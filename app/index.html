@@ -8,6 +8,11 @@
     <h1>It's alive!</h1>
     We are using node <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    and Electron <script>document.write(process.versions.electron)</script>,
+    we are
+    <strong>
+      <script>document.write(process.env.DEBUG ? '' : ' not ')</script>
+    </strong>
+    in debug mode.
   </body>
 </html>
