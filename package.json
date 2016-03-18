@@ -1,0 +1,16 @@
+{
+  "name": "shamir-secret-splitter",
+  "version": "0.0.1",
+  "description": "A simple electron app providing a user-friendly interface for splitting secrets using Shamir's scheme.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron app/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "DEBUG=true npm start"
+  },
+  "author": "Gabe Isman",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.2"
+  }
+}
