@@ -12,7 +12,7 @@ $xlargeButtonIconWidth: 100px;
   border: 1px solid $whiteColor;
   border-radius: 4px;
   cursor: pointer;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .btn:hover {
@@ -35,12 +35,14 @@ $xlargeButtonIconWidth: 100px;
   margin-left: $buttonIconWidth;
   padding-right: 10px;
 
-  &.btn-no-icon {
-    width: 100%;
-    margin-left: 0;
-    padding-left: 10px;
-  }
 }
+
+.btn-no-icon .btn-content-container {
+  width: 100%;
+  margin-left: 0;
+  padding-left: 10px;
+}
+
 
 .btn-xlarge {
   width: 100%;

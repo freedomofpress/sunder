@@ -1,0 +1,32 @@
+@import '../shared/variables';
+
+$panelMargin: 10px;
+$panelTitlePadding: 3px;
+$panelTitleHeight: 20px;
+
+.panel {
+  position: relative;
+  border: 1px solid $lightBlue;
+  flex-grow: 1;
+}
+
+.panel-title {
+  position: absolute;
+  top: -10px;
+  left: $panelMargin - $panelTitlePadding;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 $panelTitlePadding;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+  background: $primaryBackgroundColor;
+}
+
+.panel-contents {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  top: $panelTitleHeight / 2;
+  padding: 10px;
+}

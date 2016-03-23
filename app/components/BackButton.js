@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Button from './Button';
 
 
 export default class BackButton extends Component {
@@ -6,9 +7,9 @@ export default class BackButton extends Component {
 
   render() {
     return (
-      <div className="btn btn-back" onClick={this.context.router.goBack}>
+      <Button className="btn-back" onClick={this.context.router.goBack}>
         Back
-      </div>
+      </Button>
     );
   }
 }

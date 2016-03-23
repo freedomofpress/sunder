@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  flex: 1 1 auto;
+
+  .col-half {
+    flex: 1 1 50%;
+    display: flex;
+  }
+
+  .col-half:nth-child(odd) {
+    margin-right: 20px;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}

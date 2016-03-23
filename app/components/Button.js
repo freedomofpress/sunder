@@ -17,7 +17,7 @@ export default function Button(props) {
     <div className={`btn btn-${type} ${className}`}
       onClick={props.onClick}>
       {icon && iconEl}
-      <div className="btn-content-container">
+      <div className="btn-content-container align-left">
         {props.children}
       </div>
     </div>
