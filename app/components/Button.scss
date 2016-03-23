@@ -1,0 +1,61 @@
+@import '../shared/variables';
+
+$buttonIconWidth: 50px;
+$xlargeButtonIconWidth: 100px;
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 10px 0;
+  background-color: transparent;
+  color: $whiteColor;
+  border: 1px solid $whiteColor;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: $whiteColor;
+  color: $primaryBackgroundColor;
+}
+
+.btn-icon-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: $buttonIconWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-content-container {
+  width: 70%;
+  margin-left: $buttonIconWidth;
+  padding-right: 10px;
+
+  &.btn-no-icon {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 10px;
+  }
+}
+
+.btn-xlarge {
+  width: 100%;
+  max-width: 400px;
+  font-size: 20px;
+  padding: 40px 0;
+
+  .btn-icon-container {
+    font-size: 40px;
+    width: $xlargeButtonIconWidth;
+  }
+
+  .btn-content-container {
+    margin-left: $xlargeButtonIconWidth;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}

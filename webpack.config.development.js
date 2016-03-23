@@ -18,10 +18,11 @@ config.entry = [
 config.output.publicPath = 'http://localhost:3000/dist/';
 
 config.module.loaders.push({
-  test: /\.css$/,
+  test: /\.scss$/,
   loaders: [
     'style-loader',
-    'css-loader'
+    'css-loader',
+    'sass-loader'
   ]
 });
 
