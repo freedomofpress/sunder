@@ -3,6 +3,7 @@ import SecretEntry from './SecretEntry';
 import ShareOptions from './ShareOptions';
 import Button from './Button';
 import Panel from './Panel';
+import './Split.scss';
 
 export default class Split extends Component {
   handleCreateShares(event) {
@@ -20,12 +21,14 @@ export default class Split extends Component {
         <div className="col-half">
           <Panel title="Share Options">
             <ShareOptions />
+          </Panel>
+          <div className="flex-row split-button-container">
             <Button type="primary"
               icon="cubes"
               onClick={this.handleCreateShares.bind(this)}>
               Create Secret Shares
             </Button>
-          </Panel>
+          </div>
         </div>
       </div>
     );

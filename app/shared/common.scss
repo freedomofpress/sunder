@@ -8,6 +8,7 @@
   .col-half {
     flex: 1 1 50%;
     display: flex;
+    flex-direction: column;
   }
 
   .col-half:nth-child(odd) {
@@ -19,6 +20,13 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .align-right {

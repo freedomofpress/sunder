@@ -1,0 +1,14 @@
+.share-options {
+  display: flex;
+  flex-wrap: wrap;
+
+  .input-label {
+    flex: 1 1 80%;
+  }
+
+  .labeled-input {
+    flex: 0 0 20%;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
