@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { split } from '../ducks/split';
+import { split, updateSplit } from '../ducks/split';
 import { connect } from 'react-redux';
 import Split from '../components/Split';
 import BackButton from '../components/BackButton';
@@ -10,26 +10,39 @@ export class SplitScreen extends Component {
     inProgress: PropTypes.bool,
     error: PropTypes.string,
     shares: PropTypes.array,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    data: PropTypes.shape({
+      secret: PropTypes.string,
+      quorum: PropTypes.number,
+      shares: PropTypes.number
+    }),
+    success: PropTypes.bool
   }
 
   render() {
     const headerContent = <BackButton />;
-    const contents = (
-      <Split inProgress={this.props.inProgress}
-        error={this.props.error}
-        onSubmit={(...args) => this.props.dispatch(split(...args))}
-        success={this.props.shares && this.props.shares.length} />
-    );
 
     return (
-      <Layout header={headerContent} content={contents} />
+      <Layout header={headerContent}>
+        <Split inProgress={this.props.inProgress}
+          error={this.props.error}
+          onSubmit={() => this.props.dispatch(split(
+              this.props.data.secret, {
+                quorum: this.props.data.quorum,
+                shares: this.props.data.shares
+              }
+            ))}
+          onChange={(key, value) => this.props.dispatch(updateSplit(key, value))}
+          success={this.props.success} />
+      </Layout>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return state.split;
+  return Object.assign({}, state.split, {
+    success: Boolean(state.split.shares && state.split.shares.length)
+  });
 }
 
 export default connect(mapStateToProps)(SplitScreen);

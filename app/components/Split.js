@@ -10,10 +10,8 @@ export default class Split extends Component {
     onSubmit: PropTypes.func,
     success: PropTypes.bool,
     inProgress: PropTypes.bool,
-    error: PropTypes.string
-  }
-  handleCreateShares(event) {
-    this.props.onSubmit();
+    error: PropTypes.string,
+    onChange: PropTypes.func
   }
 
   render() {
@@ -21,18 +19,20 @@ export default class Split extends Component {
       <div className="container split-container">
         <div className="col-half">
           <Panel title="Enter Your Secret">
-            <SecretEntry disabled={this.props.inProgress} />
+            <SecretEntry disabled={this.props.inProgress}
+              onChange={this.props.onChange} />
           </Panel>
         </div>
         <div className="col-half">
           <Panel title="Share Options">
-            <ShareOptions disabled={this.props.inProgress} />
+            <ShareOptions onChange={this.props.onChange}
+              disabled={this.props.inProgress} />
           </Panel>
           <div className="flex-row split-button-container">
             <Button type="primary"
               icon="cubes"
               disabled={this.props.inProgress}
-              onClick={this.handleCreateShares.bind(this)}>
+              onClick={this.props.onSubmit}>
               Create Secret Shares
             </Button>
           </div>

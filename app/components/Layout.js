@@ -3,19 +3,19 @@ import './Layout.scss';
 
 
 export default function Layout(props) {
-  const { header, content } = props;
+  const { header, children } = props;
   return (
     <div className="layout-container">
       <div className="header">
         {header}
       </div>
       <div className="content-container">
-        {content}
+        {children}
       </div>
     </div>
   );
 }
 Layout.propTypes = {
   header: PropTypes.element.isRequired,
-  content: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired
 };
