@@ -19,6 +19,16 @@ export class SplitScreen extends Component {
     success: PropTypes.bool
   }
 
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.success && !this.props.success) {
+      this.context.router.push('distribute');
+    }
+  }
+
   render() {
     const headerContent = <BackButton />;
 
