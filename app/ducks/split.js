@@ -9,8 +9,9 @@ const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
 const SPLIT_FAILURE = 'SPLIT_FAILURE';
 const SPLIT_UPDATE = 'SPLIT_UPDATE';
 
+const initialState = { data: {} };
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SPLIT:
       return Object.assign(

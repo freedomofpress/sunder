@@ -1,0 +1,50 @@
+@import '../shared/variables';
+
+.share-row {
+  display: flex;
+  justify-content: space-between;
+  background-color: $lightBlue;
+  padding: 10px 20px;
+  z-index: 0;
+
+  textarea {
+    border-color: $dangerColor;
+    color: $dangerColor;
+  }
+}
+
+.share-row:nth-child(odd) {
+  background-color: $whiteColor;
+  color: $primaryBackgroundColor;
+
+  .btn {
+    color: $primaryBackgroundColor;
+    border-color: $primaryBackgroundColor;
+
+    &:hover {
+      color: $whiteColor;
+      background-color: $primaryBackgroundColor;
+    }
+  }
+}
+
+.share-cell {
+  display: flex;
+  align-items: center;
+  flex: 1 1 50%;
+}
+
+.share-actions {
+  opacity: 0;
+  justify-content: flex-end;
+}
+
+.share-row:hover .share-actions {
+  opacity: 1;
+}
+
+.share-copy {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+}

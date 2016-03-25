@@ -15,6 +15,19 @@ $xlargeButtonIconWidth: 100px;
   margin: 10px 0;
 }
 
+.btn ~ .btn {
+  margin-left: 10px;
+}
+
+.btn-small {
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.btn-small ~ .btn-small {
+  margin-left: 5px;
+}
+
 .btn:hover {
   background-color: $whiteColor;
   color: $primaryBackgroundColor;
@@ -43,6 +56,21 @@ $xlargeButtonIconWidth: 100px;
   padding-left: 10px;
 }
 
+.btn-small {
+  .btn-icon-container {
+    width: 20px;
+  }
+
+  .btn-content-container {
+    padding-right: 5px;
+    margin-left: 20px;
+  }
+
+
+  .btn-no-icon .btn-content-container {
+    padding-left: 5px;
+  }
+}
 
 .btn-xlarge {
   width: 100%;
