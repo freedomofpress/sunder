@@ -3,9 +3,9 @@ import './Panel.scss';
 
 
 export default function Panel(props) {
-  const { title, children } = props;
+  const { title, children, className } = props;
   return (
-    <div className="panel">
+    <div className={`panel ${className}`}>
       <span className="panel-title">
         {title}
       </span>
@@ -17,5 +17,6 @@ export default function Panel(props) {
 }
 Panel.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  className: PropTypes.string
 };
