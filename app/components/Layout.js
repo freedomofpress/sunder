@@ -17,5 +17,5 @@ export default function Layout(props) {
 }
 Layout.propTypes = {
   header: PropTypes.element.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.node.isRequired
 };

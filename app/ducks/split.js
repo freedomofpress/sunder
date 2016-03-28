@@ -1,5 +1,5 @@
 /**
- * Actions for splitting a secret.
+ * Actions and reducer for splitting a secret.
  */
 
 import { splitFFI } from '../lib/crypto';

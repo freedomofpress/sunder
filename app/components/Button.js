@@ -26,8 +26,7 @@ export default function Button(props) {
 Button.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
-  children: PropTypes.oneOfType(
-      [PropTypes.element, PropTypes.string]).isRequired,
+  children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['small', 'default', 'primary', 'xlarge']),
   icon: PropTypes.string
 };

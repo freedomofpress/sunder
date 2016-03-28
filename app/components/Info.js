@@ -4,7 +4,7 @@ import './Info.scss';
 
 export default class Info extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.node,
     className: PropTypes.string
   }
 

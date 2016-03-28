@@ -1,25 +1,8 @@
-.panel.recover-row {
-  flex: 0 0 auto;
-
-  .panel-contents {
-    flex-flow: row nowrap;
-    align-items: stretch;
-    justify-content: space-around;
-  }
+.recover-explanation {
+  padding: 20px 0;
 }
 
-.recover-row {
-  input {
-    flex-basis: 50%;
-    margin: 10px 0;
-  }
-
-  select {
-    flex-basis: 15%;
-    margin: 10px 0;
-  }
-
-  .btn {
-    flex-basis: 25%;
-  }
+.entered-shares {
+  font-size: 20px;
+  margin-bottom: 20px;
 }

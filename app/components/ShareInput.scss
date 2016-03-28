@@ -1,0 +1,25 @@
+.panel.share-input {
+  flex: 0 0 auto;
+
+  .panel-contents {
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: space-around;
+  }
+}
+
+.share-input {
+  input {
+    flex-basis: 50%;
+    margin: 10px 0;
+  }
+
+  select {
+    flex-basis: 15%;
+    margin: 10px 0;
+  }
+
+  .btn {
+    flex-basis: 25%;
+  }
+}

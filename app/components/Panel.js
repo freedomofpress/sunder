@@ -17,6 +17,6 @@ export default function Panel(props) {
 }
 Panel.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string
 };

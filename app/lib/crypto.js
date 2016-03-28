@@ -1,7 +1,7 @@
 // TODO: REMOVEME
 function randomString(length) {
   let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-$&@#!';
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$&@#!';
 
   for (let i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -11,7 +11,24 @@ function randomString(length) {
 }
 
 function getFakeShare(options) {
-  return `${options.quorum}-${randomString(options.length)}`;
+  return `${options.quorum}-v0.1-${options.id}-${randomString(options.length)}`;
+}
+
+
+/**
+ * Parses a share to recover the parameters that generated it.
+ * @param {string} share The share to parse.
+ * @returns {Object} An object containing quorum, the version of the share,
+ *   format and the random id of the secret.
+ */
+export function parseShare(share) {
+  const components = share.split('-');
+
+  return {
+    quorum: parseInt(components[0], 10),
+    version: components[1],
+    id: components[2]
+  };
 }
 
 
@@ -30,10 +47,12 @@ export function splitFFI(secret, options) {
     // Return some fake data after a second.
     setTimeout(() => {
       const fakeData = [];
+      const id = randomString(16);
       for (let i = 0; i < options.shares; i++) {
         fakeData.push(getFakeShare({
           quorum: options.quorum,
-          length: secret.length
+          length: secret.length,
+          id
         }));
       }
 
