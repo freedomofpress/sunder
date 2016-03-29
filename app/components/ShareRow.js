@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Button from './Button';
 import CopyButton from './CopyButton';
+import SaveFileButton from './SaveFileButton';
 import './ShareRow.scss';
 
 export default class ShareRow extends Component {
@@ -49,11 +50,9 @@ export default class ShareRow extends Component {
             {viewText}
           </Button>
           <CopyButton type="small" targetText={share} />
-          <Button type="small"
-            icon="hdd-o"
-            onClick={this.handleSaveClicked.bind(this)}>
-            Save
-          </Button>
+          <SaveFileButton contents={share}
+            type="small"
+            defaultPath={`secret-share-${index}.txt`} />
         </div>
       </div>
     );

@@ -3,6 +3,7 @@ import './Export.scss';
 import Panel from './Panel';
 import Button from './Button';
 import CopyButton from './CopyButton';
+import SaveFileButton from './SaveFileButton';
 
 
 export default class Export extends Component {
@@ -56,11 +57,7 @@ export default class Export extends Component {
               View
             </Button>
             <CopyButton targetText={this.props.secret} />
-            <Button type="default"
-              icon="hdd-o"
-              onClick={this.handleSave.bind(this)}>
-              Save
-            </Button>
+            <SaveFileButton contents={this.props.secret} />
           </div>
           <div className="dash-separator" />
           <div className="flex-row veracrypt-row align-center">
