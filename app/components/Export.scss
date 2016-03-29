@@ -1,0 +1,41 @@
+@import '../shared/variables';
+
+.success-icon-container {
+  padding: 24px 0;
+  font-size: 72px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  color: $accentColor;
+}
+
+.success-message {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.actions-row {
+  justify-content: center;
+}
+
+.dash-separator {
+  width: 30%;
+  margin: auto;
+  height: 0;
+  padding: 0;
+  border-bottom: 1px dashed $borderColor;
+}
+
+.button-subtitle {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.veracrypt-row {
+  justify-content: center;
+}
+
+.secret-view {
+  color: $dangerColor;
+  border-color: $dangerColor;
+  flex: 1 1 auto;
+}

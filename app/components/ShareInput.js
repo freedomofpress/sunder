@@ -24,7 +24,7 @@ export class ShareInput extends Component {
 
     return (
       <Panel className="share-input"
-        title={`Enter the ${isFirst ? 'first' : 'next'} secret share.`}>
+        title={`Enter the ${isFirst ? 'first' : 'next'} secret share`}>
         <select defaultValue="text"
           onChange={() => console.log('mode changed, NOT IMPLEMENTED')}>
           <option value="text">As Text</option>

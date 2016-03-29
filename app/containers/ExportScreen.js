@@ -16,7 +16,7 @@ export class ExportScreen extends Component {
 
     return (
       <Layout header={headerContent}>
-        <Export />
+        <Export secret={this.props.secret} />
       </Layout>
     );
   }
