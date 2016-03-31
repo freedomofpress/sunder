@@ -3,6 +3,7 @@ import SecretEntry from './SecretEntry';
 import ShareOptions from './ShareOptions';
 import Button from './Button';
 import Panel from './Panel';
+import WorkingIndicator from './WorkingIndicator';
 import './Split.scss';
 
 export default class Split extends Component {
@@ -35,6 +36,7 @@ export default class Split extends Component {
               onClick={this.props.onSubmit}>
               Create Secret Shares
             </Button>
+            {this.props.inProgress && <WorkingIndicator />}
           </div>
         </div>
       </div>

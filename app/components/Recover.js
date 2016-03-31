@@ -3,6 +3,7 @@ import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
 import RecoverRow from './RecoverRow';
+import WorkingIndicator from './WorkingIndicator';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -57,6 +58,7 @@ export default class Recover extends Component {
         <RecoverStatus quorum={quorum} shares={shares} />
         {shares.length > 0 && <div className="entered-shares">{enteredShares}</div>}
         {action}
+        {this.props.inProgress && <WorkingIndicator />}
       </div>
     );
   }
