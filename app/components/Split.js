@@ -1,45 +1,63 @@
 import React, { Component, PropTypes } from 'react';
 import SecretEntry from './SecretEntry';
-import ShareOptions from './ShareOptions';
+import SplitOptions from './SplitOptions';
 import Button from './Button';
 import Panel from './Panel';
 import WorkingIndicator from './WorkingIndicator';
+import splitValidator from '../lib/splitvalidator';
+import { reduxForm } from 'redux-form';
 import './Split.scss';
 
 export default class Split extends Component {
+  // These are all injected by the reduxForm decorator
   static propTypes = {
-    onSubmit: PropTypes.func,
-    success: PropTypes.bool,
-    inProgress: PropTypes.bool,
-    error: PropTypes.string,
-    onChange: PropTypes.func
+    fields: PropTypes.shape({
+      shares: PropTypes.object,
+      quorum: PropTypes.object,
+      secret: PropTypes.object
+    }),
+    submitting: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    invalid: PropTypes.bool,
   }
 
   render() {
+    const {
+      fields: { shares, quorum, secret },
+      submitting,
+      handleSubmit,
+      invalid
+    } = this.props;
+
     return (
       <div className="container split-container">
         <div className="col-half">
           <Panel title="Enter Your Secret">
-            <SecretEntry disabled={this.props.inProgress}
-              onChange={this.props.onChange} />
+            <SecretEntry disabled={submitting} field={secret} />
           </Panel>
         </div>
         <div className="col-half">
           <Panel title="Share Options">
-            <ShareOptions onChange={this.props.onChange}
-              disabled={this.props.inProgress} />
+            <SplitOptions disabled={submitting}
+              sharesField={shares} quorumField={quorum} />
           </Panel>
           <div className="flex-row split-button-container">
             <Button type="primary"
               icon="cubes"
-              disabled={this.props.inProgress}
-              onClick={this.props.onSubmit}>
+              disabled={invalid || submitting}
+              onClick={handleSubmit}>
               Create Secret Shares
             </Button>
-            {this.props.inProgress && <WorkingIndicator />}
+            {submitting && <WorkingIndicator />}
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default reduxForm({
+  form: 'split',
+  fields: ['secret', 'shares', 'quorum'],
+  validate: splitValidator
+})(Split);

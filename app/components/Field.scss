@@ -1,0 +1,16 @@
+@import '../shared/variables';
+.field-container {
+  margin-bottom: 10px;
+}
+
+.has-error {
+  textarea,
+  input {
+    border: 1px solid $dangerColor;
+    color: $dangerColor;
+  }
+
+  .error-label {
+    color: lighten($dangerColor, 20%);
+  }
+}
