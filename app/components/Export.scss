@@ -1,7 +1,11 @@
 @import '../shared/variables';
 
+.export {
+  justify-content: space-around;
+}
+
 .success-icon-container {
-  padding: 24px 0;
+  flex: 1 1 25%;
   font-size: 72px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   color: $accentColor;
@@ -9,7 +13,7 @@
 
 .success-message {
   font-size: 20px;
-  margin-bottom: 40px;
+  flex: 1 1 25%;
 }
 
 .actions-row {

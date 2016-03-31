@@ -22,10 +22,6 @@ export default class Export extends Component {
     this.setState({ viewing: false });
   }
 
-  handleSave() {
-    console.log('save');
-  }
-
   handleVeracrypt() {
     console.log('veracrypt');
   }
@@ -76,7 +72,7 @@ export default class Export extends Component {
     }
 
     return (
-      <div className="container flex-column">
+      <div className="container flex-column export">
         <div className="success-icon-container align-center">
           <i className="fa fa-cube" />
         </div>
