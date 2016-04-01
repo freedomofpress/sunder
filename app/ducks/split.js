@@ -14,7 +14,13 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SPLIT:
       return Object.assign(
-        {}, state, { inProgress: true, error: null, shares: null });
+        {}, state, {
+          inProgress: true,
+          error: null,
+          shares: null,
+          numShares: action.numShares,
+          quorum: action.quorum
+        });
     case SPLIT_SUCCESS:
       return Object.assign(
         {}, state, { inProgress: false, shares: action.shares, error: null });
@@ -35,7 +41,11 @@ export function split(secret, options) {
         `Expected shares and quorum to be defined on options but got ${options}`);
     }
 
-    dispatch({ type: SPLIT });
+    dispatch({
+      type: SPLIT,
+      numShares: options.shares,
+      quorum: options.quorum
+    });
 
     return splitFFI(secret, options).then((shares) => {
       dispatch({ type: SPLIT_SUCCESS, shares });

@@ -28,8 +28,8 @@ export class SplitScreen extends Component {
       <Layout header={headerContent}>
         <Split onSubmit={(values) => this.props.dispatch(split(
               values.secret, {
-                quorum: values.quorum,
-                shares: values.shares
+                quorum: parseInt(values.quorum, 10),
+                shares: parseInt(values.shares, 10)
               }
             ))} />
       </Layout>

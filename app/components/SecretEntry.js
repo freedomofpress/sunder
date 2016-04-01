@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import FileInput from './FileInput';
 import './SecretEntry.scss';
 
 
@@ -21,6 +22,17 @@ export default class SecretEntry extends Component {
     const { field } = this.props;
     const hasError = field.touched && field.invalid;
 
+    let fieldEl;
+    if (this.state.entryMode === 'text') {
+      fieldEl = (
+        <textarea className="secret-entry-input"
+          {...field}>
+        </textarea>
+      );
+    } else {
+      fieldEl = <FileInput field={field} />;
+    }
+
     return (
       <div className="flex-column">
         <div className="secret-entry-mode-select-container">
@@ -31,9 +43,7 @@ export default class SecretEntry extends Component {
           </select>
         </div>
         <div className={`secret-entry-input-container flex-column ${hasError ? 'has-error' : ''}`}>
-          <textarea className="secret-entry-input"
-            {...field}>
-          </textarea>
+          {fieldEl}
           {hasError && <label className="error-label">{field.error}</label>}
         </div>
       </div>

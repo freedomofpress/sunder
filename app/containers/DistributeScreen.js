@@ -32,7 +32,7 @@ export class DistributeScreen extends Component {
 function mapStateToProps(state) {
   return {
     shares: state.split.shares,
-    quorum: state.split.data.quorum
+    quorum: state.split.quorum
   };
 }
 
