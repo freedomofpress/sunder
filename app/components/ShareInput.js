@@ -9,7 +9,8 @@ import { addShare } from '../ducks/recover';
 export class ShareInput extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    isFirst: PropTypes.bool
+    quorum: PropTypes.number,
+    numEnteredShares: PropTypes.number,
   }
 
   // This will be more complicated when file input is implemented
@@ -20,11 +21,13 @@ export class ShareInput extends Component {
   }
 
   render() {
-    const { isFirst } = this.props;
+    const { quorum, numEnteredShares } = this.props;
+    const whichShare = numEnteredShares === 0 ? 'first' : 'next';
+    const progressMessage = quorum ? `(${numEnteredShares}/${quorum})` : '';
 
     return (
       <Panel className="share-input"
-        title={`Enter the ${isFirst ? 'first' : 'next'} secret share`}>
+        title={`Enter the ${whichShare} secret share ${progressMessage}`}>
         <select defaultValue="text"
           onChange={() => console.log('mode changed, NOT IMPLEMENTED')}>
           <option value="text">As Text</option>
@@ -43,7 +46,8 @@ export class ShareInput extends Component {
 
 function mapStateToProps(state) {
   return {
-    isFirst: state.recover.shares.length === 0
+    quorum: state.recover.shareProperties.quorum,
+    numEnteredShares: state.recover.shares.length
   };
 }
 

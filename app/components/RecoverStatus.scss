@@ -3,41 +3,6 @@
 .recover-status {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 40px;
-}
-
-.progress-icon {
-  font-size: 40px;
-  transition: all 0.5s linear;
-
-  &.incomplete {
-    color: $borderColor;
-  }
-
-  &.success {
-    color: $accentColor;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  }
-
-  &.error {
-    color: $dangerColor;
-  }
-
-  &.current {
-    color: $borderColor;
-    animation-name: fadeIn;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
+  flex: none;
+  align-items: center;
 }

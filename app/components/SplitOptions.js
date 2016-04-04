@@ -14,7 +14,7 @@ export default class SplitOptions extends Component {
   render() {
     const { sharesField, quorumField } = this.props;
     let statusMessage;
-    const statusEnding = ' shares need to recover secret.';
+    const statusEnding = ' shares needed to recover secret.';
 
     if (quorumField.value && sharesField.value) {
       statusMessage = (

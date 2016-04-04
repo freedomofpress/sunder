@@ -1,0 +1,62 @@
+@import '../shared/variables';
+
+.progress-icon {
+  font-size: 40px;
+  transition: all 0.5s linear;
+  position: relative;
+
+  &.incomplete {
+    color: $borderColor;
+  }
+
+  &.success {
+    color: $accentColor;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  &.error {
+    color: $dangerColor;
+  }
+
+  &.current {
+    color: $borderColor;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  .fa-close {
+    visibility: hidden;
+    opacity: 0;
+    color: $dangerColor;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    transition: opacity .2s linear;
+    transition: transform .2s ease-in;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: scale(0.75);
+  }
+
+  &.error:hover,
+  &.success:hover {
+    .fa-close {
+      visibility: visible;
+      transform: scale(1);
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

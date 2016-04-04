@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import RecoverStatusShare from './RecoverStatusShare';
 import './RecoverStatus.scss';
 
 
@@ -9,30 +10,23 @@ export default class RecoverStatus extends Component {
   }
 
   render() {
-    const shareClasses = [];
+    const shareIcons = [];
     const { shares } = this.props;
     let quorum = this.props.quorum;
-    // Provide a reasonable default so that there is something to display when
-    // this value is unknown.
-    quorum = quorum || 5;
+    quorum = quorum || 0;
 
     for (let i = 0; i < quorum; i++) {
-      let className;
-      if (!shares[i]) {
-        className = i === shares.length ? 'current' : 'incomplete';
-      } else if (shares[i].error) {
-        className = 'error';
-      } else {
-        className = 'success';
-      }
-      shareClasses.push(className);
+      shareIcons.push(
+        <RecoverStatusShare share={shares[i]}
+          current={i === shares.length}
+          key={i}
+          index={i} />
+      );
     }
 
     return (
       <div className="recover-status">
-        {shareClasses.map((className, index) =>
-          <i key={index} className={`fa fa-cube progress-icon ${className}`} />)
-        }
+        {shareIcons}
       </div>
     );
   }

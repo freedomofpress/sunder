@@ -77,7 +77,7 @@ export function addShare(share) {
       return dispatch({ type: BAD_SHARE, share, error: 'Mismatched secret id.' });
     }
 
-    // Handle duplicates
+    // Handle duplicates and any other obvious errors
 
     dispatch({ type: ADD_SHARE, share, shareProperties });
   };
