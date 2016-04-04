@@ -29,7 +29,7 @@ export default class SaveFileButton extends Component {
       return;
     }
 
-    this.setState({ save: 'saving' });
+    this.setState({ save: 'saving', to: filename });
 
     fs.writeFile(
       filename,
@@ -39,8 +39,6 @@ export default class SaveFileButton extends Component {
   }
 
   writeFinished(error) {
-    setTimeout(() => this.setState({ save: null }), 5000);
-
     if (error) {
       return this.setState({ save: 'failed' });
     }
