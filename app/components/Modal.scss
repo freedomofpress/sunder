@@ -1,0 +1,9 @@
+@import '../shared/variables';
+
+.modal.overlay {
+  padding: 40px;
+}
+
+.modal .panel {
+  background-color: $primaryBackgroundColor;
+}

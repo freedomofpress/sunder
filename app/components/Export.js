@@ -4,6 +4,7 @@ import Panel from './Panel';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
+import Modal from './Modal';
 
 
 export default class Export extends Component {
@@ -27,24 +28,28 @@ export default class Export extends Component {
   }
 
   render() {
-    let panel;
+    const modal = (
+      <Modal onClose={this.handleHide.bind(this)} title="Secret">
+        <textarea className="secret-view" value={this.props.secret} readOnly>
+        </textarea>
+        <div className="actions-row align-center">
+          <Button type="default"
+            onClick={this.handleHide.bind(this)}
+            icon="eye-slash">
+            Hide
+          </Button>
+        </div>
+      </Modal>
+    );
 
-    if (this.state.viewing) {
-      panel = (
-        <Panel title="Secret">
-          <textarea className="secret-view" value={this.props.secret} readOnly>
-          </textarea>
-          <div className="actions-row align-center">
-            <Button type="default"
-              onClick={this.handleHide.bind(this)}
-              icon="eye-slash">
-              Hide
-            </Button>
-          </div>
-        </Panel>
-      );
-    } else {
-      panel = (
+    return (
+      <div className="container flex-column export">
+        <div className="success-icon-container align-center">
+          <i className="fa fa-cube" />
+        </div>
+        <div className="success-message align-center">
+          Successfully recovered shared secret!
+        </div>
         <Panel title="Actions">
           <div className="actions-row flex-row align-center">
             <Button type="default"
@@ -68,18 +73,7 @@ export default class Export extends Component {
             </Button>
           </div>
         </Panel>
-      );
-    }
-
-    return (
-      <div className="container flex-column export">
-        <div className="success-icon-container align-center">
-          <i className="fa fa-cube" />
-        </div>
-        <div className="success-message align-center">
-          Successfully recovered shared secret!
-        </div>
-        {panel}
+        {this.state.viewing && modal}
       </div>
     );
   }

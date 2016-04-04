@@ -4,11 +4,15 @@ import './Panel.scss';
 
 export default function Panel(props) {
   const { title, children, className } = props;
+  const titleEl = (
+    <span className="panel-title">
+      {title}
+    </span>
+  );
+
   return (
     <div className={`panel ${className}`}>
-      <span className="panel-title">
-        {title}
-      </span>
+      {title && titleEl}
       <div className="panel-contents flex-column">
         {children}
       </div>

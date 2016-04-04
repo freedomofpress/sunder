@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
+import Modal from './Modal';
 import './ShareRow.scss';
 
 export default class ShareRow extends Component {
@@ -15,41 +16,43 @@ export default class ShareRow extends Component {
     this.state = {};
   }
 
-  handleViewClicked() {
+  toggleViewing() {
     this.setState({ shown: !this.state.shown });
   }
 
   render() {
     const { share, index } = this.props;
-    let viewText;
-    let shareValue;
-
-    if (this.state.shown) {
-      viewText = 'Hide';
-      shareValue = (
-        <textarea className="full-width" value={share} readOnly />
-      );
-    } else {
-      viewText = 'View';
-      shareValue = `Share #${index}`;
-    }
+    const modal = (
+      <Modal onClose={this.toggleViewing.bind(this)}>
+        <textarea className="secret-view" value={this.props.share} readOnly>
+        </textarea>
+        <div className="actions-row align-center">
+          <Button type="default"
+            onClick={this.toggleViewing.bind(this)}
+            icon="eye-slash">
+            Hide
+          </Button>
+        </div>
+      </Modal>
+    );
 
     return (
       <div className="share-row" key={share}>
         <div className="share-cell share-value">
-          {shareValue}
+          {`Share #${index}`}
         </div>
         <div className="share-cell share-actions">
           <Button type="small"
             icon="eye"
-            onClick={this.handleViewClicked.bind(this)}>
-            {viewText}
+            onClick={this.toggleViewing.bind(this)}>
+            View
           </Button>
           <CopyButton type="small" targetText={share} />
           <SaveFileButton contents={share}
             type="small"
             defaultPath={`secret-share-${index}.txt`} />
         </div>
+        {this.state.shown && modal}
       </div>
     );
   }
