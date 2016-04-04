@@ -19,10 +19,6 @@ export default class ShareRow extends Component {
     this.setState({ shown: !this.state.shown });
   }
 
-  handleSaveClicked() {
-    console.log('save clicked NOT IMPLEMENTED');
-  }
-
   render() {
     const { share, index } = this.props;
     let viewText;
