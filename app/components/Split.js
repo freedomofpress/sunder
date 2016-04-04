@@ -30,26 +30,22 @@ export default class Split extends Component {
     } = this.props;
 
     return (
-      <div className="container split-container">
-        <div className="col-half">
-          <Panel title="Enter Your Secret">
-            <SecretEntry disabled={submitting} field={secret} />
-          </Panel>
-        </div>
-        <div className="col-half">
-          <Panel title="Share Options">
-            <SplitOptions disabled={submitting}
-              sharesField={shares} quorumField={quorum} />
-          </Panel>
-          <div className="flex-row split-button-container">
-            <Button type="primary"
-              icon="cubes"
-              disabled={invalid || submitting}
-              onClick={handleSubmit}>
-              Create Secret Shares
-            </Button>
-            {submitting && <WorkingIndicator />}
-          </div>
+      <div className="container flex-column split-container">
+        <Panel title="Enter Your Secret">
+          <SecretEntry disabled={submitting} field={secret} />
+        </Panel>
+        <Panel title="Share Options" className="split-options-panel">
+          <SplitOptions disabled={submitting}
+            sharesField={shares} quorumField={quorum} />
+        </Panel>
+        <div className="flex-row split-button-container">
+          <Button type="primary"
+            icon="cubes"
+            disabled={invalid || submitting}
+            onClick={handleSubmit}>
+            Create Secret Shares
+          </Button>
+          {submitting && <WorkingIndicator />}
         </div>
       </div>
     );

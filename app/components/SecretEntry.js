@@ -42,7 +42,8 @@ export default class SecretEntry extends Component {
             <option value="file">From File</option>
           </select>
         </div>
-        <div className={`secret-entry-input-container flex-column ${hasError ? 'has-error' : ''}`}>
+        <div className={`field-container secret-entry-input-container
+            flex-column ${hasError ? 'has-error' : ''}`}>
           {fieldEl}
           {hasError && <label className="error-label">{field.error}</label>}
         </div>

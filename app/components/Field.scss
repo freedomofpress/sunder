@@ -1,6 +1,14 @@
 @import '../shared/variables';
+
+$errorHeight: 18px;
+
 .field-container {
   margin-bottom: 10px;
+  padding-bottom: $errorHeight;
+
+  &.has-error {
+    padding-bottom: 0;
+  }
 }
 
 .has-error {
@@ -12,5 +20,6 @@
 
   .error-label {
     color: lighten($dangerColor, 20%);
+    line-height: $errorHeight;
   }
 }

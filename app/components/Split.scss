@@ -1,3 +1,24 @@
+@import '../shared/variables';
+
+.split-container {
+  .panel {
+    margin-bottom: 20px;
+  }
+
+  .split-options-panel {
+    flex-grow: 0;
+  }
+}
+
 .split-button-container {
   justify-content: center;
+}
+
+.split-status-message {
+  line-height: 20px;
+  height: 20px;
+
+  strong {
+    color: lighten($accentColor, 10%);
+  }
 }
