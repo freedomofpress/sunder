@@ -1,4 +1,9 @@
-.shares-table {
-  flex: 1 1 100%;
-  overflow-y: scroll;
+.distribute-container {
+  .panel {
+    max-height: 75%;
+  }
+
+  .shares-table {
+    overflow-y: scroll;
+  }
 }

@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   background-color: $lightBlue;
-  padding: 10px 20px;
+  padding: 0 20px;
   z-index: 0;
 
   textarea {
@@ -26,6 +26,10 @@
       background-color: $primaryBackgroundColor;
     }
   }
+}
+
+.share-value {
+  font-weight: bold;
 }
 
 .share-cell {
