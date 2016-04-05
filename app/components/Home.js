@@ -11,11 +11,6 @@ export default class Home extends Component {
         <h1 className="home-title align-center">
           Rusty Secrets
         </h1>
-        <p className="home-explanation">
-          {"Rusty Secrets is an implementation of Shamir's Secret Sharing scheme. " +
-            "Under this scheme a secret is split into some number of pieces, called 'shares.'" +
-            'A configurable quorum of these shares is required to recover the original secret. '}
-        </p>
         <div className="home-actions align-center">
           <Button type="xlarge"
             icon="cubes"
@@ -28,6 +23,11 @@ export default class Home extends Component {
             Recover a secret
           </Button>
         </div>
+        <p className="home-explanation">
+          {"Rusty Secrets is an implementation of Shamir's Secret Sharing scheme. " +
+            "Under this scheme a secret is split into some number of pieces, called 'shares.'" +
+            'A configurable quorum of these shares is required to recover the original secret. '}
+        </p>
       </div>
     );
   }
