@@ -3,7 +3,7 @@ import './Panel.scss';
 
 
 export default function Panel(props) {
-  const { title, children, className } = props;
+  const { title, children, className, onClick } = props;
   const titleEl = (
     <span className="panel-title">
       {title}
@@ -11,7 +11,7 @@ export default function Panel(props) {
   );
 
   return (
-    <div className={`panel ${className}`}>
+    <div className={`panel ${className}`} onClick={onClick}>
       {title && titleEl}
       <div className="panel-contents flex-column">
         {children}
@@ -22,5 +22,6 @@ export default function Panel(props) {
 Panel.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onClick: PropTypes.func
 };

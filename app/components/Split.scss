@@ -1,8 +1,10 @@
 @import '../shared/variables';
 
 .split-container {
+  margin-top: 10px;
+
   .panel {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .split-options-panel {
@@ -21,4 +23,8 @@
   strong {
     color: lighten($accentColor, 10%);
   }
+}
+
+.split-options-panel {
+  padding: 20px;
 }

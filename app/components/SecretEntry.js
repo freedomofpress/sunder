@@ -34,7 +34,7 @@ export default class SecretEntry extends Component {
     }
 
     return (
-      <div className="flex-column">
+      <div className="flex-column secret-entry">
         <div className="secret-entry-mode-select-container">
           <select defaultValue={this.state.entryMode}
             onChange={this.onModeChange.bind(this)}>

@@ -13,7 +13,7 @@ export default class Modal extends Component {
   render() {
     return (
       <div className="modal overlay" onClick={this.props.onClose}>
-        <Panel title="">
+        <Panel title="" onClick={(event) => event.stopPropagation()}>
           {this.props.children}
         </Panel>
       </div>

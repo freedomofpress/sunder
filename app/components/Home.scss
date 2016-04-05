@@ -8,18 +8,28 @@
 }
 
 .home-actions {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+
+  i {
+    color: $accentColor;
+  }
+
+  .btn:hover i {
+    color: $primaryBackgroundColor;
+  }
 }
 
 .home-title {
+  font-family: "Courier New", monospace;
   font-size: 60px;
-  margin-bottom: 40px;
-  text-shadow: 0 0 20px $dangerColor;
-  color: $primaryBackgroundColor;
+  margin-bottom: 100px;
+  text-transform: lowercase;
 }
 
 .home-explanation {
+  text-align: center;
   max-width: $xlargeButtonMaxWidth;
   line-height: 28px;
   font-size: 18px;
+  color: $gray;
 }

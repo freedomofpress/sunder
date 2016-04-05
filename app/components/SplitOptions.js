@@ -28,7 +28,7 @@ export default class SplitOptions extends Component {
         <span><strong>{quorumField.value}</strong>{statusEnding}</span>
       );
     } else {
-      statusMessage = '';
+      statusMessage = 'How many shares should be needed to recover the secret?';
     }
 
     return (

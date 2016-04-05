@@ -1,6 +1,7 @@
 @import '../shared/variables';
 
 $buttonIconWidth: 50px;
+$primaryButtonIconWidth: 70px;
 $xlargeButtonMaxWidth: 400px;
 $xlargeButtonIconWidth: 100px;
 
@@ -70,6 +71,23 @@ $xlargeButtonIconWidth: 100px;
 
   .btn-no-icon .btn-content-container {
     padding-left: 5px;
+  }
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 20px 0;
+
+  .btn-content-container {
+    font-size: 20px;
+    margin-left: $primaryButtonIconWidth;
+  }
+
+  .btn-icon-container {
+    font-size: 30px;
+    width: $primaryButtonIconWidth;
   }
 }
 
