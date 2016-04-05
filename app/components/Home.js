@@ -26,7 +26,7 @@ export default class Home extends Component {
         <p className="home-explanation">
           {"Rusty Secrets is an implementation of Shamir's Secret Sharing scheme. " +
             "Under this scheme a secret is split into some number of pieces, called 'shares.'" +
-            'A configurable quorum of these shares is required to recover the original secret. '}
+            ' A configurable quorum of these shares is required to recover the original secret. '}
         </p>
       </div>
     );
