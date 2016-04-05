@@ -18,5 +18,9 @@ html, body, #root, #app-root {
 body {
   background-color: $primaryBackgroundColor;
   color: $whiteColor;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Arial", sans-serif;
+}
+
+p {
+  font-family: "Georgia", serif;
 }

@@ -1,6 +1,7 @@
 @import '../shared/variables';
 
 $buttonIconWidth: 50px;
+$xlargeButtonMaxWidth: 400px;
 $xlargeButtonIconWidth: 100px;
 
 .btn {
@@ -74,7 +75,7 @@ $xlargeButtonIconWidth: 100px;
 
 .btn-xlarge {
   width: 100%;
-  max-width: 400px;
+  max-width: $xlargeButtonMaxWidth;
   font-size: 20px;
   padding: 40px 0;
 
