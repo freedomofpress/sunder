@@ -29,13 +29,6 @@ export default class FileInput extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <input type="file"
-          onChange={this.onFileChange.bind(this)} />
-        {this.state.filename &&
-          <label className="file-input-label">{this.state.filename}</label>}
-      </div>
-    );
+    return <input type="file" onChange={this.onFileChange.bind(this)} />;
   }
 }

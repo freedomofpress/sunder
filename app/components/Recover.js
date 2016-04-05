@@ -21,7 +21,7 @@ export default class Recover extends Component {
     if (shares.length > 0) {
       instructionalContent = '';
     } else {
-      instructionalContent = 'To recover a shared secret start by providing ' +
+      instructionalContent = 'To recover a secret, start by providing ' +
         'one of the secret shares. SecretShare will then prompt you for the ' +
         'remaining shares needed to recover the shared secret.';
     }
@@ -42,7 +42,7 @@ export default class Recover extends Component {
         <div className="recover-action">
           <ShareInput />
           {instructionalContent &&
-            <div className="recover-explanation">{instructionalContent}</div>}
+            <p className="recover-explanation">{instructionalContent}</p>}
         </div>
       );
     }

@@ -13,6 +13,11 @@ select {
   border: 1px solid $lightBlue;
 }
 
+input[type=file] {
+  background: initial;
+  border: none;
+}
+
 input {
   padding: 5px;
 }

@@ -9,6 +9,11 @@
   .labeled-input {
     flex: 0 0 20%;
     height: 30px;
+    max-width: 40px;
     margin-right: 10px;
+  }
+
+  .field-container {
+    margin-right: 20px;
   }
 }
