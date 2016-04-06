@@ -43,7 +43,7 @@
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
     "electron-packager": "^5.2.0",
-    "electron-prebuilt": "^0.36.9",
+    "electron-prebuilt": "^0.37.4",
     "eslint": "~2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
@@ -79,7 +79,8 @@
     "redux": "^3.2.1",
     "redux-form": "^4.2.2",
     "redux-promise": "^0.5.0",
-    "redux-thunk": "^1.0.2"
+    "redux-thunk": "^1.0.2",
+    "rusty-secrets-ffi": "0.0.3"
   },
   "devEngines": {
     "node": "4.x || 5.x",
