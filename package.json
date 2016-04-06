@@ -41,6 +41,7 @@
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
+    "dirty-chai": "^1.2.2",
     "electron-packager": "^5.2.0",
     "electron-prebuilt": "^0.36.9",
     "eslint": "~2.2.0",

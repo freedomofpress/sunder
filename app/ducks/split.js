@@ -4,11 +4,11 @@
 
 import { splitFFI } from '../lib/crypto';
 
-const SPLIT = 'SPLIT';
-const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
-const SPLIT_FAILURE = 'SPLIT_FAILURE';
+export const SPLIT = 'SPLIT';
+export const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
+export const SPLIT_FAILURE = 'SPLIT_FAILURE';
 
-const initialState = { data: {} };
+const initialState = { };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
