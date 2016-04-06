@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
 const baseConfig = require('./webpack.config.base');
+const path = require('path');
 
 
 const config = Object.create(baseConfig);
@@ -10,13 +11,13 @@ config.devtool = 'source-map';
 
 config.entry = './app/index';
 
-config.output.publicPath = '../dist/';
+config.output.publicPath = path.join(__dirname, 'dist');
 
 config.module.loaders.push({
-  test: /\.css$/,
+  test: /\.scss$/,
   loader: ExtractTextPlugin.extract(
     'style-loader',
-    'css-loader'
+    ['css-loader', 'sass-loader']
   )
 });
 
