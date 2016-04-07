@@ -36,6 +36,7 @@ export class ShareInput extends Component {
         <input name="secret-share" ref={(el) => (this.shareEl = el)} />
         <Button type="default"
           icon="cube"
+          id="submit-share-button"
           onClick={this.handleSubmit.bind(this)}>
           Continue
         </Button>

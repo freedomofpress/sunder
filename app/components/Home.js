@@ -14,11 +14,13 @@ export default class Home extends Component {
         <div className="home-actions align-center">
           <Button type="xlarge"
             icon="cubes"
+            id="split-button"
             onClick={() => this.context.router.push('split')}>
             Split a secret
           </Button>
           <Button type="xlarge"
             icon="cube"
+            id="recover-button"
             onClick={() => this.context.router.push('recover')}>
             Recover a secret
           </Button>

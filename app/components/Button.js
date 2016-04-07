@@ -15,6 +15,7 @@ export default function Button(props) {
 
   return (
     <div className={`btn btn-${type} ${className}`}
+      id={props.id ? props.id : null}
       onClick={props.onClick}>
       {icon && iconEl}
       <div className="btn-content-container align-left">
@@ -28,5 +29,6 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['small', 'default', 'primary', 'xlarge']),
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  id: PropTypes.string
 };

@@ -11,6 +11,10 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('main window', function spec() {
   this.timeout(5000);
+  let shares; // Store the generated shares for recovery
+  const quorum = 2;
+  const numShares = 3;
+  const secret = 'test secret';
 
   before(async () => {
     await delay(1000); // wait chromedriver start time
@@ -29,9 +33,71 @@ describe('main window', function spec() {
   after(async () => {
     await this.driver.quit();
   });
+  //
+  // afterEach(async () => {
+  //   await delay(300);
+  // });
 
   it('should open window', async () => {
     const title = await this.driver.getTitle();
-    expect(title).to.equal('SecretShare');
+    expect(title).to.equal('Rusty Secrets');
+  });
+
+  it('should click on the split button', async () => {
+    await this.driver.findElement({ id: 'split-button' }).click();
+  });
+
+  it('should enter some bogus data on the split screen', async () => {
+    await this.driver.findElement({ name: 'secret' }).sendKeys(secret);
+    await this.driver.findElement({ name: 'quorum' }).sendKeys(quorum);
+    await this.driver.findElement({ name: 'shares' }).sendKeys(numShares);
+    await this.driver.findElement({ id: 'create-shares' }).click();
+  });
+
+  it('should find the right number of shares on distribute screen', async () => {
+    await delay(100); // wait for crypto
+    const shareEls = await this.driver.findElements({ className: 'share-row' });
+    expect(shareEls).to.have.length(3);
+  });
+
+  it('should find and store the share values', async () => {
+    // Depends on implementation of the copy button, less than ideal.
+    const secretShareEls = await this.driver.findElements({ css: 'input[readonly]' });
+    return Promise.all(secretShareEls.map((el) => el.getAttribute('value'))).then((values) => {
+      // Store in global for later use
+      shares = values;
+    });
+  });
+
+  const clickBack = () => this.driver.findElement({ className: 'btn-back' }).click();
+  it('should go back to the home screen', async () => {
+    await clickBack();
+    await clickBack();
+  });
+
+  it('should navigate to recover', async () => {
+    await this.driver.findElement({ id: 'recover-button' }).click();
+  });
+
+  it('should input the shares', async () => {
+    for (let i = 0; i < quorum; i++) {
+      await this.driver.findElement({ name: 'secret-share' }).sendKeys(shares[i]);
+      await this.driver.findElement({ id: 'submit-share-button' }).click();
+    }
+  });
+
+  it('should click the finish recovery button', async () => {
+    await this.driver.findElement({ id: 'finish-recovery' }).click();
+    await delay(100); // Wait for crypto
+  });
+
+  it('should click view secret button', async () => {
+    await this.driver.findElement({ id: 'view-secret-button' }).click();
+  });
+
+  it('should have the right secret revealed', async () => {
+    const foundSecret = await this.driver.findElement({ className: 'secret-view' })
+        .getAttribute('value');
+    expect(foundSecret).to.be.eql(secret);
   });
 });

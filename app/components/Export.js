@@ -54,6 +54,7 @@ export default class Export extends Component {
           <div className="actions-row flex-row align-center">
             <Button type="default"
               icon="eye"
+              id="view-secret-button"
               onClick={this.handleView.bind(this)}>
               View
             </Button>

@@ -41,6 +41,7 @@ export default class Split extends Component {
         <div className="flex-row split-button-container">
           <Button type="primary"
             icon="cubes"
+            id="create-shares"
             disabled={invalid || submitting}
             onClick={handleSubmit}>
             Create Secret Shares

@@ -32,6 +32,7 @@ export default class Recover extends Component {
         <div className="align-center recover-action">
           <Button type="xlarge"
             onClick={onSubmit}
+            id="finish-recovery"
             icon="cube">
             Recover
           </Button>
