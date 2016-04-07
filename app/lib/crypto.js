@@ -1,5 +1,5 @@
 import { remote } from 'electron';
-const cryptoFFI = remote.require('rusty-secrets-ffi');
+const cryptoFFI = remote.require('rusty-secrets');
 
 /**
  * Parses a share to recover the parameters that generated it.

@@ -2,7 +2,7 @@
   "name": "secret-share",
   "productName": "SecretShare",
   "version": "0.0.1",
-  "description": "Simple desktop application providing a simple UI for the Shamir secret sharing scheme.",
+  "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "main": "app/main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -15,7 +15,7 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
+    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && electron-rebuild",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "bin": {
@@ -44,6 +44,7 @@
     "dirty-chai": "^1.2.2",
     "electron-packager": "^5.2.0",
     "electron-prebuilt": "^0.37.4",
+    "electron-rebuild": "^1.1.3",
     "eslint": "~2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
@@ -80,7 +81,7 @@
     "redux-form": "^4.2.2",
     "redux-promise": "^0.5.0",
     "redux-thunk": "^1.0.2",
-    "rusty-secrets-ffi": "0.0.3"
+    "rusty-secrets": "0.0.4"
   },
   "devEngines": {
     "node": "4.x || 5.x",
