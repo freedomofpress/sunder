@@ -33,10 +33,6 @@ describe('main window', function spec() {
   after(async () => {
     await this.driver.quit();
   });
-  //
-  // afterEach(async () => {
-  //   await delay(300);
-  // });
 
   it('should open window', async () => {
     const title = await this.driver.getTitle();

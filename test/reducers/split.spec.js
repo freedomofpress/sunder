@@ -7,11 +7,11 @@ import reducer, {
 
 
 describe('split reducer', () => {
-  describe('handling of SPLIT', () => {
-    it('should return the right initial state', () => {
-      expect(reducer(undefined, {})).to.be.eql({});
-    });
+  it('should return the right initial state', () => {
+    expect(reducer(undefined, {})).to.be.eql({});
+  });
 
+  describe('handling of SPLIT', () => {
     it('should mark inProgress on split', () => {
       const action = { type: SPLIT };
       expect(reducer(undefined, action).inProgress).to.be.true();
