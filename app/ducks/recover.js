@@ -2,17 +2,17 @@
  * Actions and reducer for recovering a secret.
  */
 
-import { parseShare, recoverFFI } from '../lib/crypto';
+import { parseShare, recoverFFI } from 'app/lib/crypto';
 
-const RECOVER = 'RECOVER';
-const RECOVER_SUCCESS = 'RECOVER_SUCCESS';
-const RECOVER_ERROR = 'RECOVER_ERROR';
-const ADD_SHARE = 'ADD_SHARE';
-const BAD_SHARE = 'BAD_SHARE';
-const REMOVE_SHARE = 'REMOVE_SHARE';
-const RESET_RECOVERY = 'RESET_RECOVERY';
+export const RECOVER = 'RECOVER';
+export const RECOVER_SUCCESS = 'RECOVER_SUCCESS';
+export const RECOVER_ERROR = 'RECOVER_ERROR';
+export const ADD_SHARE = 'ADD_SHARE';
+export const BAD_SHARE = 'BAD_SHARE';
+export const REMOVE_SHARE = 'REMOVE_SHARE';
+export const RESET_RECOVERY = 'RESET_RECOVERY';
 
-const initialState = {
+export const initialState = {
   shares: [],
   shareProperties: {},
   secret: null,

@@ -2,7 +2,7 @@
  * Actions and reducer for splitting a secret.
  */
 
-import { splitFFI } from '../lib/crypto';
+import { splitFFI } from 'app/lib/crypto';
 
 export const SPLIT = 'SPLIT';
 export const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
