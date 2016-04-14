@@ -1,3 +1,5 @@
+@import '~app/shared/variables';
+
 .recover-explanation {
   padding: 20px;
   line-height: 30px;
@@ -15,4 +17,12 @@
 
 .recover-action {
   margin-bottom: 40px;
+}
+
+.recover-error-message {
+  color: $dangerColor;
+}
+
+.reset-action p {
+  margin-bottom: 20px;
 }

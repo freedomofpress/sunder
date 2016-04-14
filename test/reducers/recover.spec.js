@@ -47,7 +47,7 @@ describe('recover reducer', () => {
   });
 
   describe('handling of RECOVER_ERROR', () => {
-    const error = { message: 'BAD NEWS' };
+    const error = 'BAD NEWS';
     const action = { type: RECOVER_ERROR, error };
     const state = { inProgress: true };
 
@@ -56,7 +56,7 @@ describe('recover reducer', () => {
     });
 
     it('should store the error message', () => {
-      expect(reducer(state, action).error).to.be.eql(error.message);
+      expect(reducer(state, action).error).to.be.eql(error);
     });
   });
 

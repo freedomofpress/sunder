@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
       });
     case RECOVER_ERROR:
       return Object.assign({}, state, {
-        error: action.error.message || 'Something went wrong',
+        error: action.error || 'Something went wrong',
         inProgress: false
       });
     case ADD_SHARE: {
@@ -106,7 +106,7 @@ export function recover() {
     recoverFFI(shares).then((secret) => {
       dispatch({ type: RECOVER_SUCCESS, secret });
     }).catch((error) => {
-      dispatch({ type: RECOVER_ERROR, error });
+      dispatch({ type: RECOVER_ERROR, error: error.message });
     });
   };
 }

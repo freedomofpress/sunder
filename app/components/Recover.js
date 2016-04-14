@@ -11,11 +11,12 @@ export default class Recover extends Component {
     quorum: PropTypes.number,
     inProgress: PropTypes.bool,
     onSubmit: PropTypes.func,
-    error: PropTypes.string
+    error: PropTypes.string,
+    onReset: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error } = this.props;
+    const { quorum, shares, onSubmit, error, onReset } = this.props;
     const numGoodShares = shares.filter((s) => !s.error).length;
     let instructionalContent;
 
@@ -28,7 +29,20 @@ export default class Recover extends Component {
     }
 
     let action;
-    if (numGoodShares >= quorum) {
+    if (error) {
+      action = (
+        <div className="align-center reset-action">
+          <p>
+            Sorry, something went wrong. Received error message:
+            <span className="recover-error-message"> {error}</span>
+          </p>
+          <Button type="default"
+            onClick={onReset}>
+            Reset Recovery
+          </Button>
+        </div>
+      );
+    } else if (numGoodShares >= quorum) {
       action = (
         <div className="align-center recover-action">
           <Button type="xlarge"
@@ -52,7 +66,7 @@ export default class Recover extends Component {
     return (
       <div className="container flex-column recover">
         {action}
-        <RecoverStatus quorum={quorum} shares={shares} />
+        {!error && <RecoverStatus quorum={quorum} shares={shares} />}
         {this.props.inProgress && <WorkingIndicator />}
       </div>
     );
