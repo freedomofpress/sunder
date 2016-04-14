@@ -13,6 +13,7 @@ export function parseShare(share) {
   return {
     quorum: parseInt(components[0], 10),
     shareNum: parseInt(components[1], 10),
+    secretData: components[2]
   };
 }
 

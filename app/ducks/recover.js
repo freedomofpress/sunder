@@ -69,18 +69,34 @@ export default function reducer(state = initialState, action) {
 
 export function addShare(share) {
   return (dispatch, getState) => {
-    const shareProperties = parseShare(share);
-    const existingShareProperties = getState().recover.shareProperties;
+    const parsedShare = parseShare(share);
+    const state = getState();
+    const existingShareProperties = state.recover.shareProperties;
 
     if (existingShareProperties.id
-        && existingShareProperties.id !== shareProperties.id) {
-      return dispatch({ type: BAD_SHARE, share, error: 'Mismatched secret id.' });
+        && existingShareProperties.id !== parsedShare.id) {
+      return dispatch(badShare(share, 'Mismatched secret id'));
     }
 
-    // Handle duplicates and any other obvious errors
+    const parsedShares = state.recover.shares.map((s) => parseShare(s.data));
+    if (parsedShares.some((s) => s.shareNum === parsedShare.shareNum)) {
+      return dispatch(badShare(share, 'Duplicate share'));
+    }
 
-    dispatch({ type: ADD_SHARE, share, shareProperties });
+    if (!Number.isInteger(parsedShare.quorum) || !Number.isInteger(parsedShare.shareNum)) {
+      return dispatch(badShare(share, 'Malformed share'));
+    }
+
+    dispatch({
+      type: ADD_SHARE,
+      share,
+      shareProperties: { quorum: parsedShare.quorum }
+    });
   };
+}
+
+export function badShare(share, error) {
+  return { type: BAD_SHARE, share, error };
 }
 
 
