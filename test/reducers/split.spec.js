@@ -1,10 +1,20 @@
 import { expect } from 'chai';
-import reducer, {
+import mockery from 'mockery';
+import sinon from 'sinon';
+
+const cryptoMock = sinon.mock();
+
+mockery.enable({ warnOnUnregistered: false });
+mockery.registerAllowable('app/ducks/split');
+mockery.registerMock('app/lib/crypto', cryptoMock);
+const reducer = require('app/ducks/split').default;
+const {
   SPLIT,
   SPLIT_SUCCESS,
   SPLIT_FAILURE
-} from '../../app/ducks/split';
+} = require('app/ducks/split');
 
+mockery.disable();
 
 describe('split reducer', () => {
   it('should return the right initial state', () => {
