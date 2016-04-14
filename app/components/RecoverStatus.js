@@ -14,8 +14,9 @@ export default class RecoverStatus extends Component {
     const { shares } = this.props;
     let quorum = this.props.quorum;
     quorum = quorum || 0;
+    const numToDisplay = Math.max(quorum, shares.length);
 
-    for (let i = 0; i < quorum; i++) {
+    for (let i = 0; i < numToDisplay; i++) {
       shareIcons.push(
         <RecoverStatusShare share={shares[i]}
           current={i === shares.length}
