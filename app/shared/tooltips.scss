@@ -1,0 +1,50 @@
+@import 'variables';
+
+$tipHeight: 20px;
+$tipArrowHeight: 6px;
+$tipPadding: 5px;
+$tipOffset: 1px;
+$tipColor: $blueGray;
+$fontSize: 14px;
+
+/**
+ * Significant inspiration drawn from https://github.com/chinchang/hint.css.
+ */
+
+.tooltipped {
+  position: relative;
+  display: inline-block;
+
+  &:before, &:after {
+    position: absolute;
+    visibility: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  &:hover:before, &:hover:after,
+  &:focus:before, &:focus:after {
+    visibility: visible;
+  }
+
+  &:before {
+    top: -($tipHeight + $tipArrowHeight + $tipOffset + $tipPadding + $tipPadding);
+    content: attr(data-tooltip);
+    font-size: $fontSize;
+    line-height: $tipHeight;
+    text-align: center;
+    padding: $tipPadding 10px;
+    background: $tipColor;
+    color: $whiteColor;
+    white-space: nowrap;
+  }
+
+  &:after {
+    top: -($tipArrowHeight + $tipOffset);
+    background: transparent;
+    border: $tipArrowHeight solid transparent;
+    border-top-color: $tipColor;
+    content: '';
+  }
+}

@@ -22,19 +22,22 @@ export class RecoverStatusShare extends Component {
   render() {
     const { share, current } = this.props;
     let className;
+    let tooltip;
 
     if (current) {
       className = 'current';
     } else if (!share) {
       className = 'incomplete';
     } else if (share.error) {
-      className = 'error';
+      className = 'error tooltipped';
+      tooltip = share.error;
     } else {
       className = 'success';
     }
 
+    console.log(tooltip);
     return (
-      <div className={`progress-icon ${className}`}>
+      <div className={`progress-icon ${className}`} data-tooltip={tooltip}>
         <i className="fa fa-cube" />
         <i className="fa fa-close" onClick={this.handleRemove.bind(this)} />
       </div>

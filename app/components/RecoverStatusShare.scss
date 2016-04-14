@@ -28,25 +28,23 @@
 
   .fa-close {
     visibility: hidden;
-    opacity: 0;
-    color: $dangerColor;
+    display: block;
     position: absolute;
-    top: 5px;
-    left: 0;
-    transition: opacity .2s linear;
-    transition: transform .2s ease-in;
+    top: 0;
+    left: 5px;
+    transition: text-shadow .1s ease-out;
     cursor: pointer;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    transform: scale(0.75);
   }
 
   &.error:hover,
   &.success:hover {
+    .fa-cube {
+      visibility: hidden;
+    }
+
     .fa-close {
       visibility: visible;
-      transform: scale(1);
-      display: block;
-      opacity: 1;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
   }
 }

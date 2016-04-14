@@ -11,10 +11,11 @@ export default class Recover extends Component {
     quorum: PropTypes.number,
     inProgress: PropTypes.bool,
     onSubmit: PropTypes.func,
+    error: PropTypes.string
   }
 
   render() {
-    const { quorum, shares, onSubmit } = this.props;
+    const { quorum, shares, onSubmit, error } = this.props;
     const numGoodShares = shares.filter((s) => !s.error).length;
     let instructionalContent;
 
