@@ -8,7 +8,7 @@ export const SPLIT = 'SPLIT';
 export const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
 export const SPLIT_FAILURE = 'SPLIT_FAILURE';
 
-const initialState = { };
+const initialState = {};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

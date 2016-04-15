@@ -35,7 +35,6 @@ export class RecoverStatusShare extends Component {
       className = 'success';
     }
 
-    console.log(tooltip);
     return (
       <div className={`progress-icon ${className}`} data-tooltip={tooltip}>
         <i className="fa fa-cube" />

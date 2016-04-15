@@ -33,7 +33,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .full-width {
@@ -59,4 +59,9 @@
 
 .danger {
   color: $dangerColor;
+}
+
+a {
+  color: $accentColor;
+  cursor: pointer;
 }

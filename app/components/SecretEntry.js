@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import FileInput from './FileInput';
 import './SecretEntry.scss';
 
+// Anything over 50 kb we won't try to print.
+const MAX_DISPLAY_SIZE_BYTES = 50000;
 
 export default class SecretEntry extends Component {
   static propTypes = {
@@ -11,27 +13,53 @@ export default class SecretEntry extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { entryMode: 'text' };
+    this.state = { entryMode: 'text', revealed: false };
   }
 
   onModeChange(event) {
-    this.setState({ entryMode: event.target.value });
+    // Set revealed to false on any mode change so secret file contents aren't
+    // unexpectedly revealed.
+    this.setState({ entryMode: event.target.value, revealed: false });
+  }
+
+  onRevealChange(event) {
+    this.setState({ revealed: event.target.checked });
+  }
+
+  clearSecret() {
+    this.props.field.onChange('');
   }
 
   render() {
     const { field } = this.props;
     const hasError = field.touched && field.invalid;
+    const { entryMode } = this.state;
 
-    let fieldEl;
-    if (this.state.entryMode === 'text') {
-      fieldEl = (
-        <textarea className="secret-entry-input"
+    const tooLargeToDisplay = field.value && field.value.length * 2 > MAX_DISPLAY_SIZE_BYTES;
+    let textField;
+    if (tooLargeToDisplay) {
+      textField = (
+        <div className={`no-display-message ${entryMode === 'text' ? '' : 'hidden'}`}>
+          {"This secret is too large to display (don't worry, we can still encrypt it)."}
+          <a onClick={this.clearSecret.bind(this)}> Clear Secret</a>
+        </div>
+      );
+    } else {
+      textField = (
+        <textarea className={`secret-entry-input ${entryMode === 'text' ? '' : 'hidden'}
+                              ${this.state.revealed ? 'revealed' : ''}`}
           {...field}>
         </textarea>
       );
-    } else {
-      fieldEl = <FileInput field={field} />;
     }
+
+    const revealCheckbox = (
+      <label className={`reveal-options ${tooLargeToDisplay ? 'hidden' : ''}`}>
+        <input type="checkbox"
+          onChange={this.onRevealChange.bind(this)}
+          checked={this.state.revealed} /> Reveal secret?
+      </label>
+    );
 
     return (
       <div className="flex-column secret-entry">
@@ -41,10 +69,12 @@ export default class SecretEntry extends Component {
             <option value="text">As Text</option>
             <option value="file">From File</option>
           </select>
+          {this.state.entryMode === 'text' && revealCheckbox}
         </div>
         <div className={`field-container secret-entry-input-container
             flex-column ${hasError ? 'has-error' : ''}`}>
-          {fieldEl}
+          {textField}
+          <FileInput className={entryMode === 'file' ? '' : 'hidden'} field={field} />
           {hasError && <label className="error-label">{field.error}</label>}
         </div>
       </div>
