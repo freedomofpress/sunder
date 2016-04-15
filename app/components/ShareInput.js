@@ -33,7 +33,7 @@ export class ShareInput extends Component {
           <option value="text">As Text</option>
           <option value="file">From File</option>
         </select>
-        <input name="secret-share" ref={(el) => (this.shareEl = el)} />
+        <input type="password" name="secret-share" ref={(el) => (this.shareEl = el)} />
         <Button type="default"
           icon="cube"
           id="submit-share-button"
@@ -48,7 +48,7 @@ export class ShareInput extends Component {
 function mapStateToProps(state) {
   return {
     quorum: state.recover.shareProperties.quorum,
-    numEnteredShares: state.recover.shares.length
+    numEnteredShares: state.recover.shares.filter((s) => !s.error).length
   };
 }
 

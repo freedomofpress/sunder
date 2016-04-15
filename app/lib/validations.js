@@ -54,9 +54,8 @@ export function isNumber(value, fieldName) {
 
 export function min(num) {
   return (value, fieldName) => {
-    // Ignore non-numbers
-    if (typeof value !== 'number') {
-      return false;
+    if (typeof value === 'string') {
+      value = parseInt(value, 10);
     }
 
     if (value < num) {
@@ -70,9 +69,8 @@ export function min(num) {
 
 export function max(num) {
   return (value, fieldName) => {
-    // Ignore non-numbers
-    if (typeof value !== 'number') {
-      return false;
+    if (typeof value === 'string') {
+      value = parseInt(value, 10);
     }
 
     if (value > num) {
