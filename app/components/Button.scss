@@ -4,6 +4,7 @@ $buttonIconWidth: 50px;
 $primaryButtonIconWidth: 70px;
 $xlargeButtonMaxWidth: 400px;
 $xlargeButtonIconWidth: 100px;
+$buttonDisabledColor: rgba(200, 200, 200, 0.5);
 
 .btn {
   position: relative;
@@ -15,6 +16,12 @@ $xlargeButtonIconWidth: 100px;
   border-radius: 4px;
   cursor: pointer;
   margin: 10px 0;
+}
+
+.btn.disabled {
+  color: $buttonDisabledColor;
+  border-color: $buttonDisabledColor;
+  cursor: default;
 }
 
 .btn ~ .btn {
@@ -30,9 +37,14 @@ $xlargeButtonIconWidth: 100px;
   margin-left: 5px;
 }
 
-.btn:hover {
+.btn:hover:not(.disabled) {
   background-color: $whiteColor;
   color: $primaryBackgroundColor;
+}
+
+.btn:active:not(.disabled) {
+  background-color: lighten($gray, 10%);
+  border-color: lighten($gray, 10%);
 }
 
 .btn-icon-container {

@@ -11,7 +11,8 @@ export default function Button(props) {
     </div>
   );
 
-  const className = icon ? props.className || '' : `btn-no-icon ${props.className}`;
+  let className = icon ? props.className || '' : `btn-no-icon ${props.className}`;
+  className = `${className} ${props.disabled ? 'disabled' : ''}`;
 
   return (
     <div className={`btn btn-${type} ${className}`}
@@ -30,5 +31,6 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['small', 'default', 'primary', 'xlarge']),
   icon: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  disabled: PropTypes.bool
 };
