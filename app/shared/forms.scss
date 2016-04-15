@@ -13,10 +13,27 @@ select {
   border: 1px solid $lightBlue;
 }
 
+// File inputs are represented visually by their corresponding labels
 input[type=file] {
-  background: initial;
-  border: none;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
 }
+
+.file-input-container {
+  display: inline-block;
+
+  .filename {
+    color: lighten($accentColor, 10%);
+    margin-bottom: 10px;
+  }
+
+  .file-error {
+    color: lighten($dangerColor, 15%);
+  }
+}
+
 
 input {
   padding: 5px;
