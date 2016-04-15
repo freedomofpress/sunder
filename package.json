@@ -58,8 +58,6 @@
     "mockery": "^1.6.2",
     "node-sass": "^3.4.2",
     "react-addons-test-utils": "^0.14.2",
-    "redux-devtools": "^3.0.1",
-    "redux-devtools-log-monitor": "^1.0.5",
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
     "selenium-webdriver": "^2.48.2",
