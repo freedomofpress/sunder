@@ -16,7 +16,9 @@
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && electron-rebuild && node -e \"var s='../app',d='node_modules/app',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\"",
-    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
+    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
+    "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
+    "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -42,6 +44,7 @@
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
+    "electron-installer-debian": "^0.2.0",
     "electron-packager": "^5.2.0",
     "electron-prebuilt": "^0.37.4",
     "electron-rebuild": "^1.1.3",
