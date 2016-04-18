@@ -8,7 +8,8 @@ export default class SaveFileButton extends Component {
   static propTypes = {
     contents: PropTypes.string,
     dialogTitle: PropTypes.string,
-    defaultPath: PropTypes.string
+    defaultPath: PropTypes.string,
+    onSaved: PropTypes.func
   }
 
   constructor(props) {
@@ -35,15 +36,16 @@ export default class SaveFileButton extends Component {
       filename,
       this.props.contents,
       { mode: '0600' },
-      this.writeFinished.bind(this));
-  }
+      (error) => {
+        if (error) {
+          return this.setState({ save: 'failed' });
+        }
 
-  writeFinished(error) {
-    if (error) {
-      return this.setState({ save: 'failed' });
-    }
-
-    this.setState({ save: 'succeeded' });
+        this.setState({ save: 'succeeded' });
+        if (this.props.onSaved) {
+          this.props.onSaved(filename);
+        }
+      });
   }
 
   render() {

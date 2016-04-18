@@ -3,7 +3,8 @@
 .share-row {
   display: flex;
   justify-content: space-between;
-  background-color: $lightBlue;
+  background-color: lighten($gray, 15%);
+  color: $primaryBackgroundColor;
   padding: 0 20px;
   z-index: 0;
 
@@ -11,11 +12,6 @@
     border-color: $dangerColor;
     color: $dangerColor;
   }
-}
-
-.share-row:nth-child(odd) {
-  background-color: $whiteColor;
-  color: $primaryBackgroundColor;
 
   .share-actions .btn {
     color: $primaryBackgroundColor;
@@ -26,6 +22,10 @@
       background-color: $primaryBackgroundColor;
     }
   }
+}
+
+.share-row:nth-child(odd) {
+  background-color: $whiteColor;
 }
 
 .share-value {
@@ -39,16 +39,11 @@
 }
 
 .share-actions {
-  opacity: 0;
   justify-content: flex-end;
 }
 
-.share-row:hover .share-actions {
-  opacity: 1;
-}
-
-.share-copy {
-  position: absolute;
-  top: -10000px;
-  left: -10000px;
+.share-status {
+  margin-left: 10px;
+  font-size: 12px;
+  color: rgb(65, 144, 75);
 }

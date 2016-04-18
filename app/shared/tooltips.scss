@@ -21,6 +21,7 @@ $fontSize: 14px;
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
+    z-index: 100;
   }
 
   &:hover:before, &:hover:after,
@@ -46,5 +47,25 @@ $fontSize: 14px;
     border: $tipArrowHeight solid transparent;
     border-top-color: $tipColor;
     content: '';
+  }
+}
+
+.tooltipped.bottom-tooltip {
+  &:before {
+    top: auto;
+    bottom: -($tipHeight + $tipArrowHeight + $tipOffset + $tipPadding + $tipPadding)
+  }
+
+  &:after {
+    top: auto;
+    bottom: -($tipArrowHeight + $tipOffset);
+    border-top-color: transparent;
+    border-bottom-color: $tipColor;
+  }
+}
+
+.tooltipped.right-tooltip {
+  &:before {
+    transform: translateX(-10%);
   }
 }

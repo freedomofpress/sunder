@@ -3,7 +3,10 @@ import Button from './Button';
 
 
 export default class CopyButton extends Component {
-  static propTypes = { targetText: PropTypes.string.isRequired }
+  static propTypes = {
+    targetText: PropTypes.string.isRequired,
+    onCopied: PropTypes.func
+  }
 
   constructor(props) {
     super(props);
@@ -22,6 +25,9 @@ export default class CopyButton extends Component {
 
     if (successful) {
       this.setState({ copied: 'successful' });
+      if (this.props.onCopied) {
+        this.props.onCopied();
+      }
     } else {
       this.setState({ copied: 'error' });
     }

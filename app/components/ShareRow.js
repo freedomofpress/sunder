@@ -20,6 +20,14 @@ export default class ShareRow extends Component {
     this.setState({ shown: !this.state.shown });
   }
 
+  handleCopied() {
+    this.setState({ copied: true });
+  }
+
+  handleSaved(filename) {
+    this.setState({ saved: filename });
+  }
+
   render() {
     const { share, index } = this.props;
     const modal = (
@@ -36,10 +44,26 @@ export default class ShareRow extends Component {
       </Modal>
     );
 
+    let savedIndicator = '';
+    if (this.state.saved) {
+      savedIndicator = (
+        <span className="tooltipped bottom-tooltip right-tooltip"
+          data-tooltip={this.state.saved}>
+          saved
+        </span>
+      );
+    }
+
+
     return (
       <div className="share-row" key={share}>
         <div className="share-cell share-value">
           {`Share #${index}`}
+          <span className="share-status">
+            {this.state.copied ? 'copied' : ''}
+            {this.state.copied && this.state.saved ? ', ' : ''}
+            {savedIndicator}
+          </span>
         </div>
         <div className="share-cell share-actions">
           <Button type="small"
@@ -47,14 +71,16 @@ export default class ShareRow extends Component {
             onClick={this.toggleViewing.bind(this)}>
             View
           </Button>
-          <CopyButton type="small" targetText={share} />
+          <CopyButton type="small"
+            targetText={share}
+            onCopied={this.handleCopied.bind(this)} />
           <SaveFileButton contents={share}
             type="small"
+            onSaved={this.handleSaved.bind(this)}
             defaultPath={`secret-share-${index}.txt`} />
         </div>
         {this.state.shown && modal}
       </div>
     );
   }
-
-  }
+}
