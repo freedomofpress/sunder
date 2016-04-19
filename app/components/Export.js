@@ -4,6 +4,7 @@ import Panel from './Panel';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
+import PuzzleIcon from './PuzzleIcon';
 import Modal from './Modal';
 
 
@@ -45,7 +46,7 @@ export default class Export extends Component {
     return (
       <div className="container flex-column export">
         <div className="success-icon-container align-center">
-          <i className="fa fa-cube" />
+          <PuzzleIcon />
         </div>
         <div className="success-message align-center">
           Successfully recovered shared secret!

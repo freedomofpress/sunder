@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { recover, reset } from '../ducks/recover';
 import Recover from '../components/Recover';
 import BackButton from '../components/BackButton';
+import WorkingIndicator from 'app/components/WorkingIndicator';
 import Layout from '../components/Layout';
 
 export class RecoverScreen extends Component {
@@ -21,14 +22,26 @@ export class RecoverScreen extends Component {
     router: PropTypes.object
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.secret && !this.props.secret) {
+  constructor(props) {
+    super(props);
+    this.state = { fakeDelay: false };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (!nextState.fakeDelay && nextProps.secret) {
       this.context.router.push('/export');
     }
   }
 
   handleRecover() {
-    this.props.dispatch(recover());
+    this.setState({ fakeDelay: true });
+    const fakeDelay = new Promise((resolve) => {
+      window.setTimeout(() => {
+        this.setState({ fakeDelay: false })
+      }, 2000);
+      resolve();
+    });
+    return Promise.all([this.props.dispatch(recover()), fakeDelay]);
   }
 
   handleReset() {
@@ -41,12 +54,15 @@ export class RecoverScreen extends Component {
 
     return (
       <Layout header={headerContent}>
-        <Recover shares={shares}
-          quorum={quorum}
-          inProgress={inProgress}
-          error={error}
-          onReset={this.handleReset.bind(this)}
-          onSubmit={this.handleRecover.bind(this)} />
+        <div className="flex-column">
+          <Recover shares={shares}
+            quorum={quorum}
+            inProgress={inProgress}
+            error={error}
+            onReset={this.handleReset.bind(this)}
+            onSubmit={this.handleRecover.bind(this)} />
+          {inProgress || this.state.fakeDelay && <WorkingIndicator />}
+        </div>
       </Layout>
     );
   }

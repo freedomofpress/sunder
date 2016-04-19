@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
-import WorkingIndicator from './WorkingIndicator';
+import PuzzleIcon from './PuzzleIcon';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -48,7 +48,7 @@ export default class Recover extends Component {
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"
-            icon="cube">
+            icon={<PuzzleIcon />}>
             Recover
           </Button>
         </div>
@@ -67,7 +67,6 @@ export default class Recover extends Component {
       <div className="container flex-column recover">
         {action}
         {!error && <RecoverStatus quorum={quorum} shares={shares} />}
-        {this.props.inProgress && <WorkingIndicator />}
       </div>
     );
   }

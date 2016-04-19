@@ -35,7 +35,7 @@ export class ShareInput extends Component {
         </select>
         <input type="password" name="secret-share" ref={(el) => (this.shareEl = el)} />
         <Button type="default"
-          icon="cube"
+          icon="puzzle-piece"
           id="submit-share-button"
           onClick={this.handleSubmit.bind(this)}>
           Continue

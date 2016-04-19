@@ -12,6 +12,7 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   padding: 10px 0;
   background-color: transparent;
   color: $whiteColor;
+  fill: $whiteColor;
   border: 1px solid $whiteColor;
   border-radius: 4px;
   cursor: pointer;
@@ -20,6 +21,7 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
 
 .btn.disabled {
   color: $buttonDisabledColor;
+  fill: $buttonDisabledColor;
   border-color: $buttonDisabledColor;
   cursor: default;
 }
@@ -40,6 +42,7 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
 .btn:hover:not(.disabled) {
   background-color: $whiteColor;
   color: $primaryBackgroundColor;
+  fill: $primaryBackgroundColor;
 }
 
 .btn:active:not(.disabled) {
@@ -57,11 +60,18 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   align-items: center;
 }
 
+.btn-icon-container.svg-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: $buttonIconWidth;
+  padding: 20px;
+}
+
 .btn-content-container {
   width: 70%;
   margin-left: $buttonIconWidth;
   padding-right: 10px;
-
 }
 
 .btn-no-icon .btn-content-container {
@@ -79,7 +89,6 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
     padding-right: 5px;
     margin-left: 20px;
   }
-
 
   .btn-no-icon .btn-content-container {
     padding-left: 5px;

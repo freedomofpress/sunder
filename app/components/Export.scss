@@ -5,20 +5,25 @@
 }
 
 .success-icon-container {
-  flex: 1 1 25%;
+  margin: auto;
+  flex: 1 1 40%;
+  padding-top: 50px;
   font-size: 72px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   color: $accentColor;
+  fill: $accentColor;
+  max-width: 150px;
 }
 
 .success-message {
   font-size: 28px;
   font-weight: bold;
-  flex: 1 1 25%;
+  flex: 1 1 10%;
 }
 
 .actions-row {
   justify-content: center;
+  flex: 1 1 50%;
 }
 
 .dash-separator {

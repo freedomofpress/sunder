@@ -5,11 +5,20 @@ export default function Button(props) {
   const type = props.type || 'default';
   const { icon } = props;
 
-  const iconEl = (
-    <div className="btn-icon-container">
-      <i className={`fa fa-${icon}`} />
-    </div>
-  );
+  let iconEl;
+  if (typeof icon === 'object') {
+    iconEl = (
+      <div className="svg-icon btn-icon-container">
+        {icon}
+      </div>
+    );
+  } else {
+    iconEl = (
+      <div className="btn-icon-container">
+        <i className={`fa fa-${icon}`} />
+      </div>
+    );
+  }
 
   let className = icon ? props.className || '' : `btn-no-icon ${props.className}`;
   className = `${className} ${props.disabled ? 'disabled' : ''}`;
@@ -30,7 +39,7 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['small', 'default', 'primary', 'xlarge']),
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   id: PropTypes.string,
   disabled: PropTypes.bool
 };

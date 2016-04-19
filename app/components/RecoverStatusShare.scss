@@ -2,6 +2,7 @@
 
 .progress-icon {
   font-size: 40px;
+  margin: 0 5px;
   transition: all 0.5s linear;
   position: relative;
 
@@ -31,14 +32,13 @@
     display: block;
     position: absolute;
     top: 0;
-    left: 5px;
     transition: text-shadow .1s ease-out;
     cursor: pointer;
   }
 
   &.error:hover,
   &.success:hover {
-    .fa-cube {
+    .fa-puzzle-piece {
       visibility: hidden;
     }
 

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './Home.scss';
+import PuzzleIcon from 'app/components/PuzzleIcon';
 import Button from './Button';
 
 export default class Home extends Component {
@@ -13,13 +14,13 @@ export default class Home extends Component {
         </h1>
         <div className="home-actions align-center">
           <Button type="xlarge"
-            icon="cubes"
+            icon={<PuzzleIcon className="split" />}
             id="split-button"
             onClick={() => this.context.router.push('split')}>
             Split a secret
           </Button>
           <Button type="xlarge"
-            icon="cube"
+            icon={<PuzzleIcon />}
             id="recover-button"
             onClick={() => this.context.router.push('recover')}>
             Recover a secret

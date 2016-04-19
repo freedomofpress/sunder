@@ -1,0 +1,35 @@
+@import '~app/shared/variables';
+
+.puzzle {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+
+  path {
+    shape-rendering: geometricPrecision;
+  }
+}
+
+.puzzle.split path {
+  transform-origin: center;
+  transform: scale(0.7) rotate(180deg);
+}
+
+.puzzle.spin path:nth-child(4n){
+  fill: $accentColor;
+}
+
+.puzzle.spin {
+  animation: spin 2s infinite steps(4);
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -37,7 +37,8 @@ export class RecoverStatusShare extends Component {
 
     return (
       <div className={`progress-icon ${className}`} data-tooltip={tooltip}>
-        <i className="fa fa-cube" />
+        <i className="fa fa-puzzle-piece" 
+          style={{ transform: `rotate(${90 * this.props.index}deg)`}} />
         <i className="fa fa-close" onClick={this.handleRemove.bind(this)} />
       </div>
     );

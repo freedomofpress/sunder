@@ -14,8 +14,16 @@
     color: $accentColor;
   }
 
+  path {
+    fill: $accentColor;
+  }
+
   .btn:hover i {
     color: $primaryBackgroundColor;
+  }
+
+  .btn:hover path {
+    fill: $primaryBackgroundColor;
   }
 }
 
