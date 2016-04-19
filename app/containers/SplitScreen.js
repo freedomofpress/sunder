@@ -15,10 +15,32 @@ export class SplitScreen extends Component {
     router: PropTypes.object
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.success && !this.props.success) {
+  constructor(props) {
+    super(props);
+    this.state = { fakeDelay: false };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (!nextState.fakeDelay && nextProps.success) {
       this.context.router.push('distribute');
     }
+  }
+
+  handleSubmit(values) {
+    this.setState({ fakeDelay: true });
+    const fakeDelay = new Promise((resolve) => {
+      setTimeout(() => {
+        this.setState({ fakeDelay: false });
+        resolve();
+      }, 2000);
+    });
+
+    const splitPromise = this.props.dispatch(split(values.secret, {
+      quorum: parseInt(values.quorum, 10),
+      shares: parseInt(values.shares, 10)
+    }));
+
+    return Promise.all([splitPromise, fakeDelay]);
   }
 
   render() {
@@ -26,12 +48,7 @@ export class SplitScreen extends Component {
 
     return (
       <Layout header={headerContent}>
-        <Split onSubmit={(values) => this.props.dispatch(split(
-              values.secret, {
-                quorum: parseInt(values.quorum, 10),
-                shares: parseInt(values.shares, 10)
-              }
-            ))} />
+        <Split onSubmit={this.handleSubmit.bind(this)} />
       </Layout>
     );
   }
