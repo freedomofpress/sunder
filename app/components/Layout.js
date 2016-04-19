@@ -8,6 +8,7 @@ export default function Layout(props) {
     <div className="layout-container">
       <div className="header">
         {header}
+        <h1 className="app-title">Secret Splitter</h1>
       </div>
       <div className="content-container">
         {children}

@@ -6,10 +6,9 @@ $headerHeight: 100px;
 }
 
 .header {
-  display: flex;
+  position: relative;
   height: $headerHeight;
-  padding-left: 40px;
-  align-items: center;
+  padding: 20px 40px;
 }
 
 .content-container {
@@ -17,4 +16,16 @@ $headerHeight: 100px;
   height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
+}
+
+.app-title {
+  text-align: center;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  text-transform: lowercase;
+  pointer-events: none;
 }

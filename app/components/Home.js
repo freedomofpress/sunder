@@ -10,7 +10,7 @@ export default class Home extends Component {
     return (
       <div className="container home">
         <h1 className="home-title align-center">
-          Rusty Secrets
+          Secret Splitter
         </h1>
         <div className="home-actions align-center">
           <Button type="xlarge"
@@ -27,7 +27,7 @@ export default class Home extends Component {
           </Button>
         </div>
         <p className="home-explanation">
-          {"Rusty Secrets is an implementation of Shamir's Secret Sharing scheme. " +
+          {"Secret Splitter is an implementation of Shamir's Secret Sharing scheme. " +
             "Under this scheme a secret is split into some number of pieces, called 'shares.'" +
             ' A configurable quorum of these shares is required to recover the original secret. '}
         </p>
