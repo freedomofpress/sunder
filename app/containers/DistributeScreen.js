@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Distribute from '../components/Distribute';
-import BackButton from '../components/BackButton';
+import HomeButton from '../components/HomeButton';
 import Layout from '../components/Layout';
 
 export class DistributeScreen extends Component {
@@ -19,7 +19,7 @@ export class DistributeScreen extends Component {
       this.context.router.push('/');
       return <div />;
     }
-    const headerContent = <BackButton />;
+    const headerContent = <HomeButton />;
 
     return (
       <Layout header={headerContent}>

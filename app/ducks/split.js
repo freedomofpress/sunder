@@ -3,6 +3,7 @@
  */
 
 import { splitFFI } from 'app/lib/crypto';
+import { RESET } from 'app/ducks/global';
 
 export const SPLIT = 'SPLIT';
 export const SPLIT_SUCCESS = 'SPLIT_SUCCESS';
@@ -27,6 +28,8 @@ export default function reducer(state = initialState, action) {
     case SPLIT_FAILURE:
       return Object.assign(
         {}, state, { inProgress: false, error: action.error });
+    case RESET:
+      return initialState;
     default:
       return state;
   }

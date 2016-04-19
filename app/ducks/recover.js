@@ -3,6 +3,7 @@
  */
 
 import { parseShare, recoverFFI } from 'app/lib/crypto';
+import { RESET } from 'app/ducks/global';
 
 export const RECOVER = 'RECOVER';
 export const RECOVER_SUCCESS = 'RECOVER_SUCCESS';
@@ -60,6 +61,8 @@ export default function reducer(state = initialState, action) {
         ]
       });
     case RESET_RECOVERY:
+      return initialState;
+    case RESET:
       return initialState;
     default:
       return state;

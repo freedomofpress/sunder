@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import BackButton from '../components/BackButton';
+import HomeButton from 'app/components/HomeButton';
 import Layout from '../components/Layout';
 import Export from '../components/Export';
 
@@ -12,7 +12,7 @@ export class ExportScreen extends Component {
   }
 
   render() {
-    const headerContent = <BackButton />;
+    const headerContent = <HomeButton />;
 
     return (
       <Layout header={headerContent}>
