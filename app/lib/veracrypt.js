@@ -11,7 +11,7 @@ export default function openVolume(path, password) {
   // https://veracrypt.codeplex.com/wikipage?title=Command%20Line%20Usage.
   let binary;
   let fallbackBinary;
-  let args = `--mount ${path} --password ${password} --explore`;
+  let args = ['--mount', path, '--password', password, '--explore'];
   if (process.platform === 'darwin') {
     binary = '/Applications/VeraCrypt.app/Contents/MacOS/VeraCrypt';
     fallbackBinary = 'veracrypt';
@@ -19,24 +19,24 @@ export default function openVolume(path, password) {
     binary = 'veracrypt';
   } else if (process.platform === 'win32') {
     binary = 'VeraCrypt.exe';
-    args = `/volume ${path} /password ${password} /explore`;
+    args = ['/volume', path, '/password', password, '/explore'];
   } else {
     return Promise.reject('Unsupported platform');
   }
 
-  return execPromise(`${binary} ${args}`)
+  return execPromise(binary, args)
     .catch((errObj) => {
       if (fallbackBinary) {
-        return execPromise(`${fallbackBinary} ${args}`)
+        return execPromise(fallbackBinary, args)
           .catch(parseErrors);
       }
       return errObj;
     }).catch(parseErrors);
 }
 
-function execPromise(command) {
+function execPromise(cmd, args) {
   return new Promise((resolve, reject) => {
-    child_process.exec(command, (err, stdout, stderr) => {
+    child_process.execFile(cmd, args, (err, stdout, stderr) => {
       if (err) {
         reject({ err, stderr });
       }
