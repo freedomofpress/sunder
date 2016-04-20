@@ -6,6 +6,8 @@ import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
 import PuzzleIcon from './PuzzleIcon';
 import Modal from './Modal';
+import { remote } from 'electron';
+import openVolume from 'app/lib/veracrypt';
 
 
 export default class Export extends Component {
@@ -25,7 +27,21 @@ export default class Export extends Component {
   }
 
   handleVeracrypt() {
-    console.log('veracrypt');
+    return new Promise((resolve, reject) => {
+      remote.dialog.showOpenDialog({
+        title: 'Select VeraCrypt volume',
+        properties: ['openFile']
+      }, (filenames) => {
+        const path = filenames[0];
+        openVolume(path, this.props.secret)
+          .then(resolve) // Nothing to do on success
+          .catch((err) => {
+            // TODO: Display an error message.
+            console.log(err);
+            reject(err);
+          });
+      });
+    });
   }
 
   render() {
