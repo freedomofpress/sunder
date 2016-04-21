@@ -3,6 +3,7 @@ import './Export.scss';
 import Panel from './Panel';
 import Button from './Button';
 import Info from './Info';
+import ErrorMessage from './ErrorMessage';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
 import PuzzleIcon from './PuzzleIcon';
@@ -35,11 +36,14 @@ export default class Export extends Component {
       }, (filenames) => {
         const path = filenames[0];
         openVolume(path, this.props.secret)
-          .then(resolve) // Nothing to do on success
-          .catch((err) => {
+          .then(() => {
+            this.setState({ veraCryptError: false });
+            resolve();
+          }) // Nothing to do on success
+          .catch((message) => {
             // TODO: Display an error message.
-            console.log(err);
-            reject(err);
+            this.setState({ veraCryptError: message });
+            reject(message);
           });
       });
     });
@@ -91,6 +95,7 @@ export default class Export extends Component {
           </div>
           <div className="dash-separator" />
           <div className="flex-column veracrypt-row align-center">
+            <ErrorMessage>{this.state.veraCryptError}</ErrorMessage>
             <Button type="xlarge"
               icon="hdd-o"
               onClick={this.handleVeracrypt.bind(this)}>

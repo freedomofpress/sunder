@@ -27,18 +27,17 @@ export default function openVolume(path, password) {
   return execPromise(binary, args)
     .catch((errObj) => {
       if (fallbackBinary) {
-        return execPromise(fallbackBinary, args)
-          .catch(parseErrors);
+        return execPromise(fallbackBinary, args);
       }
       return errObj;
-    }).catch(parseErrors);
+    });
 }
 
 function execPromise(cmd, args) {
   return new Promise((resolve, reject) => {
     child_process.execFile(cmd, args, (err, stdout, stderr) => {
       if (err) {
-        reject({ err, stderr });
+        reject(parseErrors({ err, stderr }));
       }
 
       resolve(stdout);
@@ -47,6 +46,10 @@ function execPromise(cmd, args) {
 }
 
 function parseErrors(errObj) {
-  // TODO: Figure out if this needs to be better
-  return errObj.err;
+  let message = 'Something went wrong while running VeraCrypt.';
+  if (errObj.err.code === 'ENOENT') {
+    message = "Unable to find VeraCrypt, are you sure it's installed?";
+  }
+
+  return message;
 }

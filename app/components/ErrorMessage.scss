@@ -1,0 +1,13 @@
+@import '~app/shared/variables';
+
+.error-message {
+  padding: 10px;
+
+  i {
+    background-color: $whiteColor;
+    color: $dangerColor;
+    border-radius: 100%;
+    padding: 3px;
+    margin-right: 5px;
+  }
+}
