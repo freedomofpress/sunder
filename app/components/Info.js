@@ -11,7 +11,7 @@ export default class Info extends Component {
   render() {
     const className = this.props.className || '';
     return (
-      <p className={`flex-row info align-center ${className}`}>
+      <p className={`flex-row info ${className}`}>
         <i className="fa fa-info-circle" />{this.props.children}
       </p>
     );

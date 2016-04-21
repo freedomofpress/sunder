@@ -9,6 +9,7 @@ export default class SaveFileButton extends Component {
     contents: PropTypes.string,
     dialogTitle: PropTypes.string,
     defaultPath: PropTypes.string,
+    buttonText: PropTypes.string,
     onSaved: PropTypes.func
   }
 
@@ -58,7 +59,7 @@ export default class SaveFileButton extends Component {
     } else if (this.state.save === 'succeeded') {
       text = 'Saved';
     } else {
-      text = 'Save';
+      text = this.props.buttonText || 'Save';
     }
 
     return (

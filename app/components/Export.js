@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './Export.scss';
 import Panel from './Panel';
 import Button from './Button';
+import Info from './Info';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
 import PuzzleIcon from './PuzzleIcon';
@@ -61,11 +62,21 @@ export default class Export extends Component {
 
     return (
       <div className="container flex-column export">
-        <div className="success-icon-container align-center">
-          <PuzzleIcon />
-        </div>
-        <div className="success-message align-center">
-          Successfully recovered shared secret!
+        <div className="success-container">
+          <div className="success-icon-container align-center">
+            <PuzzleIcon />
+            <div className="success-message align-center">
+              <i className="fa fa-check" />
+            </div>
+          </div>
+          <div className="export-explanation">
+            <p>
+              <strong>{'What\'s next? '}</strong>
+              If this secret was the passphrase to an encrypted volume you might
+              {' '}want to open that volume. If it is something else you can
+              {' '}copy it to the clipboard, or save it to a file.
+            </p>
+          </div>
         </div>
         <Panel title="Actions">
           <div className="actions-row flex-row align-center">
@@ -73,13 +84,13 @@ export default class Export extends Component {
               icon="eye"
               id="view-secret-button"
               onClick={this.handleView.bind(this)}>
-              View
+              View Secret
             </Button>
-            <CopyButton targetText={this.props.secret} />
-            <SaveFileButton contents={this.props.secret} />
+            <CopyButton buttonText="Copy Secret" targetText={this.props.secret} />
+            <SaveFileButton buttonText="Save Secret" contents={this.props.secret} />
           </div>
           <div className="dash-separator" />
-          <div className="flex-row veracrypt-row align-center">
+          <div className="flex-column veracrypt-row align-center">
             <Button type="xlarge"
               icon="hdd-o"
               onClick={this.handleVeracrypt.bind(this)}>
@@ -89,6 +100,10 @@ export default class Export extends Component {
                 {' '}the volume using the recovered secret as the passphrase.
               </span>
             </Button>
+            <Info>
+              {'If VeraCrypt asks for a password then it has failed to open' +
+              ' the volume with the recovered secret.'}
+            </Info>
           </div>
         </Panel>
         {this.state.viewing && modal}

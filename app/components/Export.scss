@@ -4,21 +4,61 @@
   justify-content: space-around;
 }
 
-.success-icon-container {
+.success-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
   margin: auto;
-  flex: 1 1 40%;
-  padding-top: 50px;
+  margin-bottom: 40px;
+}
+
+.success-icon-container {
+  position: relative;
+  display: inline-block;
   font-size: 72px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  color: $accentColor;
-  fill: $accentColor;
+  fill: $navy;
   max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  background-color: $successColor;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 1);
+  padding: 10px;
+  border-radius: 4px;
+  flex: 0 0 150px;
 }
 
 .success-message {
-  font-size: 28px;
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 72px;
   font-weight: bold;
-  flex: 1 1 10%;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  color: $whiteColor;
+}
+
+.export-explanation {
+  padding-left: 20px;
+  font-size: 18px;
+  line-height: 22px;
+
+  strong {
+    font-size: 22px;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: $sansSerif;
+  }
 }
 
 .actions-row {
@@ -41,7 +81,13 @@
 }
 
 .veracrypt-row {
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
+
+  .info {
+    padding: 10px;
+    color: $borderColor;
+  }
 }
 
 .secret-view {
