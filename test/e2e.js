@@ -36,7 +36,7 @@ describe('main window', function spec() {
 
   it('should open window', async () => {
     const title = await this.driver.getTitle();
-    expect(title).to.equal('Rusty Secrets');
+    expect(title).to.equal('Secret Splitter');
   });
 
   it('should click on the split button', async () => {
@@ -51,7 +51,7 @@ describe('main window', function spec() {
   });
 
   it('should find the right number of shares on distribute screen', async () => {
-    await delay(100); // wait for crypto
+    await delay(2100); // wait for fake delay
     const shareEls = await this.driver.findElements({ className: 'share-row' });
     expect(shareEls).to.have.length(3);
   });
@@ -65,10 +65,8 @@ describe('main window', function spec() {
     });
   });
 
-  const clickBack = () => this.driver.findElement({ className: 'btn-back' }).click();
   it('should go back to the home screen', async () => {
-    await clickBack();
-    await clickBack();
+    await this.driver.findElement({ className: 'btn-back' }).click();
   });
 
   it('should navigate to recover', async () => {
@@ -84,7 +82,7 @@ describe('main window', function spec() {
 
   it('should click the finish recovery button', async () => {
     await this.driver.findElement({ id: 'finish-recovery' }).click();
-    await delay(100); // Wait for crypto
+    await delay(2100); // wait for fake delay
   });
 
   it('should click view secret button', async () => {
