@@ -1,14 +1,5 @@
 import { expect } from 'chai';
-import mockery from 'mockery';
-import sinon from 'sinon';
-
-const cryptoMock = sinon.mock();
-
-mockery.enable({ warnOnUnregistered: false });
-mockery.registerAllowable('app/ducks/recover');
-mockery.registerMock('app/lib/crypto', cryptoMock);
-const reducer = require('app/ducks/recover').default;
-const {
+import reducer, {
   RECOVER,
   RECOVER_SUCCESS,
   RECOVER_ERROR,
@@ -17,8 +8,7 @@ const {
   REMOVE_SHARE,
   RESET_RECOVERY,
   initialState
-} = require('app/ducks/recover');
-mockery.disable();
+} from 'app/ducks/recover';
 
 describe('recover reducer', () => {
   it('should have the right initial state', () => {
