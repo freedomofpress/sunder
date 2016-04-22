@@ -39,9 +39,8 @@ export default class Export extends Component {
           .then(() => {
             this.setState({ veraCryptError: false });
             resolve();
-          }) // Nothing to do on success
+          })
           .catch((message) => {
-            // TODO: Display an error message.
             this.setState({ veraCryptError: message });
             reject(message);
           });
