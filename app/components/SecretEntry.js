@@ -3,7 +3,7 @@ import FileInput from './FileInput';
 import './SecretEntry.scss';
 
 // Anything over 50 kb we won't try to print.
-const MAX_DISPLAY_SIZE_BYTES = 50000;
+export const MAX_DISPLAY_SIZE_BYTES = 50000;
 
 export default class SecretEntry extends Component {
   static propTypes = {
@@ -45,9 +45,10 @@ export default class SecretEntry extends Component {
         </div>
       );
     } else {
+      // The odd concatenation on the className is because of https://github.com/airbnb/enzyme/issues/347
       textField = (
-        <textarea className={`secret-entry-input ${entryMode === 'text' ? '' : 'hidden'}
-                              ${this.state.revealed ? 'revealed' : ''}`}
+        <textarea className={`secret-entry-input ${this.state.revealed ? 'revealed' : ''}`
+            + ` ${entryMode === 'text' ? '' : 'hidden'}`}
           {...field}>
         </textarea>
       );
