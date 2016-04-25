@@ -54,7 +54,6 @@ export default class ShareRow extends Component {
       );
     }
 
-
     return (
       <div className="share-row" key={share}>
         <div className="share-cell share-value">
