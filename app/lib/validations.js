@@ -21,7 +21,7 @@ export function createValidator(rules) {
 export function required(value, fieldName) {
   const errorMessage = `${fieldName} is required`;
 
-  if (!value) {
+  if (!value && typeof value !== 'number') {
     return errorMessage;
   }
 
@@ -44,6 +44,10 @@ export function isNumber(value, fieldName) {
     value = parseInt(value, 10);
   }
 
+  if (isNaN(value)) {
+    return errorMessage;
+  }
+
   if (typeof value !== 'number') {
     return errorMessage;
   }
@@ -54,6 +58,11 @@ export function isNumber(value, fieldName) {
 
 export function min(num) {
   return (value, fieldName) => {
+    const numberError = isNumber(value, fieldName);
+    if (numberError) {
+      return numberError;
+    }
+
     if (typeof value === 'string') {
       value = parseInt(value, 10);
     }
@@ -69,6 +78,11 @@ export function min(num) {
 
 export function max(num) {
   return (value, fieldName) => {
+    const numberError = isNumber(value, fieldName);
+    if (numberError) {
+      return numberError;
+    }
+
     if (typeof value === 'string') {
       value = parseInt(value, 10);
     }
