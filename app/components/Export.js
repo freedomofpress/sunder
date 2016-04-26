@@ -2,14 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import './Export.scss';
 import Panel from './Panel';
 import Button from './Button';
-import Info from './Info';
-import ErrorMessage from './ErrorMessage';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
 import PuzzleIcon from './PuzzleIcon';
 import Modal from './Modal';
-import { remote } from 'electron';
-import openVolume from 'app/lib/veracrypt';
+import VeraCryptButton from './VeraCryptButton';
 
 
 export default class Export extends Component {
@@ -26,26 +23,6 @@ export default class Export extends Component {
 
   handleHide() {
     this.setState({ viewing: false });
-  }
-
-  handleVeracrypt() {
-    return new Promise((resolve, reject) => {
-      remote.dialog.showOpenDialog({
-        title: 'Select VeraCrypt volume',
-        properties: ['openFile']
-      }, (filenames) => {
-        const path = filenames[0];
-        openVolume(path, this.props.secret)
-          .then(() => {
-            this.setState({ veraCryptError: false });
-            resolve();
-          })
-          .catch((message) => {
-            this.setState({ veraCryptError: message });
-            reject(message);
-          });
-      });
-    });
   }
 
   render() {
@@ -93,22 +70,7 @@ export default class Export extends Component {
             <SaveFileButton buttonText="Save Secret" contents={this.props.secret} />
           </div>
           <div className="dash-separator" />
-          <div className="flex-column veracrypt-row align-center">
-            <ErrorMessage>{this.state.veraCryptError}</ErrorMessage>
-            <Button type="xlarge"
-              icon="hdd-o"
-              onClick={this.handleVeracrypt.bind(this)}>
-              <h4>Open Veracrypt Volume</h4>
-              <span className="button-subtitle">
-                This will prompt you to choose a Veracrypt volume, then open
-                {' '}the volume using the recovered secret as the passphrase.
-              </span>
-            </Button>
-            <Info>
-              {'If VeraCrypt asks for a password then it has failed to open' +
-              ' the volume with the recovered secret.'}
-            </Info>
-          </div>
+          <VeraCryptButton className="veracrypt-row" secret={this.props.secret} />
         </Panel>
         {this.state.viewing && modal}
       </div>

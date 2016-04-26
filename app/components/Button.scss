@@ -116,7 +116,6 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   width: 100%;
   max-width: $xlargeButtonMaxWidth;
   font-size: 20px;
-  padding: 40px 0;
 
   .btn-icon-container {
     font-size: 40px;
@@ -127,5 +126,6 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
     margin-left: $xlargeButtonIconWidth;
     text-transform: uppercase;
     font-weight: bold;
+    padding: 40px 0;
   }
 }
