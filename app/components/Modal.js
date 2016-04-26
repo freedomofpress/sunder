@@ -6,7 +6,6 @@ import './Modal.scss';
 export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.node,
-    title: PropTypes.string,
     onClose: PropTypes.func
   }
 
