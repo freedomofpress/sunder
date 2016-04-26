@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import Home from 'app/components/Home';
 import Button from 'app/components/Button';
 
-const props = { field: {} };
+const props = {};
 
 describe('<Home />', () => {
   it('should render without error', () => {
@@ -15,6 +15,4 @@ describe('<Home />', () => {
     home.find(Button).at(1).simulate('click');
     expect(context.router.push.calledTwice).to.be.true();
   });
-
-  // Interactions with the browser file dialogs seem very hard to test.
 });
