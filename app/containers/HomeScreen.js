@@ -6,7 +6,7 @@ import { reset } from 'app/ducks/global';
 export class HomeScreen extends Component {
   static propTypes = { dispatch: PropTypes.func };
 
-  // Reset the application state ever time the home screen is mounted
+  // Reset the application state every time the home screen is mounted
   componentWillMount() {
     this.props.dispatch(reset());
   }
