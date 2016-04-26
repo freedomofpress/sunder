@@ -68,7 +68,7 @@ export class RecoverScreen extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   const { shares, inProgress, secret, error, shareProperties: { quorum } } = state.recover;
   return { shares, inProgress, quorum, secret, error };
 }

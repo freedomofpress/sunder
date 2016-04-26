@@ -54,7 +54,7 @@ export class SplitScreen extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     success: Boolean(state.split.shares && state.split.shares.length)
   };

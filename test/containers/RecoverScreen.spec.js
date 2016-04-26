@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
 import { RecoverScreen } from 'app/containers/RecoverScreen';
+import Recover from 'app/components/Recover';
+import { reset } from 'app/ducks/recover';
 
 let props;
 let context;
@@ -40,5 +42,18 @@ describe('<RecoverScreen />', () => {
     expect(context.router.push.calledOnce).to.be.false();
     screen.setProps(props);
     expect(context.router.push.calledOnce).to.be.true();
+  });
+
+  it('should dispatch when recover submitted', () => {
+    const screen = shallow(<RecoverScreen {...props} />, { context });
+    // There isn't a clear way to test what params are passed to split() here
+    screen.find(Recover).prop('onSubmit')();
+    expect(props.dispatch.calledOnce).to.be.true();
+  });
+
+  it('should dispatch when reset', () => {
+    const screen = shallow(<RecoverScreen {...props} />, { context });
+    screen.find(Recover).prop('onReset')();
+    expect(props.dispatch.calledWith(reset())).to.be.true();
   });
 });
