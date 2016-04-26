@@ -4,3 +4,4 @@ npm-debug.log
 .tags*
 dist
 release
+.nyc_output

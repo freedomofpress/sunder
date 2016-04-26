@@ -8,6 +8,7 @@
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
+    "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
     "lint": "eslint app test *.js",
     "hot-server": "node server.js",
     "build-app": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
@@ -62,6 +63,7 @@
     "mocha": "^2.3.0",
     "mockery": "^1.6.2",
     "node-sass": "^3.4.2",
+    "nyc": "^6.4.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
@@ -90,5 +92,10 @@
   "devEngines": {
     "node": "4.x || 5.x",
     "npm": "2.x || 3.x"
+  },
+  "nyc": {
+    "include": [
+      "app/**"
+    ]
   }
 }
