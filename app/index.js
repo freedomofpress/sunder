@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
+import { Router, createMemoryHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.scss';
 
 const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const memoryHistory = createMemoryHistory('/');
+const history = syncHistoryWithStore(memoryHistory, store);
 
 render(
   <Provider store={store}>
