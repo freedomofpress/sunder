@@ -9,7 +9,7 @@ import PuzzleIcon from './PuzzleIcon';
 import { reduxForm } from 'redux-form';
 import './Split.scss';
 
-export default class Split extends Component {
+export class Split extends Component {
   // These are all injected by the reduxForm decorator
   static propTypes = {
     fields: PropTypes.shape({
