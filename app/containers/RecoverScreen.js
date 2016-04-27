@@ -37,7 +37,7 @@ export class RecoverScreen extends Component {
     this.setState({ fakeDelay: true });
     const fakeDelay = new Promise((resolve) => {
       window.setTimeout(() => {
-        this.setState({ fakeDelay: false })
+        this.setState({ fakeDelay: false });
       }, 2000);
       resolve();
     });
