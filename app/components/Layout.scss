@@ -16,6 +16,8 @@ $headerHeight: 100px;
   height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
+  max-width: 900px;
+  margin: auto;
 }
 
 .app-title {
