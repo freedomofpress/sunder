@@ -44,13 +44,15 @@ export default class Recover extends Component {
       );
     } else if (numGoodShares >= quorum) {
       action = (
-        <div className="align-center recover-action">
+        <div className="recover-action align-center">
+          <h1 className="accent">All shares entered!</h1>
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"
             icon={<PuzzleIcon />}>
             Recover
           </Button>
+          <p> Click the giant button to recover.</p>
         </div>
       );
     } else {
@@ -66,7 +68,7 @@ export default class Recover extends Component {
     return (
       <div className="container flex-column recover">
         {action}
-        {!error && <RecoverStatus quorum={quorum} shares={shares} />}
+        {!error && numGoodShares < quorum && <RecoverStatus quorum={quorum} shares={shares} />}
       </div>
     );
   }

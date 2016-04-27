@@ -18,6 +18,7 @@ describe('<ShareInput />', () => {
     const button = shareInput.find(Button);
     const testShare = 'test string';
     input.get(0).value = testShare;
+    input.simulate('change');
     button.simulate('click');
     // This is a little awkward to test thoroughly, but this is pretty good.
     expect(props.dispatch.calledWithMatch(match.func)).to.be.true();

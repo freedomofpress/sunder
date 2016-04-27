@@ -9,7 +9,6 @@ import { addShare } from '../ducks/recover';
 export class ShareInput extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    quorum: PropTypes.number,
     numEnteredShares: PropTypes.number,
   }
 
@@ -31,14 +30,13 @@ export class ShareInput extends Component {
   }
 
   render() {
-    const { quorum, numEnteredShares } = this.props;
+    const { numEnteredShares } = this.props;
     const currentValue = this.state.currentValue;
     const whichShare = numEnteredShares === 0 ? 'first' : 'next';
-    const progressMessage = quorum ? `(${numEnteredShares}/${quorum})` : '';
 
     return (
       <Panel className="share-input"
-        title={`Enter the ${whichShare} secret share ${progressMessage}`}>
+        title={`Enter the ${whichShare} secret share`}>
         <select defaultValue="text"
           onChange={() => console.log('mode changed, NOT IMPLEMENTED')}>
           <option value="text">As Text</option>
@@ -62,7 +60,6 @@ export class ShareInput extends Component {
 
 function mapStateToProps(state) {
   return {
-    quorum: state.recover.shareProperties.quorum,
     numEnteredShares: state.recover.shares.filter((s) => !s.error).length
   };
 }

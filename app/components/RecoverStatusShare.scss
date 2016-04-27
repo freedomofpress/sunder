@@ -1,8 +1,37 @@
 @import '../shared/variables';
 
+.share-progress-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  min-height: 40px;
+
+  &.incomplete {
+    font-style: italic;
+    color: darken($borderColor, 10%);
+    opacity: 0.5;
+  }
+
+  &.current {
+    font-style: italic;
+    color: $borderColor;
+  }
+
+  &.error:hover {
+    .fa-puzzle-piece {
+      visibility: hidden;
+    }
+
+    .fa-close {
+      visibility: visible;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
 .progress-icon {
   font-size: 40px;
-  margin: 0 5px;
+  margin-right: 20px;
   transition: all 0.5s linear;
   position: relative;
 
@@ -34,18 +63,6 @@
     top: 0;
     transition: text-shadow .1s ease-out;
     cursor: pointer;
-  }
-
-  &.error:hover,
-  &.success:hover {
-    .fa-puzzle-piece {
-      visibility: hidden;
-    }
-
-    .fa-close {
-      visibility: visible;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
   }
 }
 

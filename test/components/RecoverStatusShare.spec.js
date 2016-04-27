@@ -12,13 +12,13 @@ describe('<RecoverStatusShare />', () => {
       current: true
     };
     const share = shallow(<RecoverStatusShare {...props} />);
-    expect(share.find('.current')).to.have.length(1);
+    expect(share.is('.current')).to.be.true();
   });
 
   it('should render as incomplete if no share', () => {
     const props = {};
     const share = shallow(<RecoverStatusShare {...props} />);
-    expect(share.find('.incomplete')).to.have.length(1);
+    expect(share.is('.incomplete')).to.be.true();
   });
 
   it('should render as error if error present on share', () => {
@@ -26,7 +26,7 @@ describe('<RecoverStatusShare />', () => {
       share: { data: 'xyz', error: 'bad' }
     };
     const share = shallow(<RecoverStatusShare {...props} />);
-    expect(share.find('.error')).to.have.length(1);
+    expect(share.is('.error')).to.be.true();
   });
 
   it('should render as successful if no error present on share', () => {
@@ -34,7 +34,7 @@ describe('<RecoverStatusShare />', () => {
       share: { data: 'xyz' }
     };
     const share = shallow(<RecoverStatusShare {...props} />);
-    expect(share.find('.success')).to.have.length(1);
+    expect(share.is('.success')).to.be.true();
   });
 
   it('should dispatch remove share when clicked', () => {

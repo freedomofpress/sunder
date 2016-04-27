@@ -14,7 +14,9 @@ export default class RecoverStatus extends Component {
     const { shares } = this.props;
     let quorum = this.props.quorum;
     quorum = quorum || 0;
-    const numToDisplay = Math.max(quorum, shares.length);
+    const numBadShares = shares.filter((d) => d.error).length;
+    const numGoodShares = shares.length - numBadShares;
+    const numToDisplay = Math.max(0, quorum + numBadShares, shares.length);
 
     for (let i = 0; i < numToDisplay; i++) {
       shareIcons.push(
@@ -25,9 +27,30 @@ export default class RecoverStatus extends Component {
       );
     }
 
+    let statusMessage = '';
+    if (quorum && numGoodShares >= quorum) {
+      statusMessage = (
+        <h3 className="recover-status-message">
+          <strong>{numGoodShares} </strong>shares entered! Click the giant button.
+        </h3>
+      );
+    } else if (quorum) {
+      statusMessage = (
+        <h3 className="recover-status-message">
+          <span className="accent">{shares.length - numBadShares}</span>
+          {' out of '}
+          <span className="accent">{quorum}</span>
+          {' shares entered.'}
+        </h3>
+      );
+    }
+
     return (
       <div className="recover-status">
-        {shareIcons}
+        {statusMessage}
+        <div className="recover-status-list">
+          {shareIcons}
+        </div>
       </div>
     );
   }

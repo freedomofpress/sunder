@@ -20,26 +20,32 @@ export class RecoverStatusShare extends Component {
   }
 
   render() {
-    const { share, current } = this.props;
+    const { share, current, index } = this.props;
     let className;
-    let tooltip;
+    let statusMessage;
 
     if (current) {
       className = 'current';
+      statusMessage = 'Share currently being entered';
     } else if (!share) {
       className = 'incomplete';
+      statusMessage = 'Share still needed';
     } else if (share.error) {
-      className = 'error tooltipped';
-      tooltip = share.error;
+      className = 'error';
+      statusMessage = `Error: ${share.error}`;
     } else {
       className = 'success';
+      statusMessage = `Share #${index + 1} succesfully processed`;
     }
 
     return (
-      <div className={`progress-icon ${className}`} data-tooltip={tooltip}>
-        <i className="fa fa-puzzle-piece"
-          style={{ transform: `rotate(${90 * this.props.index}deg)` }} />
-        <i className="fa fa-close remove-share" onClick={this.handleRemove.bind(this)} />
+      <div className={`share-progress-row ${className}`}>
+        <span className={`progress-icon ${className}`}>
+          <i className=" fa fa-puzzle-piece"
+            style={{ transform: `rotate(${90 * this.props.index}deg)` }} />
+          <i className="fa fa-close remove-share" onClick={this.handleRemove.bind(this)} />
+        </span>
+        <span className="share-status-text">{statusMessage}</span>
       </div>
     );
   }

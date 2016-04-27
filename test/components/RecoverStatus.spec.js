@@ -33,6 +33,15 @@ describe('<RecoverStatus />', () => {
     expect(status.find(RecoverStatusShare)).to.have.length(4);
   });
 
+  it('should render numBadShares + quorum', () => {
+    const props = {
+      shares: [{ error: 'xyz' }, { error: 'xyz' }, { error: 'xyz' }, { error: 'xyz' }],
+      quorum: 3
+    };
+    const status = shallow(<RecoverStatus {...props} />);
+    expect(status.find(RecoverStatusShare)).to.have.length(7);
+  });
+
   it('should set the current prop of the right share', () => {
     const props = {
       shares: [{ data: 'xyz' }],
