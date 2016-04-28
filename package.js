@@ -40,9 +40,10 @@ if (version) {
   startPack();
 } else {
   // use the same version as the currently-installed electron-prebuilt
-  exec('npm list electron-prebuilt', (err, stdout) => {
+  exec('npm list electron-prebuilt --dev', (err, stdout) => {
     if (err) {
-      DEFAULT_OPTS.version = '0.36.9';
+      console.log(err);
+      DEFAULT_OPTS.version = '0.37.7';
     } else {
       DEFAULT_OPTS.version = stdout.split('electron-prebuilt@')[1].replace(/\s/g, '');
     }
