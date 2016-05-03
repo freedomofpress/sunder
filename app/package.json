@@ -1,0 +1,23 @@
+{
+  "name": "secret-splitter",
+  "version": "0.0.1",
+  "repository": "https://github.com/freedomofpress/secretshare.git",
+  "description": "The application-only package (no development dependencies).",
+  "main": "main.js",
+  "author": "Gabe Isman <gabe.isman@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "electron-debug": "^0.6.0",
+    "font-awesome": "^4.4.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.3.0",
+    "react-router-redux": "^4.0.0",
+    "redux": "^3.2.1",
+    "redux-form": "^5.1.1",
+    "redux-promise": "^0.5.0",
+    "redux-thunk": "^2.0.0",
+    "rusty-secrets": "0.0.4"
+  }
+}

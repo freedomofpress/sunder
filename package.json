@@ -1,7 +1,8 @@
 {
-  "name": "secret-share",
-  "productName": "SecretShare",
+  "name": "secret-splitter",
+  "productName": "Secret Splitter",
   "version": "0.0.1",
+  "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "main": "app/main.js",
   "scripts": {
@@ -16,7 +17,7 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && electron-rebuild && node -e \"var s='../app',d='node_modules/app',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\"",
+    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
     "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386"
@@ -46,6 +47,7 @@
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
+    "electron-builder": "^3.16.1",
     "electron-installer-debian": "^0.3.0",
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "^0.37.4",
@@ -76,22 +78,8 @@
     "webpack-hot-middleware": "^2.9.0",
     "webpack-target-electron-renderer": "^0.4.0"
   },
-  "dependencies": {
-    "electron-debug": "^0.6.0",
-    "font-awesome": "^4.4.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.3.0",
-    "react-router-redux": "^4.0.0",
-    "redux": "^3.2.1",
-    "redux-form": "^5.1.1",
-    "redux-promise": "^0.5.0",
-    "redux-thunk": "^2.0.0",
-    "rusty-secrets": "0.0.4"
-  },
   "devEngines": {
-    "node": "4.x || 5.x",
+    "node": "4.x || 5.x || 6.x",
     "npm": "2.x || 3.x"
   },
   "nyc": {
