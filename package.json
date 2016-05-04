@@ -20,7 +20,24 @@
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
-    "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386"
+    "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386",
+    "dist": "build"
+  },
+  "build": {
+    "app-bundle-id": "apple.app.id",
+    "app-category-type": "public.app-category.utilities",
+    "productName": "SecretSplitter",
+    "osx": {
+      "background": "app/assets/irises.jpg",
+      "icon": "app/app.icns"
+    },
+    "linux": {
+      "icon": "app/app.icns"
+    }
+  },
+  "directories": {
+    "buildResources": "dist",
+    "output": "release"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -67,6 +84,7 @@
     "mockery": "^1.6.2",
     "node-sass": "^3.4.2",
     "nyc": "^6.4.0",
+    "react": "^15.0.2",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
