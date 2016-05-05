@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import WorkingIndicator from 'app/components/WorkingIndicator';
+import WorkingIndicator from 'src/components/WorkingIndicator';
 
 describe('<WorkingIndicator />', () => {
   it('should render without error', () => {

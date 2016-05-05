@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import NumberField from 'app/components/NumberField';
+import NumberField from 'src/components/NumberField';
 
 describe('NumberField', () => {
   it('should render an error message', () => {

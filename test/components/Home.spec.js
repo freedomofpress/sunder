@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { mount } from 'enzyme';
-import Home from 'app/components/Home';
-import Button from 'app/components/Button';
+import Home from 'src/components/Home';
+import Button from 'src/components/Button';
 
 const props = {};
 

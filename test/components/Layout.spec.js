@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Layout from 'app/components/Layout';
+import Layout from 'src/components/Layout';
 
 const props = { header: 'xyz', children: 'some txt' };
 

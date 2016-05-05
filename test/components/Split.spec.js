@@ -2,9 +2,9 @@ import React from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { shallow } from 'enzyme';
-import { Split } from 'app/components/Split';
-import WorkingIndicator from 'app/components/WorkingIndicator';
-import Button from 'app/components/Button';
+import { Split } from 'src/components/Split';
+import WorkingIndicator from 'src/components/WorkingIndicator';
+import Button from 'src/components/Button';
 
 let props;
 

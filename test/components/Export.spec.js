@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
-import Export from 'app/components/Export';
-import Modal from 'app/components/Modal';
+import Export from 'src/components/Export';
+import Modal from 'src/components/Modal';
 
 const props = { secret: 'xyz' };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import PuzzleIcon from 'app/components/PuzzleIcon';
+import PuzzleIcon from 'src/components/PuzzleIcon';
 
 const props = { className: 'test' };
 

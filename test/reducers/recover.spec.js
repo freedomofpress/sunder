@@ -8,7 +8,7 @@ import reducer, {
   REMOVE_SHARE,
   RESET_RECOVERY,
   initialState
-} from 'app/ducks/recover';
+} from 'src/ducks/recover';
 
 describe('recover reducer', () => {
   it('should have the right initial state', () => {

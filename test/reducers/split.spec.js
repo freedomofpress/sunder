@@ -3,7 +3,7 @@ import reducer, {
   SPLIT,
   SPLIT_SUCCESS,
   SPLIT_FAILURE
-} from 'app/ducks/split';
+} from 'src/ducks/split';
 
 describe('split reducer', () => {
   it('should return the right initial state', () => {

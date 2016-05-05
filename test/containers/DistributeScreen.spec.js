@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import { DistributeScreen } from 'app/containers/DistributeScreen';
+import { DistributeScreen } from 'src/containers/DistributeScreen';
 
 const props = { dispatch: spy(), shares: ['xyz'], quorum: 1 };
 

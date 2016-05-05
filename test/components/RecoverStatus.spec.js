@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import RecoverStatus from 'app/components/RecoverStatus';
-import RecoverStatusShare from 'app/components/RecoverStatusShare';
+import RecoverStatus from 'src/components/RecoverStatus';
+import RecoverStatusShare from 'src/components/RecoverStatusShare';
 
 describe('<RecoverStatus />', () => {
   it('should render nothing with no quorum', () => {

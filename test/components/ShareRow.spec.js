@@ -1,11 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
-import ShareRow from 'app/components/ShareRow';
-import Button from 'app/components/Button';
-import Modal from 'app/components/Modal';
-import CopyButton from 'app/components/CopyButton';
-import SaveFileButton from 'app/components/SaveFileButton';
+import ShareRow from 'src/components/ShareRow';
+import Button from 'src/components/Button';
+import Modal from 'src/components/Modal';
+import CopyButton from 'src/components/CopyButton';
+import SaveFileButton from 'src/components/SaveFileButton';
 
 const props = {
   share: 'xyz',

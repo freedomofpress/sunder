@@ -2,10 +2,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { shallow } from 'enzyme';
-import Recover from 'app/components/Recover';
-import ShareInput from 'app/components/ShareInput';
-import Button from 'app/components/Button';
-import RecoverStatus from 'app/components/RecoverStatus';
+import Recover from 'src/components/Recover';
+import ShareInput from 'src/components/ShareInput';
+import Button from 'src/components/Button';
+import RecoverStatus from 'src/components/RecoverStatus';
 
 let props;
 

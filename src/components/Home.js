@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './Home.scss';
-import PuzzleIcon from 'app/components/PuzzleIcon';
+import PuzzleIcon from 'src/components/PuzzleIcon';
 import Button from './Button';
 
 export default class Home extends Component {

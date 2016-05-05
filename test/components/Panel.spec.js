@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Panel from 'app/components/Panel';
+import Panel from 'src/components/Panel';
 
 describe('Panel', () => {
   it('should render title if passed', () => {

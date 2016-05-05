@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import { SplitScreen, mapStateToProps } from 'app/containers/SplitScreen';
-import Split from 'app/components/Split';
+import { SplitScreen, mapStateToProps } from 'src/containers/SplitScreen';
+import Split from 'src/components/Split';
 
 let props;
 let context;

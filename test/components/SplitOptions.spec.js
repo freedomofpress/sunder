@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import SplitOptions from 'app/components/SplitOptions';
+import SplitOptions from 'src/components/SplitOptions';
 
 let props;
 

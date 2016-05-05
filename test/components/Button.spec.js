@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import Button from 'app/components/Button';
+import Button from 'src/components/Button';
 
 let props;
 describe('Button', () => {

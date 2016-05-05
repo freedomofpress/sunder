@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import Modal from 'app/components/Modal';
+import Modal from 'src/components/Modal';
 
 const props = { onClose: spy(), children: 'some txt' };
 

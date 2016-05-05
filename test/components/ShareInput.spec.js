@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy, match } from 'sinon';
-import { ShareInput } from 'app/components/ShareInput';
-import Button from 'app/components/Button';
+import { ShareInput } from 'src/components/ShareInput';
+import Button from 'src/components/Button';
 
 const props = {
   dispatch: spy(),

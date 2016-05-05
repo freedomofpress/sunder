@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { recover, reset } from '../ducks/recover';
 import Recover from '../components/Recover';
 import BackButton from '../components/BackButton';
-import WorkingIndicator from 'app/components/WorkingIndicator';
+import WorkingIndicator from 'src/components/WorkingIndicator';
 import Layout from '../components/Layout';
 
 export class RecoverScreen extends Component {

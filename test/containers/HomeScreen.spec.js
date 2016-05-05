@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import { reset } from 'app/ducks/global';
-import { HomeScreen } from 'app/containers/HomeScreen';
+import { reset } from 'src/ducks/global';
+import { HomeScreen } from 'src/containers/HomeScreen';
 
 const props = { dispatch: spy() };
 

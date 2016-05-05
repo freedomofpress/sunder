@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import CopyButton from 'app/components/CopyButton';
+import CopyButton from 'src/components/CopyButton';
 
 const props = {
   targetText: 'xyz'

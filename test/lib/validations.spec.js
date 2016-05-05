@@ -5,7 +5,7 @@ import {
   isNumber,
   min,
   max
-} from 'app/lib/validations';
+} from 'src/lib/validations';
 
 describe('validations', () => {
   describe('required', () => {

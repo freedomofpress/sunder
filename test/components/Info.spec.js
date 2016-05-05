@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import Info from 'app/components/Info';
+import Info from 'src/components/Info';
 
 const props = { className: 'info-test', children: 'some txt' };
 

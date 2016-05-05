@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import FileInput from 'app/components/FileInput';
+import FileInput from 'src/components/FileInput';
 
 const props = { field: {} };
 

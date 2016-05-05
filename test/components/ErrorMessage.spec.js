@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import ErrorMessage from 'app/components/ErrorMessage';
+import ErrorMessage from 'src/components/ErrorMessage';
 
 describe('ErrorMessage', () => {
   it('should render an error message', () => {

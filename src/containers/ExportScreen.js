@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import HomeButton from 'app/components/HomeButton';
+import HomeButton from 'src/components/HomeButton';
 import Layout from '../components/Layout';
 import Export from '../components/Export';
 

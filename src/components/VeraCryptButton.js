@@ -3,7 +3,7 @@ import Info from './Info';
 import Button from './Button';
 import ErrorMessage from './ErrorMessage';
 import { remote } from 'electron';
-import openVolume from 'app/lib/veracrypt';
+import openVolume from 'src/lib/veracrypt';
 import './VeraCryptButton.scss';
 
 export default class VeraCryptButton extends Component {

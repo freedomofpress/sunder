@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import { RecoverStatusShare } from 'app/components/RecoverStatusShare';
-import { removeShare } from 'app/ducks/recover';
+import { RecoverStatusShare } from 'src/components/RecoverStatusShare';
+import { removeShare } from 'src/ducks/recover';
 
 describe('<RecoverStatusShare />', () => {
   it('should render as current if current true', () => {

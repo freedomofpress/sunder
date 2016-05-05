@@ -2,9 +2,9 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import { RecoverScreen } from 'app/containers/RecoverScreen';
-import Recover from 'app/components/Recover';
-import { reset } from 'app/ducks/recover';
+import { RecoverScreen } from 'src/containers/RecoverScreen';
+import Recover from 'src/components/Recover';
+import { reset } from 'src/ducks/recover';
 
 let props;
 let context;

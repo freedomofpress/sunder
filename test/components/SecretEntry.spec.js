@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { spy } from 'sinon';
-import SecretEntry, { MAX_DISPLAY_SIZE_BYTES } from 'app/components/SecretEntry';
-import FileInput from 'app/components/FileInput';
+import SecretEntry, { MAX_DISPLAY_SIZE_BYTES } from 'src/components/SecretEntry';
+import FileInput from 'src/components/FileInput';
 
 const props = {
   field: {

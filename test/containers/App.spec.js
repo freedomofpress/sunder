@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import App from 'app/containers/App';
+import App from 'src/containers/App';
 
 const props = { children: 'some txt' };
 

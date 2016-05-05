@@ -2,8 +2,8 @@
  * Actions and reducer for splitting a secret.
  */
 
-import { splitFFI } from 'app/lib/crypto';
-import { RESET } from 'app/ducks/global';
+import { splitFFI } from 'src/lib/crypto';
+import { RESET } from 'src/ducks/global';
 
 export const SPLIT = 'SPLIT';
 export const SPLIT_SUCCESS = 'SPLIT_SUCCESS';

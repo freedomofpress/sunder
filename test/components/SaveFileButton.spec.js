@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import SaveFileButton from 'app/components/SaveFileButton';
+import SaveFileButton from 'src/components/SaveFileButton';
 
 const props = { buttonText: 'some txt' };
 

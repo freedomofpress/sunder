@@ -2,8 +2,8 @@
  * Actions and reducer for recovering a secret.
  */
 
-import { parseShare, recoverFFI } from 'app/lib/crypto';
-import { RESET } from 'app/ducks/global';
+import { parseShare, recoverFFI } from 'src/lib/crypto';
+import { RESET } from 'src/ducks/global';
 
 export const RECOVER = 'RECOVER';
 export const RECOVER_SUCCESS = 'RECOVER_SUCCESS';

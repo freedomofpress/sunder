@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import { ExportScreen } from 'app/containers/ExportScreen';
+import { ExportScreen } from 'src/containers/ExportScreen';
 
 const props = { dispatch: spy(), secret: 'zyz' };
 

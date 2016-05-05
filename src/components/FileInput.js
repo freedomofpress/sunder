@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from 'app/components/Button';
+import Button from 'src/components/Button';
 import fs from 'fs';
 
 let fileCounter = 0;

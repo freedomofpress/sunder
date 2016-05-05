@@ -1,4 +1,4 @@
-import splitValidator from 'app/lib/splitvalidator';
+import splitValidator from 'src/lib/splitvalidator';
 import { expect } from 'chai';
 
 describe('splitValidator', () => {

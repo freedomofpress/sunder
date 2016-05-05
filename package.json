@@ -4,20 +4,20 @@
   "version": "0.0.1",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
-  "main": "app/main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
     "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
-    "lint": "eslint app test *.js",
+    "lint": "eslint src test *.js",
     "hot-server": "node server.js",
     "build-app": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
+    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
     "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386",
@@ -102,7 +102,7 @@
   },
   "nyc": {
     "include": [
-      "app/**"
+      "src/**"
     ]
   }
 }

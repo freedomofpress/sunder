@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import VeraCryptButton from 'app/components/VeraCryptButton';
+import VeraCryptButton from 'src/components/VeraCryptButton';
 
 const props = { className: 'test', secret: 'xyz' };
 
