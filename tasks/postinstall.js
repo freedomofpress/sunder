@@ -14,11 +14,6 @@ fs.lstat(symlink, (e, stats) => {
   }
 });
 
-// Install application dependencies
-console.log('installing application dependencies');
-execSync('npm install', { cwd: path.join(__dirname, '../src') });
-console.log('finished installing application dependencies');
-
 // Rebuild native app modules to match electron version
 const electron = require('electron-prebuilt');
 const electronPackage = require('electron-prebuilt/package.json');
