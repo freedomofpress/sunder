@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const execSync = require('child_process').execSync;
 
 
 // Symlink source folder into node_modules to allow for absolute imports
