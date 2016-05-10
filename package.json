@@ -17,7 +17,7 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && node tasks/postinstall.js",
+    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
     "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386",
@@ -27,17 +27,18 @@
     "app-bundle-id": "apple.app.id",
     "app-category-type": "public.app-category.utilities",
     "productName": "SecretSplitter",
+    "asar": false,
     "osx": {
-      "background": "app/assets/irises.jpg",
-      "icon": "app/app.icns"
+      "background": "build/bg.jpg",
+      "icon": "build/icons/app.icns"
     },
     "linux": {
-      "icon": "app/app.icns"
+      "icon": "build/icons/app.icns"
     }
   },
   "directories": {
-    "buildResources": "dist",
-    "output": "release"
+    "output": "release",
+    "app": "app"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -106,8 +107,7 @@
     "redux": "^3.2.1",
     "redux-form": "^5.1.1",
     "redux-promise": "^0.5.0",
-    "redux-thunk": "^2.0.0",
-    "rusty-secrets": "0.0.4"
+    "redux-thunk": "^2.0.0"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
