@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SecretEntry from './SecretEntry';
+import FileOrTextInput from './FileOrTextInput';
 import SplitOptions from './SplitOptions';
 import Button from './Button';
 import Panel from './Panel';
@@ -33,7 +33,7 @@ export class Split extends Component {
     return (
       <div className="container flex-column split-container">
         <Panel title="Enter Your Secret">
-          <SecretEntry disabled={submitting} field={secret} />
+          <FileOrTextInput disabled={submitting} field={secret} />
         </Panel>
         <Panel title="Share Options" className="split-options-panel">
           <SplitOptions disabled={submitting}

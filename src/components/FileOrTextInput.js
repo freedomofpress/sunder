@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import FileInput from './FileInput';
-import './SecretEntry.scss';
+import './FileOrTextInput.scss';
 
 // Anything over 50 kb we won't try to print.
 export const MAX_DISPLAY_SIZE_BYTES = 50000;
 
-export default class SecretEntry extends Component {
+export default class FileOrTextInput extends Component {
   static propTypes = {
     // redux-form field
     field: PropTypes.object
@@ -26,7 +26,7 @@ export default class SecretEntry extends Component {
     this.setState({ revealed: event.target.checked });
   }
 
-  clearSecret() {
+  clearData() {
     this.props.field.onChange('');
   }
 
@@ -40,14 +40,14 @@ export default class SecretEntry extends Component {
     if (tooLargeToDisplay) {
       textField = (
         <div className={`no-display-message ${entryMode === 'text' ? '' : 'hidden'}`}>
-          {"This secret is too large to display (don't worry, we can still encrypt it)."}
-          <a onClick={this.clearSecret.bind(this)}> Clear Secret</a>
+          {"This is too large to display (don't worry, we can still use it)."}
+          <a onClick={this.clearData.bind(this)}> Clear Data</a>
         </div>
       );
     } else {
       // The odd concatenation on the className is because of https://github.com/airbnb/enzyme/issues/347
       textField = (
-        <textarea className={`secret-entry-input ${this.state.revealed ? 'revealed' : ''}`
+        <textarea className={`file-or-text-input ${this.state.revealed ? 'revealed' : ''}`
             + ` ${entryMode === 'text' ? '' : 'hidden'}`}
           {...field}>
         </textarea>
@@ -58,13 +58,13 @@ export default class SecretEntry extends Component {
       <label className={`reveal-options ${tooLargeToDisplay ? 'hidden' : ''}`}>
         <input type="checkbox"
           onChange={this.onRevealChange.bind(this)}
-          checked={this.state.revealed} /> Reveal secret?
+          checked={this.state.revealed} /> Reveal?
       </label>
     );
 
     return (
-      <div className="flex-column secret-entry">
-        <div className="secret-entry-mode-select-container">
+      <div className="flex-column file-or-text">
+        <div className="file-or-text-mode-select-container">
           <select defaultValue={this.state.entryMode}
             onChange={this.onModeChange.bind(this)}>
             <option value="text">As Text</option>
@@ -72,7 +72,7 @@ export default class SecretEntry extends Component {
           </select>
           {this.state.entryMode === 'text' && revealCheckbox}
         </div>
-        <div className={`field-container secret-entry-input-container
+        <div className={`field-container file-or-text-input-container
             flex-column ${hasError ? 'has-error' : ''}`}>
           {textField}
           <FileInput className={entryMode === 'file' ? '' : 'hidden'} field={field} />

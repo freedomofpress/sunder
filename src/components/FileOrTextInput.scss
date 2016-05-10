@@ -1,17 +1,17 @@
 @import '../shared/variables';
 
-.secret-entry-mode-select-container {
+.file-or-text-mode-select-container {
   margin-bottom: 20px;
   flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
 }
 
-.secret-entry-input-container {
+.file-or-text-input-container {
   flex: 1 1 auto;
 }
 
-.field-container.secret-entry-input-container {
+.field-container.file-or-text-input-container {
   margin-bottom: 0;
 
   textarea {
@@ -19,16 +19,16 @@
   }
 }
 
-.secret-entry-input {
+.file-or-text-input {
   flex: 1 1 auto;
   -webkit-text-security: disc;
 }
 
-.secret-entry-input.revealed {
+.file-or-text-input.revealed {
   -webkit-text-security: none;
 }
 
-.secret-entry {
+.file-or-text {
   padding: 0 20px;
 }
 
