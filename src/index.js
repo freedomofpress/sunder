@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.scss';
+import 'font-awesome/css/font-awesome.min.css';
 
 const store = configureStore();
 const memoryHistory = createMemoryHistory('/');

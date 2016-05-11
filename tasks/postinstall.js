@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const execSync = require('child_process').execSync;
 
 
 // Symlink source folder into node_modules to allow for absolute imports
@@ -13,11 +12,6 @@ fs.lstat(symlink, (e, stats) => {
     console.log(`WARNING: ${symlink} exists but is not a symlink.`);
   }
 });
-
-// Install application dependencies
-console.log('installing application dependencies');
-execSync('npm install', { cwd: path.join(__dirname, '../src') });
-console.log('finished installing application dependencies');
 
 // Rebuild native app modules to match electron version
 const electron = require('electron-prebuilt');

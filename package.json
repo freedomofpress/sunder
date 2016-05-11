@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
-  "main": "src/main.js",
+  "main": "app/main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
@@ -12,12 +12,14 @@
     "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
     "lint": "eslint src test *.js",
     "hot-server": "node server.js",
+    "clean": "rm app/dist/*",
     "build-app": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
+    "clean-build": "npm prune && npm run clean && npm run build-app",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "package": "cross-env NODE_ENV=production node package.js",
     "package-all": "npm run package -- --all",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && node tasks/postinstall.js",
+    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
     "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386",
@@ -27,17 +29,18 @@
     "app-bundle-id": "apple.app.id",
     "app-category-type": "public.app-category.utilities",
     "productName": "SecretSplitter",
+    "asar": false,
     "osx": {
-      "background": "app/assets/irises.jpg",
-      "icon": "app/app.icns"
+      "background": "build/bg.jpg",
+      "icon": "build/icons/app.icns"
     },
     "linux": {
-      "icon": "app/app.icns"
+      "icon": "build/icons/app.icns"
     }
   },
   "directories": {
-    "buildResources": "dist",
-    "output": "release"
+    "output": "release",
+    "app": "app"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -77,6 +80,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.6.0",
+    "file-loader": "^0.8.5",
     "jsdom": "^8.4.0",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
@@ -84,17 +88,30 @@
     "mockery": "^1.6.2",
     "node-sass": "^3.4.2",
     "nyc": "^6.4.0",
-    "react": "^15.0.2",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
     "selenium-webdriver": "^2.48.2",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.9.0",
     "webpack-target-electron-renderer": "^0.4.0"
+  },
+  "dependencies": {
+    "electron-debug": "^0.6.0",
+    "font-awesome": "^4.4.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.3.0",
+    "react-router-redux": "^4.0.0",
+    "redux": "^3.2.1",
+    "redux-form": "^5.1.1",
+    "redux-promise": "^0.5.0",
+    "redux-thunk": "^2.0.0"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",
