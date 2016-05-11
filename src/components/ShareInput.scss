@@ -3,23 +3,21 @@
 
   .panel-contents {
     flex-flow: row nowrap;
-    align-items: stretch;
+    align-items: flex-end;
     justify-content: space-around;
   }
 }
 
 .share-input {
-  input {
-    flex-basis: 50%;
-    margin: 10px 0;
-  }
-
-  select {
-    flex-basis: 15%;
-    margin: 10px 0;
-  }
-
   .btn {
     flex-basis: 25%;
+  }
+
+  .field-container {
+    padding-bottom: 0;
+  }
+
+  .error-label {
+    display: none;
   }
 }

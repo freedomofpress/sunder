@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { recover, reset } from '../ducks/recover';
+import { recover, reset, addShare } from '../ducks/recover';
 import Recover from '../components/Recover';
 import BackButton from '../components/BackButton';
 import WorkingIndicator from 'src/components/WorkingIndicator';
@@ -44,6 +44,10 @@ export class RecoverScreen extends Component {
     return Promise.all([this.props.dispatch(recover()), fakeDelay]);
   }
 
+  handleShareAdded(data) {
+    this.props.dispatch(addShare(data.share));
+  }
+
   handleReset() {
     this.props.dispatch(reset());
   }
@@ -59,6 +63,7 @@ export class RecoverScreen extends Component {
             quorum={quorum}
             inProgress={inProgress}
             error={error}
+            onShareAdded={this.handleShareAdded.bind(this)}
             onReset={this.handleReset.bind(this)}
             onSubmit={this.handleRecover.bind(this)} />
           {inProgress || this.state.fakeDelay && <WorkingIndicator />}

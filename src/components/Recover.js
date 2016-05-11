@@ -12,11 +12,12 @@ export default class Recover extends Component {
     inProgress: PropTypes.bool,
     onSubmit: PropTypes.func,
     error: PropTypes.string,
-    onReset: PropTypes.func
+    onReset: PropTypes.func,
+    onShareAdded: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error, onReset } = this.props;
+    const { quorum, shares, onSubmit, error, onReset, onShareAdded } = this.props;
     const numGoodShares = shares.filter((s) => !s.error).length;
     let instructionalContent;
 
@@ -27,6 +28,8 @@ export default class Recover extends Component {
         'one of the secret shares. Secret Splitter will then prompt you for the ' +
         'remaining shares needed to recover the shared secret.';
     }
+
+    const shouldDisplayStatus = !error && shares.length > 0 && (!quorum || numGoodShares < quorum);
 
     let action;
     if (error) {
@@ -58,7 +61,7 @@ export default class Recover extends Component {
     } else {
       action = (
         <div className="recover-action">
-          <ShareInput />
+          <ShareInput numEnteredShares={numGoodShares} onSubmit={onShareAdded} />
           {instructionalContent &&
             <p className="recover-explanation">{instructionalContent}</p>}
         </div>
@@ -68,7 +71,7 @@ export default class Recover extends Component {
     return (
       <div className="container flex-column recover">
         {action}
-        {!error && numGoodShares < quorum && <RecoverStatus quorum={quorum} shares={shares} />}
+        {shouldDisplayStatus && <RecoverStatus quorum={quorum} shares={shares} />}
       </div>
     );
   }
