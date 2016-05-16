@@ -1,26 +1,28 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import { spy, match } from 'sinon';
+import { spy } from 'sinon';
 import { ShareInput } from 'src/components/ShareInput';
-import Button from 'src/components/Button';
 
 const props = {
-  dispatch: spy(),
-  quorum: 3,
-  numEnteredShares: 2
+  fields: {
+    share: {},
+  },
+  handleSubmit: spy(),
+  invalid: false,
+  resetForm: spy()
 };
 
 describe('<ShareInput />', () => {
-  it('should call addShare when button is pressed', () => {
+  it('should call handleSubmit when button is pressed', () => {
     const shareInput = mount(<ShareInput {...props} />);
-    const input = shareInput.find('[name="secret-share"]');
-    const button = shareInput.find(Button);
+    const input = shareInput.find('textarea');
+    const button = shareInput.find('#submit-share-button');
     const testShare = 'test string';
     input.get(0).value = testShare;
     input.simulate('change');
     button.simulate('click');
-    // This is a little awkward to test thoroughly, but this is pretty good.
-    expect(props.dispatch.calledWithMatch(match.func)).to.be.true();
+    expect(props.handleSubmit.calledOnce).to.be.true();
+    expect(props.resetForm.calledOnce).to.be.true();
   });
 });
