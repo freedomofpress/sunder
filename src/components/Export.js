@@ -7,6 +7,7 @@ import SaveFileButton from './SaveFileButton';
 import PuzzleIcon from './PuzzleIcon';
 import Modal from './Modal';
 import VeraCryptButton from './VeraCryptButton';
+import { detectVeraCrypt } from '../lib/veracrypt';
 
 
 export default class Export extends Component {
@@ -15,6 +16,9 @@ export default class Export extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    detectVeraCrypt().then((result) => {
+      this.setState({ veracryptDetected: result });
+    });
   }
 
   handleView() {
@@ -69,8 +73,10 @@ export default class Export extends Component {
             <CopyButton buttonText="Copy Secret" targetText={this.props.secret} />
             <SaveFileButton buttonText="Save Secret" contents={this.props.secret} />
           </div>
-          <div className="dash-separator" />
-          <VeraCryptButton className="veracrypt-row" secret={this.props.secret} />
+          {this.state.veracryptDetected &&
+            <div className="dash-separator" />}
+          {this.state.veracryptDetected &&
+            <VeraCryptButton className="veracrypt-row" secret={this.props.secret} />}
         </Panel>
         {this.state.viewing && modal}
       </div>
