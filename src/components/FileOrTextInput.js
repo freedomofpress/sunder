@@ -13,7 +13,7 @@ export default class FileOrTextInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { entryMode: 'text', revealed: false };
+    this.state = { entryMode: props.defaultMode || 'text', revealed: false };
   }
 
   onModeChange(event) {

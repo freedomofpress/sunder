@@ -33,7 +33,7 @@ export class ShareInput extends Component {
     return (
       <Panel className="share-input"
         title={`Enter the ${whichShare} secret share`}>
-        <FileOrTextInput field={share} />
+        <FileOrTextInput field={share} defaultMode="file" />
         <Button type="default"
           icon="puzzle-piece"
           id="submit-share-button"
