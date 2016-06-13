@@ -1,12 +1,15 @@
+
+
 export function createValidator(rules) {
   return (values = {}) => {
     const errors = {};
     Object.keys(rules).forEach((field) => {
       const fieldRules = rules[field];
-      const fieldError = fieldRules
+      const fieldErrors = unique(fieldRules
           .map((rule) => rule(values[field], field, values))
           .filter((error) => Boolean(error))
-          .join('. ');
+          .map(capitalize));
+      const fieldError = `${fieldErrors.join('. ')}${fieldErrors.length ? '.' : ''}`;
 
       if (fieldError) {
         errors[field] = fieldError;
@@ -93,4 +96,19 @@ export function max(num) {
 
     return false;
   };
+}
+
+
+function unique(arr) {
+  const hash = {};
+  return arr.filter((val) => {
+    const alreadyPresent = hash[val];
+    hash[val] = true;
+    return !alreadyPresent;
+  });
+}
+
+
+function capitalize(str) {
+  return str[0].toUpperCase() + str.slice(1);
 }
