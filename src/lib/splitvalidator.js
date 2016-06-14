@@ -2,11 +2,11 @@ import { createValidator, required, max, min, isNumber } from './validations';
 
 export default createValidator({
   secret: [required],
-  shares: [required, isNumber, max(255), min(1)],
+  shares: [required, isNumber, max(255), min(2)],
   quorum: [
     required,
     isNumber,
-    min(1),
+    min(2),
     // Require that quorum is less than the number of shares
     (value, fieldName, allValues) => {
       let sharesValue = allValues.shares;
