@@ -14,10 +14,10 @@ describe('splitValidator', () => {
     expect(splitValidator({ shares: 'ten' }).shares).to.contain('number');
   });
 
-  it('should require shares to be between 1 and 255', () => {
+  it('should require shares to be between 2 and 255', () => {
     expect(splitValidator({ shares: 0 }).shares).to.contain('at least');
     expect(splitValidator({ shares: 256 }).shares).to.contain('at most');
-    expect(splitValidator({ shares: 1 }).shares).to.not.exist();
+    expect(splitValidator({ shares: 2 }).shares).to.not.exist();
     expect(splitValidator({ shares: 255 }).shares).to.not.exist();
   });
 
