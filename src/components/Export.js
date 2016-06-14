@@ -11,7 +11,7 @@ import { detectVeraCrypt } from '../lib/veracrypt';
 
 
 export default class Export extends Component {
-  static propTypes = { secret: PropTypes.string }
+  static propTypes = { secret: PropTypes.object }
 
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ export default class Export extends Component {
   render() {
     const modal = (
       <Modal onClose={this.handleHide.bind(this)} title="Secret">
-        <textarea className="secret-view" value={this.props.secret} readOnly>
+        <textarea className="secret-view" value={this.props.secret.toString('utf8')} readOnly>
         </textarea>
         <div className="actions-row align-center">
           <Button type="default"
@@ -70,13 +70,14 @@ export default class Export extends Component {
               onClick={this.handleView.bind(this)}>
               View Secret
             </Button>
-            <CopyButton buttonText="Copy Secret" targetText={this.props.secret} />
+            <CopyButton buttonText="Copy Secret" targetText={this.props.secret.toString('utf-8')} />
             <SaveFileButton buttonText="Save Secret" contents={this.props.secret} />
           </div>
           {this.state.veracryptDetected &&
             <div className="dash-separator" />}
           {this.state.veracryptDetected &&
-            <VeraCryptButton className="veracrypt-row" secret={this.props.secret} />}
+            <VeraCryptButton className="veracrypt-row"
+              secret={this.props.secret.toString('utf-8')} />}
         </Panel>
         {this.state.viewing && modal}
       </div>

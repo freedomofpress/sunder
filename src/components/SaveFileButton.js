@@ -6,7 +6,7 @@ import Button from './Button';
 
 export default class SaveFileButton extends Component {
   static propTypes = {
-    contents: PropTypes.string,
+    contents: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     dialogTitle: PropTypes.string,
     defaultPath: PropTypes.string,
     buttonText: PropTypes.string,

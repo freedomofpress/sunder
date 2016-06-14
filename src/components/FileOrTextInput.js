@@ -8,7 +8,8 @@ export const MAX_DISPLAY_SIZE_BYTES = 50000;
 export default class FileOrTextInput extends Component {
   static propTypes = {
     // redux-form field
-    field: PropTypes.object
+    field: PropTypes.object,
+    defaultMode: PropTypes.string
   }
 
   constructor(props) {

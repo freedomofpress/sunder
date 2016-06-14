@@ -19,7 +19,7 @@ export function parseShare(share) {
 
 
 /**
- * @param   {string} secret The secret to be split.
+ * @param   {Buffer} secret The secret to be split.
  * @param   {Object} options
  * @param   {number} options.shares The total number of shares to generate.
  * @param   {number} options.quorum The number of shares required to recover.
@@ -27,20 +27,24 @@ export function parseShare(share) {
  */
 export function splitFFI(secret, options) {
   return new Promise((resolve, reject) => {
-    cryptoFFI.generate_shares(options.quorum, options.shares, secret, (err, shares) => {
-      if (err) {
-        return reject(err);
-      }
+    cryptoFFI.generate_shares(
+      options.quorum,
+      options.shares,
+      secret.toString('base64'),
+      (err, shares) => {
+        if (err) {
+          return reject(err);
+        }
 
-      resolve(shares);
-    });
+        resolve(shares);
+      });
   });
 }
 
 
 /**
  * @param   {Array<string>} shares The list of shares to attempt recovery with.
- * @returns {Promise<string>} The decrypted secret.
+ * @returns {Promise<Buffer>} The decrypted secret.
  */
 export function recoverFFI(shares) {
   return new Promise((resolve, reject) => {
@@ -49,7 +53,7 @@ export function recoverFFI(shares) {
         return reject(err);
       }
 
-      resolve(secret);
+      resolve(Buffer.from(secret, 'base64'));
     });
   });
 }

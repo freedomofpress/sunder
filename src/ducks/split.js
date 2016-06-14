@@ -50,6 +50,10 @@ export function split(secret, options) {
       quorum: options.quorum
     });
 
+    if (!Buffer.isBuffer(secret)) {
+      secret = Buffer.from(secret, 'utf8');
+    }
+
     return splitFFI(secret, options).then((shares) => {
       dispatch({ type: SPLIT_SUCCESS, shares });
     }).catch((error) => {

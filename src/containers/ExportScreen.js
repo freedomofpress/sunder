@@ -7,7 +7,7 @@ import Export from '../components/Export';
 
 export class ExportScreen extends Component {
   static propTypes = {
-    secret: PropTypes.string,
+    secret: PropTypes.object,
     dispatch: PropTypes.func
   }
 

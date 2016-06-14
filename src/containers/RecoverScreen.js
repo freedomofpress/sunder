@@ -15,7 +15,7 @@ export class RecoverScreen extends Component {
     quorum: PropTypes.number,
     inProgress: PropTypes.bool,
     dispatch: PropTypes.func,
-    secret: PropTypes.string,
+    secret: PropTypes.object,
     error: PropTypes.string
   }
   static contextTypes = {
@@ -45,7 +45,8 @@ export class RecoverScreen extends Component {
   }
 
   handleShareAdded(data) {
-    this.props.dispatch(addShare(data.share));
+    const share = Buffer.isBuffer(data.share) ? data.share.toString('utf8') : data.share;
+    this.props.dispatch(addShare(share));
   }
 
   handleReset() {
