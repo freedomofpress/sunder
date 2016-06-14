@@ -73,6 +73,10 @@ describe('main window', function spec() {
     await this.driver.findElement({ id: 'recover-button' }).click();
   });
 
+  it('should select text input', async () => {
+    await this.driver.findElement({ css: 'option[value="text"]' }).click();
+  });
+
   it('should input the shares', async () => {
     for (let i = 0; i < quorum; i++) {
       await this.driver.findElement({ name: 'share' }).sendKeys(shares[i]);
