@@ -17,8 +17,6 @@
     "clean-build": "npm prune && npm run clean && npm run build-app",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
-    "package": "cross-env NODE_ENV=production node package.js",
-    "package-all": "npm run package -- --all",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
