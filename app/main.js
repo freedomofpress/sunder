@@ -4,6 +4,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const electron = require('electron');
+const autoUpdate = require('./autoUpdate');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let mainWindow = null;
@@ -30,4 +31,6 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
   }
+
+  autoUpdate(mainWindow);
 });
