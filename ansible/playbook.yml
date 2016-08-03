@@ -4,4 +4,6 @@
   roles:
     - role: geerlingguy.nodejs
       become: yes
+      nodejs_version: "4.x"
+
     - role: secretshare-build
