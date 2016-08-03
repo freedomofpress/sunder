@@ -1,0 +1,7 @@
+---
+- name: Configure build machine for SecretShare.
+  hosts: all
+  roles:
+    - role: geerlingguy.nodejs
+      become: yes
+    - role: secretshare-build
