@@ -1,4 +1,15 @@
 ---
+- name: Install apt dependencies prior to building.
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - build-essential
+    - libgconf2-dev
+    - libgtk2.0-dev
+    - libnss3-dev
+
 # These packages must be installed globally, because they're referenced
 # as system-wide scripts in the build process. The geerlingguy.nodejs role
 # offers to handle global npm package installation, but is broken due to
