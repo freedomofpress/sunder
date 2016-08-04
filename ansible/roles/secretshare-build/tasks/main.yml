@@ -20,9 +20,7 @@
     state: present
     global: yes
     name: "{{ item }}"
-  environment:
-    NPM_CONFIG_PREFIX: "/usr/local/lib/npm"
-    NODE_PATH: "/usr/local/lib/npm/lib/node_modules"
+  environment: "{{ secretshare_nodejs_environment_map }}"
   with_items:
     - cross-env
     - webpack
@@ -30,3 +28,15 @@
 - name: Install NodeJS dependencies via npm.
   npm:
     path: /vagrant
+
+- name: Compile CSS and JS application code.
+  command: npm run build-app
+  environment: "{{ secretshare_nodejs_environment_map }}"
+  args:
+    chdir: /vagrant
+
+- name: Build secret-share deb package.
+  command: npm run dist
+  environment: "{{ secretshare_nodejs_environment_map }}"
+  args:
+    chdir: /vagrant
