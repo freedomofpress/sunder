@@ -1,0 +1,42 @@
+---
+- name: Install apt dependencies prior to building.
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - build-essential
+    - libgconf2-dev
+    - libgtk2.0-dev
+    - libnss3-dev
+
+# These packages must be installed globally, because they're referenced
+# as system-wide scripts in the build process. The geerlingguy.nodejs role
+# offers to handle global npm package installation, but is broken due to
+# a bug in the Ansible npm module:
+# https://github.com/ansible/ansible-modules-extras/issues/1375#issuecomment-186510972
+- name: Install global NodeJS dependencies via npm.
+  npm:
+    state: present
+    global: yes
+    name: "{{ item }}"
+  environment: "{{ secretshare_nodejs_environment_map }}"
+  with_items:
+    - cross-env
+    - webpack
+
+- name: Install NodeJS dependencies via npm.
+  npm:
+    path: /vagrant
+
+- name: Compile CSS and JS application code.
+  command: npm run build-app
+  environment: "{{ secretshare_nodejs_environment_map }}"
+  args:
+    chdir: /vagrant
+
+- name: Build secret-share deb package.
+  command: npm run dist
+  environment: "{{ secretshare_nodejs_environment_map }}"
+  args:
+    chdir: /vagrant
