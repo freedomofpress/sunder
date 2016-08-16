@@ -5,3 +5,7 @@ npm-debug.log
 dist
 release
 .nyc_output
+.vagrant/
+
+# External roles are included from Ansible Galaxy, don't version control.
+ansible/roles/geerlingguy.nodejs
