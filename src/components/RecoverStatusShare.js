@@ -32,7 +32,7 @@ export class RecoverStatusShare extends Component {
       statusMessage = 'Share still needed';
     } else if (share.error) {
       className = 'error';
-      statusMessage = `Error: ${share.error}`;
+      statusMessage = `Share #${index + 1}: ${share.error}`;
     } else {
       className = 'success';
       statusMessage = `Share #${index + 1} succesfully processed`;
