@@ -31,9 +31,23 @@ export default function reducer(state = initialState, action) {
         inProgress: false
       });
     case RECOVER_ERROR:
-      return Object.assign({}, state, {
-        error: action.error || 'Something went wrong',
-        inProgress: false
+      const newState = Object.assign({}, state, { inProgress: false });
+
+      // If the error is associated with a specific share, add it to the share
+      if (action.error && action.error.share_index !== undefined) {
+        return Object.assign(newState, {
+          shares: state.shares.map((share, index) => {
+            if (index === action.error.share_index) {
+              return Object.assign(share, { error: action.error.message });
+            }
+            return share;
+          })
+        });
+      }
+
+      // Global error case
+      return Object.assign(newState, {
+        error: action.error && action.error.message || 'Something went wrong',
       });
     case ADD_SHARE: {
       // If share properties differ, prefer the ones entered first.
@@ -125,7 +139,7 @@ export function recover() {
     recoverFFI(shares).then((secret) => {
       dispatch({ type: RECOVER_SUCCESS, secret });
     }).catch((error) => {
-      dispatch({ type: RECOVER_ERROR, error: error.message });
+      dispatch({ type: RECOVER_ERROR, error });
     });
   };
 }

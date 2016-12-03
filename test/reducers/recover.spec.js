@@ -37,7 +37,7 @@ describe('recover reducer', () => {
   });
 
   describe('handling of RECOVER_ERROR', () => {
-    const error = 'BAD NEWS';
+    const error = { message: 'BAD NEWS' };
     const action = { type: RECOVER_ERROR, error };
     const state = { inProgress: true };
 
@@ -46,7 +46,22 @@ describe('recover reducer', () => {
     });
 
     it('should store the error message', () => {
-      expect(reducer(state, action).error).to.be.eql(error);
+      expect(reducer(state, action).error).to.be.eql(error.message);
+    });
+
+    it('should attach an indexed error to the right share', () => {
+      const shareError = { message: 'BAD NEWS', share_index: 1 };
+      const shareErrorAction = { type: RECOVER_ERROR, error: shareError };
+      const share0 = { data: 'sharedata0' };
+      const share1 = { data: 'sharedata1' };
+      const startingState = { inProgress: true, shares: [share0, share1] };
+
+      expect(reducer(startingState, shareErrorAction).shares)
+        .to.be.eql([share0, { data: 'sharedata1', error: 'BAD NEWS' }]);
+      expect(reducer(startingState, shareErrorAction).error)
+        .to.be.eql(undefined);
+      expect(reducer(startingState, shareErrorAction).inProgress)
+        .to.be.eql(false);
     });
   });
 
