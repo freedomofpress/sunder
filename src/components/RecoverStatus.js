@@ -41,7 +41,7 @@ export default class RecoverStatus extends Component {
           <span className="accent">{shares.length - numBadShares}</span>
           {' out of '}
           <span className="accent">{quorum}</span>
-          {' shares entered.'}
+          {' valid shares entered.'}
         </h3>
       );
     }
