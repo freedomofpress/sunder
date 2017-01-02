@@ -27,10 +27,14 @@ export function parseShare(share) {
  */
 export function splitFFI(secret, options) {
   return new Promise((resolve, reject) => {
+    var mime = 'img/test';
     cryptoFFI.generate_shares(
       options.quorum,
       options.shares,
-      secret.toString('base64'),
+      // This needs to be a buffer
+      secret,
+      // TODO mime
+      mime,
       (err, shares) => {
         if (err) {
           return reject(err);
@@ -48,7 +52,7 @@ export function splitFFI(secret, options) {
  */
 export function recoverFFI(shares) {
   return new Promise((resolve, reject) => {
-    cryptoFFI.recover_secret(shares, (err, secret) => {
+    cryptoFFI.recover_secret(shares, (err, secret, mime) => {
       if (err) {
         return reject(err);
       }

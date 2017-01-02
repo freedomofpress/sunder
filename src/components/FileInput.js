@@ -58,6 +58,8 @@ export default class FileInput extends Component {
           return this.setState({ error: 'Something went wrong.' });
         }
 
+        // TODO Look up the mime type here, pipe through reducer
+
         // The order of these statements is important because of `componentWillReceiveProps`
         this.props.field.onChange(contents);
         this.setState({ filename: file.name });
