@@ -3,12 +3,13 @@ const autoUpdater = electron.autoUpdater;
 const currentVersion = require('../package.json').version;
 const os = require('os');
 const request = require('request');
+const repo = 'atom/atom' // TESTING ONLY, change to 'freedomofpress/sunder'
 
 
 module.exports = function autoUpdate(browserWindow) {
-  const feedUrl = `http://localhost:8000/update/${os.platform()}_${os.arch()}/${currentVersion}`;
 
-  if (false && process.platform !== 'linux') {
+  if (process.platform !== 'linux') {
+    const feedUrl = `http://localhost:8000/update/${os.platform()}_${os.arch()}/${currentVersion}`;
     console.log('checking for updates at', feedUrl);
     autoUpdater.setFeedURL(feedUrl);
 
@@ -53,9 +54,9 @@ module.exports = function autoUpdate(browserWindow) {
     autoUpdater.checkForUpdates();
   } else { // linux
     const options = {
-      url: 'https://api.github.com/repos/atom/atom/releases/latest',
+      url: `https://api.github.com/repos/${repo}/releases/latest`,
       headers: {
-        'User-Agent': 'GabeIsman'
+        'User-Agent': 'Sunder'
       }
     }
     request(options, (error, response, body) => {
@@ -72,9 +73,9 @@ module.exports = function autoUpdate(browserWindow) {
         return;
       }
 
-      if (body.name.indexOf(currentVersion) !==) {
+      if (body.name.indexOf(currentVersion) !== -1) {
         // Up to date
-        return;  
+        return;
       }
 
       electron.dialog.showMessageBox(browserWindow, {
@@ -88,8 +89,5 @@ module.exports = function autoUpdate(browserWindow) {
         cancelId: 0, // Return the cancel id if the user closes dialog without clicking a button
       });
     });
-    // try to GET /repos/:owner/:repo/releases/latest
-    // if successful compare to 'name' or 'tag_name' to current version
-    // if out of date link to 'html_url'
   }
 };
