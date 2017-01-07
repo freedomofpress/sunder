@@ -79,8 +79,13 @@ describe('main window', function spec() {
 
   it('should input the shares', async () => {
     for (let i = 0; i < quorum; i++) {
-      await this.driver.findElement({ name: 'share' }).sendKeys(shares[i]);
+      await this.driver.executeScript(
+        "arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('blur'));",
+        this.driver.findElement({ name: 'share' }),
+        shares[i]);
+      await delay(1000);
       await this.driver.findElement({ id: 'submit-share-button' }).click();
+      await delay(1000);
     }
   });
 
