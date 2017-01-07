@@ -88,7 +88,7 @@
     "nyc": "^6.4.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
-    "rusty-secrets": "0.0.9",
+    "rusty-secrets": "0.0.10",
     "sass-loader": "^3.2.0",
     "selenium-webdriver": "^2.48.2",
     "sinon": "^1.17.3",
