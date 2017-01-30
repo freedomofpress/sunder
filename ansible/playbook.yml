@@ -1,5 +1,5 @@
 ---
-- name: Configure build machine for SecretShare.
+- name: Configure build machine for Sunder.
   hosts: all
   roles:
     - role: geerlingguy.nodejs

@@ -26,7 +26,7 @@
   "build": {
     "app-bundle-id": "apple.app.id",
     "app-category-type": "public.app-category.utilities",
-    "productName": "SecretSplitter",
+    "productName": "Sunder",
     "asar": false,
     "osx": {
       "background": "build/bg.jpg",
