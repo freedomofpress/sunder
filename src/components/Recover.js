@@ -4,6 +4,7 @@ import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
 import PuzzleIcon from './PuzzleIcon';
+import { countGoodShares } from 'src/lib/utilities';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -19,7 +20,7 @@ export default class Recover extends Component {
 
   render() {
     const { quorum, shares, onSubmit, error, onReset, onShareAdded } = this.props;
-    const numGoodShares = shares.filter((s) => !s.error).length;
+    const numGoodShares = countGoodShares(shares);
     let instructionalContent;
 
     if (shares.length > 0) {
@@ -62,7 +63,8 @@ export default class Recover extends Component {
     } else {
       action = (
         <div className="recover-action">
-          <ShareInput numEnteredShares={numGoodShares} onSubmit={onShareAdded} />
+          <ShareInput numEnteredShares={numGoodShares}
+            onSubmit={onShareAdded} />
           {instructionalContent &&
             <p className="recover-explanation">{instructionalContent}</p>}
         </div>

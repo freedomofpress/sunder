@@ -45,6 +45,24 @@ export default function reducer(state = initialState, action) {
         });
       }
 
+      // This is a global, but recoverable error where the shares are valid but mismatched
+      if (action.error && action.error.share_groups) {
+        // Find the group with the maximum shares in it, mark the others as not belonging
+        // Should we indicate a strict majority? Should the messaging be different?
+        // 'These don't match' vs. 'This one doesn't belong.'
+        // Should we render them visually by group? Use colors to indicate?
+        const maxGroupSize = Math.max(...action.error.share_groups.map((a) => a.length));
+        const majorityGroup = action.error.share_groups.find((a) => a.length === maxGroupSize);
+        return Object.assign(newState, {
+          shares: state.shares.map((share, index) => {
+            return Object.assign(share, {
+              error: majorityGroup.includes(index) ? null : 'This share doesn\'t belong with the others.'
+            })
+          }),
+          mismatch: true
+        });
+      }
+
       // Global error case
       return Object.assign(newState, {
         error: action.error && action.error.message || 'Something went wrong',
@@ -131,7 +149,6 @@ export function recover() {
   return (dispatch, getState) => {
     const state = getState();
     const shares = state.recover.shares
-      .filter((s) => !s.error)
       .map((s) => s.data);
 
     dispatch({ type: RECOVER });
