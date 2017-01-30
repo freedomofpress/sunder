@@ -1,6 +1,6 @@
 {
-  "name": "secret-splitter",
-  "productName": "Secret Splitter",
+  "name": "sunder",
+  "productName": "Sunder",
   "version": "0.0.1",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",

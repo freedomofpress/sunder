@@ -25,7 +25,7 @@ export default class Recover extends Component {
       instructionalContent = '';
     } else {
       instructionalContent = 'To recover a secret, start by providing ' +
-        'one of the secret shares. Secret Splitter will then prompt you for the ' +
+        'one of the secret shares. Sunder will then prompt you for the ' +
         'remaining shares needed to recover the shared secret.';
     }
 

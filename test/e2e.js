@@ -36,7 +36,7 @@ describe('main window', function spec() {
 
   it('should open window', async () => {
     const title = await this.driver.getTitle();
-    expect(title).to.equal('Secret Splitter');
+    expect(title).to.equal('Sunder');
   });
 
   it('should click on the split button', async () => {
