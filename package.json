@@ -109,8 +109,7 @@
     "redux": "^3.2.1",
     "redux-form": "^5.1.1",
     "redux-promise": "^0.5.0",
-    "redux-thunk": "^2.0.0",
-    "request": "^2.72.0"
+    "redux-thunk": "^2.0.0"
   },
   "devEngines": {
     "node": "4.x || 5.x || 6.x",

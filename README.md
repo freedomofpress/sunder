@@ -54,3 +54,12 @@ npm run dist
 ```
 
 Packages will be stored in `release/`.
+
+### Signing OSX Packages
+Signed OSX packages are required for the Auto-Update functionality to work. In order to sign an a package you need to have an Apple developer certificate available. You can do this by opening XCode, Preferences -> Accounts -> Sign in with Apple ID enrolled in Developer Program -> View Details. When you have downloaded the 'Developer ID Application' certificate, you can look in Keychain Access -> Login -> Certificates to verify that the certificate has been installed. From this screen copy the full name of the certificate. You can now build a signed package with:
+```
+env CSC_NAME="<identity cert name>" npm run dist
+```
+More info on automatic signing (not just for OSX) [here](https://github.com/electron-userland/electron-builder/wiki/Code-Signing).
+
+You can verify the signature with `codesign --verify -vvvv release/osx/AppName.app`.

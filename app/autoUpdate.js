@@ -1,6 +1,6 @@
 const electron = require('electron');
 const autoUpdater = electron.autoUpdater;
-const currentVersion = require('../package.json').version;
+const currentVersion = electron.app.getVersion();
 const os = require('os');
 const request = require('request');
 const repo = 'atom/atom' // TESTING ONLY, change to 'freedomofpress/sunder'
@@ -9,7 +9,7 @@ const repo = 'atom/atom' // TESTING ONLY, change to 'freedomofpress/sunder'
 module.exports = function autoUpdate(browserWindow) {
 
   if (process.platform !== 'linux') {
-    const feedUrl = `http://localhost:8000/update/${os.platform()}_${os.arch()}/${currentVersion}`;
+    const feedUrl = `http://localhost:5000/update/${os.platform()}_${os.arch()}/${currentVersion}`;
     console.log('checking for updates at', feedUrl);
     autoUpdater.setFeedURL(feedUrl);
 
@@ -51,7 +51,9 @@ module.exports = function autoUpdate(browserWindow) {
       console.log('checking for update');
     });
 
-    autoUpdater.checkForUpdates();
+    if (process.env.NODE_ENV === 'production') {
+      autoUpdater.checkForUpdates();
+    }
   } else { // linux
     const options = {
       url: `https://api.github.com/repos/${repo}/releases/latest`,
