@@ -28,7 +28,7 @@ module.exports = function autoUpdate(browserWindow) {
         }, (response) => {
           console.log(response);
           if (response === 0) {
-            autoUpdater.quitAndInstall();
+            setTimeout(() => autoUpdater.quitAndInstall(), 1);
           } else {
             console.log('canceled');
           }
