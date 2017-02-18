@@ -64,7 +64,7 @@ module.exports = function autoUpdate(browserWindow) {
         return;
       }
 
-      if (body.name.indexOf(currentVersion) !== -1) {
+      if (body.tag_name.indexOf(currentVersion) !== -1) {
         // Up to date
         return;
       }
