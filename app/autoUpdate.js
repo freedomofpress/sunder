@@ -3,55 +3,44 @@ const autoUpdater = electron.autoUpdater;
 const currentVersion = electron.app.getVersion();
 const os = require('os');
 const request = require('request');
-const repo = 'atom/atom' // TESTING ONLY, change to 'freedomofpress/sunder'
+const repo = 'freeedomofpress/sunder' // TODO: verify this repo is accurate once public
 
 
 module.exports = function autoUpdate(browserWindow) {
 
   if (process.platform !== 'linux') {
-    const feedUrl = `http://localhost:5000/update/${os.platform()}_${os.arch()}/${currentVersion}`;
+    // TODO: Fix this url when nuts instances deployed
+    const nutsUrl = process.env.NUTS_URL || 'https://updates.freedom.press';
+    const feedUrl = `${nutsUrl}/update/${os.platform()}_${os.arch()}/${currentVersion}`;
     console.log('checking for updates at', feedUrl);
-    autoUpdater.setFeedURL(feedUrl);
+    // This will error out in development because the running binary is unsigned
+    if (process.env.NODE_ENV === 'production') {
+      autoUpdater.setFeedURL(feedUrl);
 
-    autoUpdater.addListener(
-      'update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl) => {
-        console.log(releaseName, updateUrl);
-        electron.dialog.showMessageBox(browserWindow, {
-          type: 'info',
-          buttons: ['Install & Resart', 'Later'],
-          defaultId: 0, // Index of pre-selected button
-          title: 'Update Available',
-           // Should include change log or something
-          message: 'An update has been downloaded',
-          detail: 'We recommend you install it now.',
-          cancelId: 1, // Return the cancel id if the user closes dialog without clicking a button
-        }, (response) => {
-          console.log(response);
-          if (response === 0) {
-            setTimeout(() => autoUpdater.quitAndInstall(), 1);
-          } else {
-            console.log('canceled');
-          }
+      autoUpdater.addListener(
+        'update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl) => {
+          electron.dialog.showMessageBox(browserWindow, {
+            type: 'info',
+            buttons: ['Install & Resart', 'Later'],
+            defaultId: 0, // Index of pre-selected button
+            title: 'Update Available',
+            // Should include change log or something
+            message: 'An update has been downloaded',
+            detail: 'We recommend you install it now.',
+            cancelId: 1, // Return the cancel id if the user closes dialog without clicking a button
+          }, (response) => {
+            if (response === 0) {
+              setTimeout(() => autoUpdater.quitAndInstall(), 1);
+            } else {
+              console.log('canceled');
+            }
+          });
         });
+
+      autoUpdater.addListener('error', (error) => {
+        console.log('encountered error', error.message);
       });
 
-    autoUpdater.addListener('error', (error) => {
-      console.log('encountered error', error.message);
-    });
-
-    autoUpdater.addListener('update-not-available', () => {
-      console.log('update not found');
-    });
-
-    autoUpdater.addListener('update-available', () => {
-      console.log('update found');
-    });
-
-    autoUpdater.addListener('checking-for-update', () => {
-      console.log('checking for update');
-    });
-
-    if (process.env.NODE_ENV === 'production') {
       autoUpdater.checkForUpdates();
     }
   } else { // linux
