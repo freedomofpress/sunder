@@ -13,12 +13,14 @@ export default class Recover extends Component {
     inProgress: PropTypes.bool,
     onSubmit: PropTypes.func,
     error: PropTypes.string,
+    unrecoverable: PropTypes.bool,
+    mismatch: PropTypes.bool,
     onReset: PropTypes.func,
     onShareAdded: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error, onReset, onShareAdded } = this.props;
+    const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable, mismatch } = this.props;
     const numGoodShares = countGoodShares(shares);
     let instructionalContent;
 
@@ -30,10 +32,10 @@ export default class Recover extends Component {
         'remaining shares needed to recover the shared secret.';
     }
 
-    const shouldDisplayStatus = !error && shares.length > 0 && (!quorum || numGoodShares < quorum);
+    const shouldDisplayStatus = !unrecoverable && shares.length > 0 && (!quorum || numGoodShares < quorum || mismatch);
 
     let action;
-    if (error) {
+    if (error && unrecoverable) {
       action = (
         <div className="align-center reset-action">
           <p>
@@ -46,7 +48,7 @@ export default class Recover extends Component {
           </Button>
         </div>
       );
-    } else if (numGoodShares >= quorum) {
+    } else if (!mismatch && numGoodShares >= quorum) {
       action = (
         <div className="recover-action align-center">
           <h1 className="accent">All shares entered!</h1>

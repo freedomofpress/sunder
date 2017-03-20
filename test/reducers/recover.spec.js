@@ -59,7 +59,30 @@ describe('recover reducer', () => {
       expect(reducer(startingState, shareErrorAction).shares)
         .to.be.eql([share0, { data: 'sharedata1', error: 'BAD NEWS' }]);
       expect(reducer(startingState, shareErrorAction).error)
-        .to.be.eql(undefined);
+        .to.be.eql('One of the shares is invalid.');
+      expect(reducer(startingState, shareErrorAction).inProgress)
+        .to.be.eql(false);
+    });
+
+    it('should handle share groups properly', () => {
+      const shareError = { message: 'BAD NEWS', share_groups: [[1], [2, 3]] };
+      const shareErrorAction = { type: RECOVER_ERROR, error: shareError };
+      const share0 = { data: 'sharedata0' };
+      const share1 = { data: 'sharedata1' };
+      const share2 = { data: 'sharedata2' };
+      const startingState = { inProgress: true, shares: [share0, share1, share2] };
+
+      expect(reducer(startingState, shareErrorAction).shares)
+        .to.be.eql([
+          {
+            data: 'sharedata0',
+            error: 'This share doesn\'t belong with the others.'
+          },
+          share1,
+          share2
+        ]);
+      expect(reducer(startingState, shareErrorAction).error)
+        .to.be.eql('One or more of the shares belongs to a different secret.');
       expect(reducer(startingState, shareErrorAction).inProgress)
         .to.be.eql(false);
     });
