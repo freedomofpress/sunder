@@ -24,7 +24,7 @@ export const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case RECOVER:
-      return Object.assign({}, state, { inProgress: true });
+      return Object.assign({}, state, { inProgress: true, error: undefined });
     case RECOVER_SUCCESS:
       return Object.assign({}, state, {
         secret: action.secret,
@@ -41,7 +41,8 @@ export default function reducer(state = initialState, action) {
               return Object.assign(share, { error: action.error.message });
             }
             return share;
-          })
+          }),
+          error: 'One of the shares is invalid.'
         });
       }
 
@@ -52,20 +53,28 @@ export default function reducer(state = initialState, action) {
         // 'These don't match' vs. 'This one doesn't belong.'
         // Should we render them visually by group? Use colors to indicate?
         const maxGroupSize = Math.max(...action.error.share_groups.map((a) => a.length));
-        const majorityGroup = action.error.share_groups.find((a) => a.length === maxGroupSize);
+        const majorityGroup = action.error.share_groups.findIndex((a) => a.length === maxGroupSize);
         return Object.assign(newState, {
           shares: state.shares.map((share, index) => {
-            return Object.assign(share, {
-              error: majorityGroup.includes(index) ? null : 'This share doesn\'t belong with the others.'
-            })
+            const group = action.error.share_groups.findIndex((g) => g.includes(index));
+            if (majorityGroup != group) {
+              return Object.assign(share, {
+                error: 'This share doesn\'t belong with the others.',
+                group
+              });
+            } else {
+              return Object.assign(share, { group });
+            }
           }),
-          mismatch: true
+          mismatch: true,
+          error: 'One or more of the shares belongs to a different secret.'
         });
       }
 
-      // Global error case
+      // Global error case, nothing to be done.
       return Object.assign(newState, {
         error: action.error && action.error.message || 'Something went wrong',
+        unrecoverable: true
       });
     case ADD_SHARE: {
       // If share properties differ, prefer the ones entered first.
