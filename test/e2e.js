@@ -36,7 +36,7 @@ describe('main window', function spec() {
 
   it('should open window', async () => {
     const title = await this.driver.getTitle();
-    expect(title).to.equal('Secret Splitter');
+    expect(title).to.equal('Sunder');
   });
 
   it('should click on the split button', async () => {
@@ -58,8 +58,8 @@ describe('main window', function spec() {
 
   it('should find and store the share values', async () => {
     // Depends on implementation of the copy button, less than ideal.
-    const secretShareEls = await this.driver.findElements({ css: 'input[readonly]' });
-    return Promise.all(secretShareEls.map((el) => el.getAttribute('value'))).then((values) => {
+    const shareEls = await this.driver.findElements({ css: 'input[readonly]' });
+    return Promise.all(shareEls.map((el) => el.getAttribute('value'))).then((values) => {
       // Store in global for later use
       shares = values;
     });

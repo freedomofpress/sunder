@@ -17,7 +17,7 @@ clean-build:
 	make build
 
 help:
-	@echo Makefile for building secret-splitter packages.
+	@echo Makefile for building sunder packages.
 	@echo Subcommands:
 	@echo "\t ansible: Fetch dependency Ansible roles for NodeJS config."
 	@echo "\t clean: Remove previously built binaries from release/ directory."

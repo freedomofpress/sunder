@@ -76,7 +76,7 @@ export default class ShareRow extends Component {
           <SaveFileButton contents={share}
             type="small"
             onSaved={this.handleSaved.bind(this)}
-            defaultPath={`secret-share-${index}.txt`} />
+            defaultPath={`secret-shard-${index}.txt`} />
         </div>
         {this.state.shown && modal}
       </div>
