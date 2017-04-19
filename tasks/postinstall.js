@@ -14,11 +14,11 @@ fs.lstat(symlink, (e, stats) => {
 });
 
 // Rebuild native app modules to match electron version
-const electron = require('electron-prebuilt');
-const electronPackage = require('electron-prebuilt/package.json');
+const electron = require('electron');
+const electronPackage = require('electron/package.json');
 const rebuild = require('electron-rebuild');
 
-const pathToElectronNativeModules = path.join(__dirname, '../src/node_modules');
+const pathToElectronNativeModules = path.join(__dirname, '../app/node_modules');
 
 rebuild.shouldRebuildNativeModules(electron)
   .then((shouldBuild) => {
