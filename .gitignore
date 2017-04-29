@@ -6,6 +6,7 @@ dist
 release
 .nyc_output
 .vagrant/
+.DS_Store
 
 # External roles are included from Ansible Galaxy, don't version control.
 ansible/roles/geerlingguy.nodejs
