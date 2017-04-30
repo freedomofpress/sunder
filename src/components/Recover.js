@@ -53,7 +53,7 @@ export default class Recover extends Component {
     } else if (!mismatchExists && numGoodShares >= quorum) {
       action = (
         <div className="recover-action align-center">
-          <h1 className="accent">All shares entered!</h1>
+          <h1>All shares entered!</h1>
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"

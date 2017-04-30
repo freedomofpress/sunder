@@ -6,7 +6,7 @@ $panelTitleHeight: 20px;
 
 .panel {
   position: relative;
-  border: 1px solid $lightBlue;
+  border: 1px solid $borderColor;
   flex-grow: 1;
   display: flex;
 }
