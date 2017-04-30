@@ -48,12 +48,6 @@ export default class Export extends Component {
     return (
       <div className="container flex-column export">
         <div className="success-container">
-          <div className="success-icon-container align-center">
-            <Icon />
-            <div className="success-message align-center">
-              <i className="fa fa-check" />
-            </div>
-          </div>
           <div className="export-explanation">
             <p>
               <strong>{'What\'s next? '}</strong>

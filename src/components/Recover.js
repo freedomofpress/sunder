@@ -57,7 +57,7 @@ export default class Recover extends Component {
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"
-            icon={<Icon />}>
+            icon={<Icon type="recover" />}>
             Recover
           </Button>
           <p> Click the giant button to recover.</p>

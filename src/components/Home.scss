@@ -5,17 +5,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: $blueGray;
 }
 
 .home-actions {
   margin-bottom: 20px;
 
-  i {
-    color: $accentColor;
+  .btn ~ .btn {
+    margin-left: 0;
   }
 
-  path {
-    fill: $blueGray;
+  i {
+    color: $accentColor;
   }
 
   .btn:hover i {
