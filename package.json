@@ -23,10 +23,7 @@
   },
   "build": {
     "productName": "Sunder",
-    "asar": false,
-    "linux": {
-      "icon": "build/icons/app.icns"
-    }
+    "asar": false
   },
   "bin": {
     "electron": "./node_modules/.bin/electron",
