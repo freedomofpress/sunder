@@ -13,16 +13,16 @@ export default class Home extends Component {
         <h1 className="home-title align-center">Sunder</h1>
         <div className="home-actions align-center">
           <Button type="xlarge"
-            icon={<Icon className="split" />}
+            icon={<Icon />}
             id="split-button"
             onClick={() => this.context.router.push('split')}>
-            Split a secret
+            Sunder It
           </Button>
           <Button type="xlarge"
-            icon={<Icon />}
+            icon={<Icon type="recover"/>}
             id="recover-button"
             onClick={() => this.context.router.push('recover')}>
-            Recover a secret
+            Recover It
           </Button>
         </div>
         <p className="home-explanation">
