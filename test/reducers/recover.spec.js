@@ -65,7 +65,7 @@ describe('recover reducer', () => {
     });
 
     it('should handle share groups properly', () => {
-      const shareError = { message: 'BAD NEWS', share_groups: [[1], [2, 3]] };
+      const shareError = { message: 'BAD NEWS', share_groups: [[0], [1, 2]] };
       const shareErrorAction = { type: RECOVER_ERROR, error: shareError };
       const share0 = { data: 'sharedata0' };
       const share1 = { data: 'sharedata1' };
@@ -76,10 +76,11 @@ describe('recover reducer', () => {
         .to.be.eql([
           {
             data: 'sharedata0',
-            error: 'This share doesn\'t belong with the others.'
+            error: 'This share doesn\'t belong with the others.',
+            group: 0
           },
-          share1,
-          share2
+          Object.assign({}, share1, { group: 1 }),
+          Object.assign({}, share2, { group: 1 }),
         ]);
       expect(reducer(startingState, shareErrorAction).error)
         .to.be.eql('One or more of the shares belongs to a different secret.');
