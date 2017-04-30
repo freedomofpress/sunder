@@ -19,17 +19,11 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js && electron-rebuild",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "dist": "build"
+    "dist": "npm run build-app && build"
   },
   "build": {
-    "app-bundle-id": "apple.app.id",
-    "app-category-type": "public.app-category.utilities",
     "productName": "Sunder",
     "asar": false,
-    "osx": {
-      "background": "build/bg.jpg",
-      "icon": "build/icons/app.icns"
-    },
     "linux": {
       "icon": "build/icons/app.icns"
     }
@@ -92,7 +86,7 @@
     "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
-    "electron-debug": "^0.6.0",
+    "electron-debug": "^1.1.0",
     "font-awesome": "^4.4.0",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
