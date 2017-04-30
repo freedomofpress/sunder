@@ -9,10 +9,13 @@ export default function Icon(props) {
   if (props.type === "recover") {
     className += "recover-icon";
   }
+  if (props.type === "spin") {
+    className += " spin";
+  }
 
   return (
     <svg className={`${className} icon`} viewBox="0 0 180 180" version="1.1">
-      <g id="Sunder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Sunder" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Logo" transform="translate(-60.000000, -60.000000)">
           <g id="logo" transform="translate(60.000000, 60.000000)">
             <rect id="bg" fill="transparent" x="0" y="0" width="180" height="180" rx="38"></rect>
