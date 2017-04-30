@@ -66,7 +66,6 @@ export default function reducer(state = initialState, action) {
               return Object.assign(share, { group });
             }
           }),
-          mismatch: true,
           error: 'One or more of the shares belongs to a different secret.'
         });
       }
