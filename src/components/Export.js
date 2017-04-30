@@ -5,7 +5,7 @@ import Panel from './Panel';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
-import PuzzleIcon from './PuzzleIcon';
+import Icon from './Icon';
 import Modal from './Modal';
 import VeraCryptButton from './VeraCryptButton';
 import { detectVeraCrypt } from '../lib/veracrypt';
@@ -49,7 +49,7 @@ export default class Export extends Component {
       <div className="container flex-column export">
         <div className="success-container">
           <div className="success-icon-container align-center">
-            <PuzzleIcon />
+            <Icon />
             <div className="success-message align-center">
               <i className="fa fa-check" />
             </div>

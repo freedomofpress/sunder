@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './PuzzleIcon.scss';
+import './Icon.scss';
 
 
 /* eslint-disable max-len */
-export default function PuzzleIcon(props) {
+export default function Icon(props) {
   return (
     <svg className={`${props.className} puzzle`} x="0px" y="0px" viewBox="0 0 100 100">
       <path d="M37.572,24.085c0,3.858,3.127,6.986,6.983,6.986c3.488,0,5.165-2.206,6.308-0.843c0.586,0.7,0.676,1.583,0.676,4.227V48.15l11.658,0.002c1.709,0,1.951-0.165,2.092-0.496c0.295-0.677-0.307-1.782-0.307-4.328 c0-5.364,5.662-9.646,10.629-9.646c4.961,0,10.617,4.065,10.617,9.646c0,2.545-0.6,3.649-0.309,4.328 c0.145,0.329,0.387,0.496,2.096,0.496h11.656V5.71c0,0,0.174-3.006-1.256-4.435c-1.428-1.428-4.814-1.255-4.814-1.255H51.541v13.698 c0,2.645-0.092,3.526-0.676,4.227c-1.144,1.364-2.822-0.844-6.308-0.844C40.701,17.101,37.572,20.228,37.572,24.085z" />
@@ -14,4 +14,4 @@ export default function PuzzleIcon(props) {
     </svg>
   );
 }
-PuzzleIcon.propTypes = { className: PropTypes.string };
+Icon.propTypes = { className: PropTypes.string };

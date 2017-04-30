@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
-import PuzzleIcon from './PuzzleIcon';
+import Icon from './Icon';
 import { countGoodShares, sharesMismatched } from 'src/lib/utilities';
 import './Recover.scss';
 
@@ -57,7 +57,7 @@ export default class Recover extends Component {
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"
-            icon={<PuzzleIcon />}>
+            icon={<Icon />}>
             Recover
           </Button>
           <p> Click the giant button to recover.</p>
