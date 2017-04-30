@@ -20,11 +20,9 @@
   fill: $accentColor;
 }
 
-.icon.spin {
-  animation: spin 2s infinite steps(3);
-  path {
-    fill: #FFD719
-  }
+.icon.spin #keyhole {
+  animation: spin 2s infinite;
+  transform-origin: 50% 50%;
 }
 
 

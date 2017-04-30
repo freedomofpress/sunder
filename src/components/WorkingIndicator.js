@@ -7,7 +7,7 @@ export default class WorkingIndicator extends Component {
     return (
       <div className="overlay working-indicator">
         <div className="working-icon-container">
-          <Icon className="spin" />
+          <Icon type="spin" />
         </div>
       </div>
     );
