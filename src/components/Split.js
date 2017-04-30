@@ -6,7 +6,7 @@ import Button from './Button';
 import Panel from './Panel';
 import WorkingIndicator from './WorkingIndicator';
 import splitValidator from '../lib/splitvalidator';
-import PuzzleIcon from './PuzzleIcon';
+import Icon from './Icon';
 import { reduxForm } from 'redux-form';
 import './Split.scss';
 
@@ -42,7 +42,7 @@ export class Split extends Component {
         </Panel>
         <div className="flex-row split-button-container">
           <Button type="primary"
-            icon={<PuzzleIcon className="split" />}
+            icon={<Icon className="split" />}
             id="create-shares"
             disabled={invalid || submitting}
             onClick={handleSubmit}>

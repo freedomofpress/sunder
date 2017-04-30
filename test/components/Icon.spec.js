@@ -1,13 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import PuzzleIcon from 'src/components/PuzzleIcon';
+import Icon from 'src/components/Icon';
 
 const props = { className: 'test' };
 
-describe('<PuzzleIcon />', () => {
+describe('<Icon />', () => {
   it('should render without error', () => {
-    const icon = shallow(<PuzzleIcon {...props} />);
+    const icon = shallow(<Icon {...props} />);
     expect(icon.is(`.${props.className}`)).to.be.true();
   });
 });
