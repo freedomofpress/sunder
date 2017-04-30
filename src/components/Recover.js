@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
@@ -28,7 +29,7 @@ export default class Recover extends Component {
       instructionalContent = '';
     } else {
       instructionalContent = 'To recover a secret, start by providing ' +
-        'one of the secret shares. Secret Splitter will then prompt you for the ' +
+        'one of the secret shares. Sunder will then prompt you for the ' +
         'remaining shares needed to recover the shared secret.';
     }
 

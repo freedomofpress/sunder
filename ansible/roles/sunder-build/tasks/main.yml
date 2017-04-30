@@ -20,7 +20,7 @@
     state: present
     global: yes
     name: "{{ item }}"
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   with_items:
     - cross-env
     - webpack
@@ -31,12 +31,12 @@
 
 - name: Compile CSS and JS application code.
   command: npm run build-app
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   args:
     chdir: /vagrant
 
-- name: Build secret-share deb package.
+- name: Build Sunder deb package.
   command: npm run dist
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   args:
     chdir: /vagrant

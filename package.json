@@ -1,6 +1,6 @@
 {
-  "name": "secret-splitter",
-  "productName": "Secret Splitter",
+  "name": "sunder",
+  "productName": "Sunder",
   "version": "0.0.1",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
@@ -8,7 +8,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
-    "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
+    "test-e2e": "cross-env NODE_ENV=production mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
     "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
     "lint": "eslint src test *.js",
     "hot-server": "node server.js",
@@ -17,31 +17,20 @@
     "clean-build": "npm prune && npm run clean && npm run build-app",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
-    "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && install-app-deps && node tasks/postinstall.js",
+    "postinstall": "install-app-deps && node tasks/postinstall.js && electron-rebuild",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "deb64": "electron-installer-debian --src release/linux-x64/SecretShare-linux-x64 --dest release/installers/ --arch amd64",
-    "debia32": "electron-installer-debian --src release/linux-ia32/SecretShare-linux-ia32 --dest release/installers/ --arch i386",
-    "dist": "build"
+    "dist": "npm run build-app && build"
   },
   "build": {
-    "app-bundle-id": "apple.app.id",
-    "app-category-type": "public.app-category.utilities",
-    "productName": "SecretSplitter",
+    "productName": "Sunder",
     "asar": false,
-    "osx": {
-      "background": "build/bg.jpg",
-      "icon": "build/icons/app.icns"
-    },
     "linux": {
       "icon": "build/icons/app.icns"
     }
   },
-  "directories": {
-    "output": "release",
-    "app": "app"
-  },
   "bin": {
-    "electron": "./node_modules/.bin/electron"
+    "electron": "./node_modules/.bin/electron",
+    "electron-rebuild": "./node_modules/.bin/electron-rebuild"
   },
   "license": "MIT",
   "devDependencies": {
@@ -50,7 +39,7 @@
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.1.2",
-    "babel-plugin-module-alias": "^1.3.0",
+    "babel-plugin-module-resolver": "^2.7.0",
     "babel-plugin-webpack-loaders": "^0.4.0",
     "babel-polyfill": "^6.6.1",
     "babel-preset-es2015": "^6.6.0",
@@ -58,18 +47,16 @@
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.3.0",
-    "chromedriver": "^2.19.0",
-    "co-mocha": "^1.1.2",
+    "chromedriver": "^2.29.0",
+    "co-mocha": "^1.2.0",
     "concurrently": "^2.0.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
-    "electron-builder": "^3.16.1",
-    "electron-installer-debian": "^0.3.0",
-    "electron-packager": "^7.0.1",
-    "electron-prebuilt": "^0.37.4",
-    "electron-rebuild": "^1.1.3",
+    "electron": "^1.4.16",
+    "electron-builder": "^17.0.1",
+    "electron-rebuild": "^1.5.7",
     "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^7.0.0",
@@ -77,20 +64,19 @@
     "eslint-plugin-react": "^4.3.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "fbjs-scripts": "^0.6.0",
     "file-loader": "^0.8.5",
     "jsdom": "^8.4.0",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
-    "mocha": "^2.3.0",
+    "mocha": "^3.3.0",
     "mockery": "^1.6.2",
     "node-sass": "^3.4.2",
-    "nyc": "^6.4.0",
+    "nyc": "^10.3.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
     "rusty-secrets": "0.0.10",
     "sass-loader": "^3.2.0",
-    "selenium-webdriver": "^2.48.2",
+    "selenium-webdriver": "^3.3.0",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
@@ -100,21 +86,18 @@
     "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
-    "electron-debug": "^0.6.0",
+    "electron-debug": "^1.1.0",
     "font-awesome": "^4.4.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.3.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0",
+    "react-redux": "^4.4.8",
+    "react-router": "^3.0.5",
     "react-router-redux": "^4.0.0",
-    "redux": "^3.2.1",
-    "redux-form": "^5.1.1",
-    "redux-promise": "^0.5.0",
-    "redux-thunk": "^2.0.0"
-  },
-  "devEngines": {
-    "node": "4.x || 5.x || 6.x || 7.x",
-    "npm": "2.x || 3.x || 4.x"
+    "redux": "^3.6.0",
+    "redux-form": "^5.3.6",
+    "redux-promise": "^0.5.1",
+    "redux-thunk": "^2.2.0"
   },
   "nyc": {
     "include": [
