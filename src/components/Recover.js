@@ -4,7 +4,7 @@ import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
 import PuzzleIcon from './PuzzleIcon';
-import { countGoodShares } from 'src/lib/utilities';
+import { countGoodShares, sharesMismatched } from 'src/lib/utilities';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -15,13 +15,12 @@ export default class Recover extends Component {
     onSubmit: PropTypes.func,
     error: PropTypes.string,
     unrecoverable: PropTypes.bool,
-    mismatch: PropTypes.bool,
     onReset: PropTypes.func,
     onShareAdded: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable, mismatch } = this.props;
+    const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable } = this.props;
     const numGoodShares = countGoodShares(shares);
     let instructionalContent;
 
@@ -33,7 +32,9 @@ export default class Recover extends Component {
         'remaining shares needed to recover the shared secret.';
     }
 
-    const shouldDisplayStatus = !unrecoverable && shares.length > 0 && (!quorum || numGoodShares < quorum || mismatch);
+    const hasShares = shares.length > 0;
+    const mismatchExists = sharesMismatched(shares);
+    const shouldDisplayStatus = !unrecoverable && hasShares && (!quorum || numGoodShares < quorum || mismatchExists);
 
     let action;
     if (error && unrecoverable) {
@@ -49,7 +50,7 @@ export default class Recover extends Component {
           </Button>
         </div>
       );
-    } else if (!mismatch && numGoodShares >= quorum) {
+    } else if (!mismatchExists && numGoodShares >= quorum) {
       action = (
         <div className="recover-action align-center">
           <h1 className="accent">All shares entered!</h1>

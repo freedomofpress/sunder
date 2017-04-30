@@ -66,7 +66,7 @@ export class RecoverScreen extends Component {
 
   render() {
     const headerContent = <BackButton />;
-    const { shares, inProgress, quorum, error, unrecoverable, mismatch } = this.props;
+    const { shares, inProgress, quorum, error, unrecoverable } = this.props;
 
     return (
       <Layout header={headerContent}>
@@ -76,7 +76,6 @@ export class RecoverScreen extends Component {
             inProgress={inProgress}
             error={error}
             unrecoverable={unrecoverable}
-            mismatch={mismatch}
             onShareAdded={this.handleShareAdded.bind(this)}
             onReset={this.handleReset.bind(this)}
             onSubmit={this.handleRecover.bind(this)} />
@@ -88,8 +87,8 @@ export class RecoverScreen extends Component {
 }
 
 export function mapStateToProps(state) {
-  const { shares, inProgress, secret, error, unrecoverable, mismatch, shareProperties: { quorum } } = state.recover;
-  return { shares, inProgress, quorum, secret, error, unrecoverable, mismatch };
+  const { shares, inProgress, secret, error, unrecoverable, shareProperties: { quorum } } = state.recover;
+  return { shares, inProgress, quorum, secret, error, unrecoverable };
 }
 
 
