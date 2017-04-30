@@ -4,6 +4,7 @@ import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
 import PuzzleIcon from './PuzzleIcon';
+import { countGoodShares, sharesMismatched } from 'src/lib/utilities';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -13,13 +14,14 @@ export default class Recover extends Component {
     inProgress: PropTypes.bool,
     onSubmit: PropTypes.func,
     error: PropTypes.string,
+    unrecoverable: PropTypes.bool,
     onReset: PropTypes.func,
     onShareAdded: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error, onReset, onShareAdded } = this.props;
-    const numGoodShares = shares.filter((s) => !s.error).length;
+    const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable } = this.props;
+    const numGoodShares = countGoodShares(shares);
     let instructionalContent;
 
     if (shares.length > 0) {
@@ -30,10 +32,12 @@ export default class Recover extends Component {
         'remaining shares needed to recover the shared secret.';
     }
 
-    const shouldDisplayStatus = !error && shares.length > 0 && (!quorum || numGoodShares < quorum);
+    const hasShares = shares.length > 0;
+    const mismatchExists = sharesMismatched(shares);
+    const shouldDisplayStatus = !unrecoverable && hasShares && (!quorum || numGoodShares < quorum || mismatchExists);
 
     let action;
-    if (error) {
+    if (error && unrecoverable) {
       action = (
         <div className="align-center reset-action">
           <p>
@@ -46,7 +50,7 @@ export default class Recover extends Component {
           </Button>
         </div>
       );
-    } else if (numGoodShares >= quorum) {
+    } else if (!mismatchExists && numGoodShares >= quorum) {
       action = (
         <div className="recover-action align-center">
           <h1 className="accent">All shares entered!</h1>
@@ -62,7 +66,8 @@ export default class Recover extends Component {
     } else {
       action = (
         <div className="recover-action">
-          <ShareInput numEnteredShares={numGoodShares} onSubmit={onShareAdded} />
+          <ShareInput numEnteredShares={numGoodShares}
+            onSubmit={onShareAdded} />
           {instructionalContent &&
             <p className="recover-explanation">{instructionalContent}</p>}
         </div>

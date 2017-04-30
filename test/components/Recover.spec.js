@@ -19,6 +19,7 @@ describe('<Recover />', () => {
       onReset: spy()
     };
   });
+
   it('should render without error', () => {
     const recover = shallow(<Recover {...props} />);
     expect(recover).to.exist();
@@ -40,6 +41,7 @@ describe('<Recover />', () => {
 
   it('should show a reset button on global error', () => {
     props.error = 'bad';
+    props.unrecoverable = true;
     const recover = shallow(<Recover {...props} />);
     expect(recover.find('.reset-action')).to.have.length(1);
     expect(recover.find(Button)).to.have.length(1);
