@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'src/components/icon';
+import Icon from 'src/components/Icon';
 import PropTypes from 'prop-types';
 import './Layout.scss';
 
