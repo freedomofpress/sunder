@@ -19,7 +19,7 @@ export default class Home extends Component {
             Sunder It
           </Button>
           <Button type="xlarge"
-            icon={<Icon type="recover"/>}
+            icon={<Icon type="recover" />}
             id="recover-button"
             onClick={() => this.context.router.push('recover')}>
             Recover It

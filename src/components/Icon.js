@@ -5,12 +5,12 @@ import './Icon.scss';
 
 /* eslint-disable max-len */
 export default function Icon(props) {
-  let className = "";
-  if (props.type === "recover") {
-    className += "recover-icon";
+  let className = '';
+  if (props.type === 'recover') {
+    className += 'recover-icon';
   }
-  if (props.type === "spin") {
-    className += " spin";
+  if (props.type === 'spin') {
+    className += ' spin';
   }
 
   return (
@@ -29,4 +29,4 @@ export default function Icon(props) {
     </svg>
   );
 }
-Icon.propTypes = { className: PropTypes.string };
+Icon.propTypes = { type: PropTypes.string };

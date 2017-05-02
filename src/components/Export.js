@@ -5,7 +5,6 @@ import Panel from './Panel';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
-import Icon from './Icon';
 import Modal from './Modal';
 import VeraCryptButton from './VeraCryptButton';
 import { detectVeraCrypt } from '../lib/veracrypt';
