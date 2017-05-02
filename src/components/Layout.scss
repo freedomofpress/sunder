@@ -1,6 +1,7 @@
 @import '~src/shared/variables';
 
 $headerHeight: 100px;
+$navHeight: 40px;
 
 .layout-container {
   width: 100%;
@@ -40,13 +41,14 @@ $headerHeight: 100px;
 }
 
 .layout-nav {
-  padding: 13px 40px;
+  padding: 0 40px;
+  line-height: $navHeight;
   background-color: $gray;
 }
 
 .content-container {
-  /* variable interpolation in calc apparently doesn't work, but this is $headerHeight */
-  height: calc(100% - 100px);
+  /* variable interpolation in calc apparently doesn't work, but this is $headerHeight + navHeight */
+  height: calc(100% - 140px);
   display: flex;
   flex-direction: column;
   max-width: 900px;
