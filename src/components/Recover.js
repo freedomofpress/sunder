@@ -34,7 +34,8 @@ export default class Recover extends Component {
 
     const hasShares = shares.length > 0;
     const mismatchExists = sharesMismatched(shares);
-    const shouldDisplayStatus = !unrecoverable && hasShares && (!quorum || numGoodShares < quorum || mismatchExists);
+    const shouldDisplayStatus = !unrecoverable && hasShares &&
+      (!quorum || numGoodShares < quorum || mismatchExists);
 
     let action;
     if (error && unrecoverable) {
