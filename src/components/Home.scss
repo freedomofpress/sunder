@@ -22,17 +22,11 @@
   .btn:hover i {
     color: $primaryBackgroundColor;
   }
-
-  .btn:hover path {
-    fill: $primaryBackgroundColor;
-  }
 }
 
 .home-title {
-  font-family: "Courier New", monospace;
   font-size: 50px;
   margin-bottom: 60px;
-  text-transform: lowercase;
 }
 
 .home-explanation {

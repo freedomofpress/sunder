@@ -43,6 +43,9 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   background-color: $whiteColor;
   color: $primaryBackgroundColor;
   fill: $primaryBackgroundColor;
+  path {
+    fill: $primaryBackgroundColor;
+  }
 }
 
 .btn:active:not(.disabled) {
@@ -131,5 +134,11 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
     font-weight: bold;
     padding: 20px;
     text-align: center;
+  }
+}
+
+.btn-back {
+  i {
+    margin-right: 8px;
   }
 }

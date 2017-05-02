@@ -48,7 +48,7 @@ export class SplitScreen extends Component {
     const headerContent = <BackButton />;
 
     return (
-      <Layout header={headerContent}>
+      <Layout header={headerContent} title="Create Secret Shards">
         <Split onSubmit={this.handleSubmit.bind(this)} />
       </Layout>
     );
