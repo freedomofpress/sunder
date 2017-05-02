@@ -69,7 +69,7 @@ export class RecoverScreen extends Component {
     const { shares, inProgress, quorum, error, unrecoverable } = this.props;
 
     return (
-      <Layout header={headerContent}>
+      <Layout header={headerContent} title="Recover Secret">
         <div className="flex-column">
           <Recover shares={shares}
             quorum={quorum}
