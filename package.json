@@ -25,7 +25,8 @@
     "productName": "Sunder",
     "asar": false,
     "linux": {
-      "icon": "build/icons/"
+      "icon": "build/icons/",
+      "target": ["deb"]
     }
   },
   "bin": {
