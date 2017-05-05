@@ -13,5 +13,9 @@ Vagrant.configure("2") do |config|
       # Building nodejs packages triggers the OOM killer with 512MB of RAM.
       vb.memory = 1024
     end
+    sunder.vm.provider "libvirt" do |lv, override|
+      lv.memory = 1024
+      override.vm.synced_folder './', '/vagrant', type: 'nfs', disabled: false
+    end
   end
 end
