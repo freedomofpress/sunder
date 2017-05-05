@@ -9,6 +9,11 @@
     - libgconf2-dev
     - libgtk2.0-dev
     - libnss3-dev
+    # Required for electron-builder:
+    # https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build#linux
+    - icnsutils
+    - graphicsmagick
+    - xz-utils
 
 # These packages must be installed globally, because they're referenced
 # as system-wide scripts in the build process. The geerlingguy.nodejs role
