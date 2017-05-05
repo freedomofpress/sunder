@@ -21,11 +21,11 @@ module.exports = function autoUpdate(browserWindow) {
         'update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl) => {
           electron.dialog.showMessageBox(browserWindow, {
             type: 'info',
-            buttons: ['Install & Resart', 'Later'],
+            buttons: ['Install & Restart', 'Later'],
             defaultId: 0, // Index of pre-selected button
             title: 'Update Available',
             // Should include change log or something
-            message: 'An update has been downloaded',
+            message: 'An update is available',
             detail: 'We recommend you install it now.',
             cancelId: 1, // Return the cancel id if the user closes dialog without clicking a button
           }, (response) => {
