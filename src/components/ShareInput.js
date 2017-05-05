@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { createValidator, required } from 'src/lib/validations';
 import FileOrTextInput from 'src/components/FileOrTextInput';

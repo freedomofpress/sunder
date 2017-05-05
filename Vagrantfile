@@ -10,8 +10,12 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "ansible/playbook.yml"
     end
     sunder.vm.provider "virtualbox" do |vb|
-      # Building nodejs packages triggers the OOM killer with 512MB of RAM.
-      vb.memory = 1024
+      # Building nodejs packages triggers the OOM killer with 1GB of RAM.
+      vb.memory = 2048
+    end
+    sunder.vm.provider "libvirt" do |lv, override|
+      lv.memory = 2048
+      override.vm.synced_folder './', '/vagrant', type: 'nfs', disabled: false
     end
   end
 end

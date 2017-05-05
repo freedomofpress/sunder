@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Home.scss';
 import PuzzleIcon from 'src/components/PuzzleIcon';
 import Button from './Button';

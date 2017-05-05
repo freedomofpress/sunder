@@ -6,6 +6,8 @@ ansible:
 
 clean:
 	rm -rf release/
+	rm -rf build/icons/*.png
+	rm -rf ansible/roles/geerlingguy.nodejs
 
 build:
 	make ansible
