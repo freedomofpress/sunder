@@ -8,5 +8,8 @@ release
 .vagrant/
 .DS_Store
 
+# Linux builds require PNG-format icons extracted from app.icns file.
+build/icons/*.png
+
 # External roles are included from Ansible Galaxy, don't version control.
 ansible/roles/geerlingguy.nodejs

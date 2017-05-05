@@ -6,6 +6,7 @@ ansible:
 
 clean:
 	rm -rf release/
+	rm -rf build/icons/*.png
 
 build:
 	make ansible

@@ -15,6 +15,15 @@
     - graphicsmagick
     - xz-utils
 
+- name: Generate PNG-format icons.
+  command: >
+    icns2png --extract
+    --output /vagrant/build/icons/
+    /vagrant/build/icons/app.icns
+  args:
+    # Use `make clean` in the project root to clear out old icons.
+    creates: /vagrant/build/icons/app_32x32x32.png
+
 # These packages must be installed globally, because they're referenced
 # as system-wide scripts in the build process. The geerlingguy.nodejs role
 # offers to handle global npm package installation, but is broken due to
