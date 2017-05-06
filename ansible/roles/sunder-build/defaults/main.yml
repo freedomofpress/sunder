@@ -1,5 +1,5 @@
 ---
-# defaults file for secretshare-build
+# defaults file for sunder-build
 
 # The nodejs/npm config involves several environment variables set in
 # /etc/profile.d. By default Ansible runs with a minimal environment
@@ -8,7 +8,7 @@
 # running `npm` commands during the build process. By using a var, the
 # tasks remain DRY, referencing the same value for the `environment`
 # parameter.
-secretshare_nodejs_environment_map:
+sunder_nodejs_environment_map:
     NPM_CONFIG_PREFIX: "/usr/local/lib/npm"
     NODE_PATH: "/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript:/usr/local/lib/npm/lib/node_modules"
     PATH: "/usr/local/lib/npm/bin:{{ ansible_env.PATH }}"

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import CopyButton from './CopyButton';
 import SaveFileButton from './SaveFileButton';
@@ -76,7 +77,7 @@ export default class ShareRow extends Component {
           <SaveFileButton contents={share}
             type="small"
             onSaved={this.handleSaved.bind(this)}
-            defaultPath={`secret-share-${index}.txt`} />
+            defaultPath={`secret-shard-${index}.txt`} />
         </div>
         {this.state.shown && modal}
       </div>

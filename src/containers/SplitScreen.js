@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { split } from '../ducks/split';
 import { connect } from 'react-redux';
 import Split from '../components/Split';

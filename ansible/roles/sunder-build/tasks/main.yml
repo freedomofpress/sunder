@@ -9,6 +9,20 @@
     - libgconf2-dev
     - libgtk2.0-dev
     - libnss3-dev
+    # Required for electron-builder:
+    # https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build#linux
+    - icnsutils
+    - graphicsmagick
+    - xz-utils
+
+- name: Generate PNG-format icons.
+  command: >
+    icns2png --extract
+    --output /vagrant/build/icons/
+    /vagrant/build/icons/app.icns
+  args:
+    # Use `make clean` in the project root to clear out old icons.
+    creates: /vagrant/build/icons/app_32x32x32.png
 
 # These packages must be installed globally, because they're referenced
 # as system-wide scripts in the build process. The geerlingguy.nodejs role
@@ -20,7 +34,7 @@
     state: present
     global: yes
     name: "{{ item }}"
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   with_items:
     - cross-env
     - webpack
@@ -31,12 +45,12 @@
 
 - name: Compile CSS and JS application code.
   command: npm run build-app
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   args:
     chdir: /vagrant
 
-- name: Build secret-share deb package.
+- name: Build Sunder deb package.
   command: npm run dist
-  environment: "{{ secretshare_nodejs_environment_map }}"
+  environment: "{{ sunder_nodejs_environment_map }}"
   args:
     chdir: /vagrant

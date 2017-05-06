@@ -8,9 +8,11 @@
     "test": {
       "plugins": [
         ["webpack-loaders", { "config": "webpack.config.node.js", "verbose": false }],
-        ["babel-plugin-module-alias", [
-          { "src": "test/mocks/electron.js" , "expose": "electron" }
-        ]]
+        ["module-resolver", {
+          "alias": {
+            "electron": "./test/mocks/electron.js"
+          }
+        }]
       ]
     }
   }

@@ -6,6 +6,7 @@ You need a recent version of Node.js and NPM installed. Tested with:
 
 * v4.1.0
 * v5.7.0
+* v7.5.0
 
 ### Quickstart
 1. Clone the git repository
@@ -32,34 +33,20 @@ make build
 to create a VM and run a full build of the Linux packages.
 To build the OS X packages, read on.
 
-### Step-by-step (required for OS X)
-Compile the CSS and JavaScript:
+### OS X
 
-```
-npm run build-app
-```
-
-
-The built assets end up in the `dist/` folder. Once the assets have been built,
-open the app in production mode:
-
-```
-npm start
-```
-
-With built assets, you can now package up the app for your current platform (e.g. OS X):
+To package up the app for your current platform (e.g. OS X):
 
 ```
 npm run dist
 ```
 
-Packages will be stored in `release/`.
+Note that this will run `build-app` so there's no need to run that beforehand.
 
-### Signing OSX Packages
-Signed OSX packages are required for the Auto-Update functionality to work. In order to sign an a package you need to have an Apple developer certificate available. You can do this by opening XCode, Preferences -> Accounts -> Sign in with Apple ID enrolled in Developer Program -> View Details. When you have downloaded the 'Developer ID Application' certificate, you can look in Keychain Access -> Login -> Certificates to verify that the certificate has been installed. From this screen copy the full name of the certificate. You can now build a signed package with:
-```
-env CSC_NAME="<identity cert name>" npm run dist
-```
-More info on automatic signing (not just for OSX) [here](https://github.com/electron-userland/electron-builder/wiki/Code-Signing).
+Packages will be stored in `dist/<platform>`.
 
-You can verify the signature with `codesign --verify -vvvv release/osx/AppName.app`.
+### Code Signing
+
+#### Signing OSX Packages
+
+Code signing is handled automatically by the `electron-builder` package. All you should need to do is add the signing identity through xcode, and electron-builder will discover it automatically. See [Apple documentation](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html) and [electron-builder documentation](https://github.com/electron-userland/electron-builder/wiki/Code-Signing) for more info.
