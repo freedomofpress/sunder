@@ -3,6 +3,8 @@ const autoUpdater = electron.autoUpdater;
 const currentVersion = electron.app.getVersion();
 const os = require('os');
 const request = require('request');
+const semver = require('semver');
+
 const repo = 'freeedomofpress/sunder' // TODO: verify this repo is accurate once public
 
 
@@ -64,21 +66,28 @@ module.exports = function autoUpdate(browserWindow) {
         return;
       }
 
-      if (body.tag_name.indexOf(currentVersion) !== -1) {
-        // Up to date
+      if (!semver.valid(body.tag_name)) {
+        console.error(`Invalid version for latest release returned by GitHub: ${body.tag_name}`);
         return;
       }
 
-      electron.dialog.showMessageBox(browserWindow, {
-        type: 'info',
-        buttons: ['Ok'],
-        defaultId: 0, // Index of pre-selected button
-        title: 'Update Available',
-         // Should include change log or something
-        message: 'An update is available',
-        detail: `We recommend you install it now through your package manager or by visiting ${body.html_url}.`,
-        cancelId: 0, // Return the cancel id if the user closes dialog without clicking a button
-      });
+      if (!semver.valid(currentVersion)) {
+        console.error(`Invalid current version: ${currentVersion}`);
+        return;
+      }
+
+      if (semver.gt(body.tag_name, currentVersion)) {
+        electron.dialog.showMessageBox(browserWindow, {
+          type: 'info',
+          buttons: ['Ok'],
+          defaultId: 0, // Index of pre-selected button
+          title: 'Update Available',
+           // Should include change log or something
+          message: 'An update is available',
+          detail: `We recommend you install it now through your package manager or by visiting ${body.html_url}.`,
+          cancelId: 0, // Return the cancel id if the user closes dialog without clicking a button
+        });
+      }
     });
   }
 };
