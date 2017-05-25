@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RecoverStatusShare from './RecoverStatusShare';
+import { countGoodShares } from 'src/lib/utilities';
 import './RecoverStatus.scss';
 
 
@@ -16,7 +17,7 @@ export default class RecoverStatus extends Component {
     let quorum = this.props.quorum;
     quorum = quorum || 0;
     const numBadShares = shares.filter((d) => d.error).length;
-    const numGoodShares = shares.length - numBadShares;
+    const numGoodShares = countGoodShares(shares);
     const numToDisplay = Math.max(0, quorum + numBadShares, shares.length);
 
     for (let i = 0; i < numToDisplay; i++) {
@@ -41,7 +42,7 @@ export default class RecoverStatus extends Component {
           <span className="accent">{shares.length - numBadShares}</span>
           {' out of '}
           <span className="accent">{quorum}</span>
-          {' shares entered.'}
+          {' valid shares entered.'}
         </h3>
       );
     }

@@ -37,7 +37,7 @@ describe('recover reducer', () => {
   });
 
   describe('handling of RECOVER_ERROR', () => {
-    const error = 'BAD NEWS';
+    const error = { message: 'BAD NEWS' };
     const action = { type: RECOVER_ERROR, error };
     const state = { inProgress: true };
 
@@ -46,7 +46,46 @@ describe('recover reducer', () => {
     });
 
     it('should store the error message', () => {
-      expect(reducer(state, action).error).to.be.eql(error);
+      expect(reducer(state, action).error).to.be.eql(error.message);
+    });
+
+    it('should attach an indexed error to the right share', () => {
+      const shareError = { message: 'BAD NEWS', share_index: 1 };
+      const shareErrorAction = { type: RECOVER_ERROR, error: shareError };
+      const share0 = { data: 'sharedata0' };
+      const share1 = { data: 'sharedata1' };
+      const startingState = { inProgress: true, shares: [share0, share1] };
+
+      expect(reducer(startingState, shareErrorAction).shares)
+        .to.be.eql([share0, { data: 'sharedata1', error: 'BAD NEWS' }]);
+      expect(reducer(startingState, shareErrorAction).error)
+        .to.be.eql('One of the shares is invalid.');
+      expect(reducer(startingState, shareErrorAction).inProgress)
+        .to.be.eql(false);
+    });
+
+    it('should handle share groups properly', () => {
+      const shareError = { message: 'BAD NEWS', share_groups: [[0], [1, 2]] };
+      const shareErrorAction = { type: RECOVER_ERROR, error: shareError };
+      const share0 = { data: 'sharedata0' };
+      const share1 = { data: 'sharedata1' };
+      const share2 = { data: 'sharedata2' };
+      const startingState = { inProgress: true, shares: [share0, share1, share2] };
+
+      expect(reducer(startingState, shareErrorAction).shares)
+        .to.be.eql([
+          {
+            data: 'sharedata0',
+            error: 'This share doesn\'t belong with the others.',
+            group: 0
+          },
+          Object.assign({}, share1, { group: 1 }),
+          Object.assign({}, share2, { group: 1 }),
+        ]);
+      expect(reducer(startingState, shareErrorAction).error)
+        .to.be.eql('One or more of the shares belongs to a different secret.');
+      expect(reducer(startingState, shareErrorAction).inProgress)
+        .to.be.eql(false);
     });
   });
 

@@ -31,18 +31,28 @@ export class RecoverScreen extends Component {
   componentWillUpdate(nextProps, nextState) {
     if (!nextState.fakeDelay && nextProps.secret) {
       this.context.router.push('/export');
+    } else if (nextState.fakeDelay && nextProps.error) {
+      nextState.resolveDelay();
+      this.setState({ fakeDelay: false });
     }
   }
 
   handleRecover() {
-    this.setState({ fakeDelay: true });
-    const fakeDelay = new Promise((resolve) => {
+    let resolveDelay;
+    const delayPromise = new Promise((resolve) => {
       window.setTimeout(() => {
         this.setState({ fakeDelay: false });
+        resolve();
       }, 2000);
-      resolve();
+      resolveDelay = resolve;
     });
-    return Promise.all([this.props.dispatch(recover()), fakeDelay]);
+
+    this.setState({
+      fakeDelay: true,
+      resolveDelay
+    });
+
+    return Promise.all([this.props.dispatch(recover()), delayPromise]);
   }
 
   handleShareAdded(data) {
@@ -56,7 +66,7 @@ export class RecoverScreen extends Component {
 
   render() {
     const headerContent = <BackButton />;
-    const { shares, inProgress, quorum, error } = this.props;
+    const { shares, inProgress, quorum, error, unrecoverable } = this.props;
 
     return (
       <Layout header={headerContent}>
@@ -65,6 +75,7 @@ export class RecoverScreen extends Component {
             quorum={quorum}
             inProgress={inProgress}
             error={error}
+            unrecoverable={unrecoverable}
             onShareAdded={this.handleShareAdded.bind(this)}
             onReset={this.handleReset.bind(this)}
             onSubmit={this.handleRecover.bind(this)} />
@@ -76,8 +87,8 @@ export class RecoverScreen extends Component {
 }
 
 export function mapStateToProps(state) {
-  const { shares, inProgress, secret, error, shareProperties: { quorum } } = state.recover;
-  return { shares, inProgress, quorum, secret, error };
+  const { shares, inProgress, secret, error, unrecoverable, shareProperties: { quorum } } = state.recover;
+  return { shares, inProgress, quorum, secret, error, unrecoverable };
 }
 
 

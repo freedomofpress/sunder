@@ -17,6 +17,7 @@
     color: $borderColor;
   }
 
+  &.success:hover,
   &.error:hover {
     .fa-puzzle-piece {
       visibility: hidden;
