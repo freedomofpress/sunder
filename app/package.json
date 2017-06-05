@@ -7,6 +7,6 @@
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "author": "Gabe Isman <gabe.isman@gmail.com>",
   "dependencies": {
-    "rusty-secrets": "0.0.12"
+    "rusty-secrets": "0.0.13"
   }
 }
