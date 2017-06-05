@@ -8,9 +8,9 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let mainWindow = null;
 
-if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
-}
+//if (process.env.NODE_ENV === 'development') {
+  require('electron-debug')({ enabled: true, showDevTools: 'right' });
+//}
 
 
 app.on('window-all-closed', () => {
