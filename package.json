@@ -27,6 +27,9 @@
     "linux": {
       "icon": "build/icons/",
       "target": ["deb"]
+    },
+    "mac": {
+      "icon": "icons/app.icns"
     }
   },
   "bin": {
