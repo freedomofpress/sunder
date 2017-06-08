@@ -29,7 +29,7 @@
       "target": ["deb"]
     },
     "mac": {
-      "icon": "icons/app.icns"
+      "icon": "icons/icon.icns"
     }
   },
   "bin": {
