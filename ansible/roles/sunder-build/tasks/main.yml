@@ -28,12 +28,6 @@
   npm:
     path: /vagrant
 
-- name: Compile CSS and JS application code.
-  command: npm run build-app
-  environment: "{{ sunder_nodejs_environment_map }}"
-  args:
-    chdir: /vagrant
-
 - name: Build Sunder deb package.
   command: npm run dist
   environment: "{{ sunder_nodejs_environment_map }}"
