@@ -28,6 +28,11 @@
   npm:
     path: /vagrant
 
+- name: Rebuild NodeJS dependencies
+  command: npm rebuild
+  args:
+    chdir: /vagrant
+
 - name: Build Sunder deb package.
   command: npm run dist
   environment: "{{ sunder_nodejs_environment_map }}"
