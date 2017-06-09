@@ -3,6 +3,7 @@ npm-debug.log
 *.org
 .tags*
 /dist
+/app/dist
 release
 .nyc_output
 .vagrant/
