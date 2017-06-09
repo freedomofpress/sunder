@@ -27,13 +27,13 @@ export function parseShare(share) {
  */
 export function splitFFI(secret, options) {
   return new Promise((resolve, reject) => {
-    var mime = 'img/test';
+    const mime = '';
     cryptoFFI.generate_shares(
       options.quorum,
       options.shares,
       // This needs to be a buffer
       secret,
-      // TODO mime
+      // TODO Implement mime types
       mime,
       (err, shares) => {
         if (err) {

@@ -23,7 +23,7 @@ export class DistributeScreen extends Component {
     const headerContent = <HomeButton />;
 
     return (
-      <Layout header={headerContent}>
+      <Layout header={headerContent} title="Distribute Secret Shards">
         <Distribute shares={this.props.shares} quorum={this.props.quorum} />
       </Layout>
     );

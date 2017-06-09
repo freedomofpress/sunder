@@ -1,5 +1,5 @@
 export function countGoodShares(shares) {
-  return shares.filter((s) => !s.error).length
+  return shares.filter((s) => !s.error).length;
 }
 
 export function sharesMismatched(shares) {

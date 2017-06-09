@@ -17,7 +17,8 @@ export class RecoverScreen extends Component {
     inProgress: PropTypes.bool,
     dispatch: PropTypes.func,
     secret: PropTypes.object,
-    error: PropTypes.string
+    error: PropTypes.string,
+    unrecoverable: PropTypes.bool
   }
   static contextTypes = {
     router: PropTypes.object
@@ -69,7 +70,7 @@ export class RecoverScreen extends Component {
     const { shares, inProgress, quorum, error, unrecoverable } = this.props;
 
     return (
-      <Layout header={headerContent}>
+      <Layout header={headerContent} title="Recover Secret">
         <div className="flex-column">
           <Recover shares={shares}
             quorum={quorum}
@@ -87,7 +88,9 @@ export class RecoverScreen extends Component {
 }
 
 export function mapStateToProps(state) {
-  const { shares, inProgress, secret, error, unrecoverable, shareProperties: { quorum } } = state.recover;
+  const {
+    shares, inProgress, secret, error, unrecoverable, shareProperties: { quorum }
+  } = state.recover;
   return { shares, inProgress, quorum, secret, error, unrecoverable };
 }
 
