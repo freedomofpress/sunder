@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const {clipboard} = require('electron');
 import PropTypes from 'prop-types';
 import Button from './Button';
 
@@ -16,23 +17,11 @@ export default class CopyButton extends Component {
   }
 
   handleClicked() {
-    let successful;
-    this.copyEl.select();
-    this.copyEl.setSelectionRange(0, this.copyEl.value.length);
+    clipboard.writeText(this.props.targetText);
 
-    try {
-      successful = document.execCommand('copy');
-    } catch (e) {
-      successful = false;
-    }
-
-    if (successful) {
-      this.setState({ copied: 'successful' });
-      if (this.props.onCopied) {
-        this.props.onCopied();
-      }
-    } else {
-      this.setState({ copied: 'error' });
+    this.setState({ copied: 'successful' });
+    if (this.props.onCopied) {
+      this.props.onCopied();
     }
 
     window.setTimeout(() => this.setState({ copied: null }), 5000);
@@ -45,8 +34,6 @@ export default class CopyButton extends Component {
 
     if (copied === 'successful') {
       copyText = 'Copied';
-    } else if (copied === 'error') {
-      copyText = 'Copy failed';
     } else {
       copyText = this.props.buttonText || 'Copy';
     }
@@ -57,14 +44,7 @@ export default class CopyButton extends Component {
         onClick={this.handleClicked.bind(this)}
         {...this.props}>
         {copyText}
-        {/* hidden input for copy to clipboard functionality */}
-        <input type="text"
-          style={ { position: 'absolute', top: '-10000px', left: '-10000px' } }
-          readOnly
-          ref={(el) => (this.copyEl = el)}
-          value={this.props.targetText} />
       </Button>
-
     );
   }
 }
