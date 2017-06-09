@@ -19,7 +19,7 @@
   command: >
     icns2png --extract
     --output /vagrant/build/icons/
-    /vagrant/build/icons/app.icns
+    /vagrant/build/icon.icns
   args:
     # Use `make clean` in the project root to clear out old icons.
     creates: /vagrant/build/icons/app_32x32x32.png
