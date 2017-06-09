@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
 
 
 export default class HomeButton extends Component {
@@ -8,10 +7,9 @@ export default class HomeButton extends Component {
 
   render() {
     return (
-      <Button className="btn-back"
-        onClick={() => this.context.router.push('/')}>
-        Home
-      </Button>
+      <a className="btn-back" onClick={() => this.context.router.push('/')}>
+        <i className="fa fa-chevron-left" /> Home
+      </a>
     );
   }
 }

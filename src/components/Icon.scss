@@ -1,6 +1,6 @@
 @import '~src/shared/variables';
 
-.puzzle {
+.icon {
   display: inline-block;
   width: 100%;
   height: auto;
@@ -10,17 +10,19 @@
   }
 }
 
-.puzzle.split path {
-  transform-origin: center;
-  transform: scale(0.7) rotate(180deg);
+.icon.recover-icon {
+  path {
+    fill: #FFD719
+  }
 }
 
-.puzzle.spin path:nth-child(4n){
+.icon.spin path:nth-child(3n){
   fill: $accentColor;
 }
 
-.puzzle.spin {
-  animation: spin 2s infinite steps(4);
+.icon.spin #keyhole {
+  animation: spin 2s infinite;
+  transform-origin: 50% 50%;
 }
 
 

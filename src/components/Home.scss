@@ -5,33 +5,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: $blueGray;
 }
 
 .home-actions {
   margin-bottom: 20px;
 
-  i {
-    color: $accentColor;
+  .btn ~ .btn {
+    margin-left: 0;
   }
 
-  path {
-    fill: $accentColor;
+  i {
+    color: $accentColor;
   }
 
   .btn:hover i {
     color: $primaryBackgroundColor;
   }
-
-  .btn:hover path {
-    fill: $primaryBackgroundColor;
-  }
 }
 
 .home-title {
-  font-family: "Courier New", monospace;
   font-size: 50px;
   margin-bottom: 60px;
-  text-transform: lowercase;
 }
 
 .home-explanation {
@@ -39,5 +34,5 @@
   max-width: $xlargeButtonMaxWidth;
   line-height: 28px;
   font-size: 18px;
-  color: $gray;
+  color: $whiteColor;
 }
