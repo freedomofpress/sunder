@@ -1,7 +1,7 @@
-# Secret Share
-
+# Sunder
 
 ## Development
+
 You need a recent version of Node.js and NPM installed. Tested with:
 
 * v4.1.0
@@ -9,6 +9,7 @@ You need a recent version of Node.js and NPM installed. Tested with:
 * v7.5.0
 
 ### Quickstart
+
 1. Clone the git repository
 2. `npm install`
 3. `npm run dev`
@@ -53,6 +54,6 @@ Note that this will run `build-app` so there's no need to run that beforehand.
 
 Packages will be stored in `dist/<platform>`.
 
-### Code Signing
+#### Code Signing
 
 Code signing is handled automatically by the `electron-builder` package. All you should need to do is add the signing identity through xcode, and electron-builder will discover it automatically. See [Apple documentation](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html) and [electron-builder documentation](https://github.com/electron-userland/electron-builder/wiki/Code-Signing) for more info.
