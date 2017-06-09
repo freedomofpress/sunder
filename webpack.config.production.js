@@ -11,7 +11,7 @@ config.devtool = 'source-map';
 
 config.entry = './src/index';
 
-config.output.publicPath = path.join(__dirname, 'app/dist/');
+config.output.publicPath = './dist/';
 
 config.module.loaders.push({
   test: /\.scss$/,
