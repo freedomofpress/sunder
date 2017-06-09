@@ -23,15 +23,23 @@ For development use `npm run dev`. This does two things: it starts an electron i
 
 ## Building
 
-### Quickstart
-Requires Ansible and Vagrant for building Linux packages. Run:
+### Linux
+
+Linux packages are built in a Vagrant-based virtual environment, so they can be
+built on either Linux or Mac OS X. You will need to install the following
+prerequisites for the build environment:
+
+1. [Vagrant](https://www.vagrantup.com/)
+2. [Ansible](https://docs.ansible.com/ansible/intro_installation.html). We
+   recommend using an Ansible version >= 2.2.1.
+
+Once you have the prerequisites installed, you should be able to
 
 ```
 make build
 ```
 
 to create a VM and run a full build of the Linux packages.
-To build the OS X packages, read on.
 
 ### OS X
 
