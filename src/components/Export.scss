@@ -86,7 +86,7 @@
 
   .info {
     padding: 10px;
-    color: $borderColor;
+    color: darken($whiteColor, 40%);
   }
 }
 

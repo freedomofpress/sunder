@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
-import PuzzleIcon from './PuzzleIcon';
+import Icon from './Icon';
 import { countGoodShares, sharesMismatched } from 'src/lib/utilities';
 import './Recover.scss';
 
@@ -34,7 +34,8 @@ export default class Recover extends Component {
 
     const hasShares = shares.length > 0;
     const mismatchExists = sharesMismatched(shares);
-    const shouldDisplayStatus = !unrecoverable && hasShares && (!quorum || numGoodShares < quorum || mismatchExists);
+    const shouldDisplayStatus = !unrecoverable && hasShares &&
+      (!quorum || numGoodShares < quorum || mismatchExists);
 
     let action;
     if (error && unrecoverable) {
@@ -53,11 +54,11 @@ export default class Recover extends Component {
     } else if (!mismatchExists && numGoodShares >= quorum) {
       action = (
         <div className="recover-action align-center">
-          <h1 className="accent">All shares entered!</h1>
+          <h1>All shares entered!</h1>
           <Button type="xlarge"
             onClick={onSubmit}
             id="finish-recovery"
-            icon={<PuzzleIcon />}>
+            icon={<Icon type="recover" />}>
             Recover
           </Button>
           <p> Click the giant button to recover.</p>

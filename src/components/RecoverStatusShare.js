@@ -42,7 +42,7 @@ export class RecoverStatusShare extends Component {
     return (
       <div className={`share-progress-row ${className}`}>
         <span className={`progress-icon ${className}`}>
-          <i className=" fa fa-puzzle-piece"
+          <i className=" fa fa-bolt"
             style={{ transform: `rotate(${90 * this.props.index}deg)` }} />
           <i className="fa fa-close remove-share" onClick={this.handleRemove.bind(this)} />
         </span>

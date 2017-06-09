@@ -16,7 +16,7 @@ export class ExportScreen extends Component {
     const headerContent = <HomeButton />;
 
     return (
-      <Layout header={headerContent}>
+      <Layout header={headerContent} title="Export Recovered Secret">
         <Export secret={this.props.secret} />
       </Layout>
     );

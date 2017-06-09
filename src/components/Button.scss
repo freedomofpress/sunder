@@ -43,6 +43,9 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   background-color: $whiteColor;
   color: $primaryBackgroundColor;
   fill: $primaryBackgroundColor;
+  path {
+    fill: $primaryBackgroundColor;
+  }
 }
 
 .btn:active:not(.disabled) {
@@ -116,16 +119,26 @@ $buttonDisabledColor: rgba(200, 200, 200, 0.5);
   width: 100%;
   max-width: $xlargeButtonMaxWidth;
   font-size: 20px;
+  border-color: $borderColor;
+  background-color: $purple;
 
   .btn-icon-container {
     font-size: 40px;
     width: $xlargeButtonIconWidth;
+    border-right: 1px solid $borderColor;
   }
 
   .btn-content-container {
     margin-left: $xlargeButtonIconWidth;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 40px 0;
+    padding: 20px;
+    text-align: center;
+  }
+}
+
+.btn-back {
+  i {
+    margin-right: 8px;
   }
 }

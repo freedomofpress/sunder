@@ -14,3 +14,5 @@ build/icons/*.png
 
 # External roles are included from Ansible Galaxy, don't version control.
 ansible/roles/geerlingguy.nodejs
+
+secret-shard*

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PuzzleIcon from './PuzzleIcon';
+import Icon from './Icon';
 import './WorkingIndicator.scss';
 
 export default class WorkingIndicator extends Component {
@@ -7,7 +7,7 @@ export default class WorkingIndicator extends Component {
     return (
       <div className="overlay working-indicator">
         <div className="working-icon-container">
-          <PuzzleIcon className="spin" />
+          <Icon type="spin" />
         </div>
       </div>
     );

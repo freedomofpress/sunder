@@ -1,16 +1,18 @@
 textarea {
-  background-color: $whiteColor;
+  background-color: $blueGray;
   padding: 10px;
   outline: none;
-  border: 1px solid $lightBlue;
+  border: 1px solid $borderColor;
   border-radius: 3px;
+  color: $whiteColor;
 }
 
 input,
 select {
-  background: $whiteColor;
+  background: $blueGray;
   outline: none;
-  border: 1px solid $lightBlue;
+  border: 1px solid $borderColor;
+  color: $whiteColor;
 }
 
 // File inputs are represented visually by their corresponding labels

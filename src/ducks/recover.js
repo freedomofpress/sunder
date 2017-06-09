@@ -31,50 +31,7 @@ export default function reducer(state = initialState, action) {
         inProgress: false
       });
     case RECOVER_ERROR:
-      const newState = Object.assign({}, state, { inProgress: false });
-
-      // If the error is associated with a specific share, add it to the share
-      if (action.error && action.error.share_index !== undefined) {
-        return Object.assign(newState, {
-          shares: state.shares.map((share, index) => {
-            if (index === action.error.share_index) {
-              return Object.assign(share, { error: action.error.message });
-            }
-            return share;
-          }),
-          error: 'One of the shares is invalid.'
-        });
-      }
-
-      // This is a global, but recoverable error where the shares are valid but mismatched
-      if (action.error && action.error.share_groups) {
-        // Find the group with the maximum shares in it, mark the others as not belonging
-        // Should we indicate a strict majority? Should the messaging be different?
-        // 'These don't match' vs. 'This one doesn't belong.'
-        // Should we render them visually by group? Use colors to indicate?
-        const maxGroupSize = Math.max(...action.error.share_groups.map((a) => a.length));
-        const majorityGroup = action.error.share_groups.findIndex((a) => a.length === maxGroupSize);
-        return Object.assign(newState, {
-          shares: state.shares.map((share, index) => {
-            const group = action.error.share_groups.findIndex((g) => g.includes(index));
-            if (majorityGroup != group) {
-              return Object.assign(share, {
-                error: 'This share doesn\'t belong with the others.',
-                group
-              });
-            } else {
-              return Object.assign(share, { group });
-            }
-          }),
-          error: 'One or more of the shares belongs to a different secret.'
-        });
-      }
-
-      // Global error case, nothing to be done.
-      return Object.assign(newState, {
-        error: action.error && action.error.message || 'Something went wrong',
-        unrecoverable: true
-      });
+      return errorReducer(state, action);
     case ADD_SHARE: {
       // If share properties differ, prefer the ones entered first.
       const shareProperties =
@@ -110,6 +67,56 @@ export default function reducer(state = initialState, action) {
 }
 
 
+function errorReducer(state, action) {
+  const newState = Object.assign({}, state, { inProgress: false });
+
+  // If the error is associated with a specific share, add it to the share
+  if (action.error && action.error.share_index !== undefined) {
+    return Object.assign(newState, {
+      shares: state.shares.map((share, index) => {
+        if (index === action.error.share_index) {
+          return Object.assign(share, { error: action.error.message });
+        }
+        return share;
+      }),
+      error: 'One of the shares is invalid.'
+    });
+  }
+
+  // This is a global, but recoverable error where the shares are valid but mismatched
+  if (action.error && action.error.share_groups) {
+    // Find the group with the maximum shares in it, mark the others as not belonging
+    // Should we indicate a strict majority? Should the messaging be different?
+    // 'These don't match' vs. 'This one doesn't belong.'
+    // Should we render them visually by group? Use colors to indicate?
+    const maxGroupSize = Math.max(...action.error.share_groups.map((a) => a.length));
+    const majorityGroup = action.error.share_groups.findIndex((a) => a.length === maxGroupSize);
+
+    /* eslint-disable no-else-return */
+    return Object.assign(newState, {
+      shares: state.shares.map((share, index) => {
+        const group = action.error.share_groups.findIndex((g) => g.includes(index));
+        if (majorityGroup !== group) {
+          return Object.assign(share, {
+            error: 'This share doesn\'t belong with the others.',
+            group
+          });
+        } else {
+          return Object.assign(share, { group });
+        }
+      }),
+      error: 'One or more of the shares belongs to a different secret.'
+    });
+  }
+
+  // Global error case, nothing to be done.
+  return Object.assign(newState, {
+    error: action.error && action.error.message || 'Something went wrong',
+    unrecoverable: true
+  });
+}
+
+
 export function addShare(share) {
   return (dispatch, getState) => {
     const parsedShare = parseShare(share);
@@ -117,7 +124,7 @@ export function addShare(share) {
     const existingShareProperties = state.recover.shareProperties;
 
     if (existingShareProperties.id
-        && existingShareProperties.id !== parsedShare.id) {
+      && existingShareProperties.id !== parsedShare.id) {
       return dispatch(badShare(share, 'Mismatched secret id'));
     }
 
