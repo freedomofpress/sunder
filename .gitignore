@@ -2,7 +2,8 @@ node_modules
 npm-debug.log
 *.org
 .tags*
-dist
+/dist
+/app/dist
 release
 .nyc_output
 .vagrant/

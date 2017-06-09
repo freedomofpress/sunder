@@ -1,7 +1,7 @@
 {
   "name": "sunder",
   "productName": "Sunder",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "main": "app/main.js",
@@ -75,7 +75,7 @@
     "nyc": "^10.3.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
-    "rusty-secrets": "0.0.12",
+    "rusty-secrets": "0.0.13",
     "sass-loader": "^3.2.0",
     "selenium-webdriver": "^3.3.0",
     "sinon": "^1.17.3",
