@@ -8,6 +8,8 @@ clean:
 	rm -rf dist/
 	rm -rf build/icons/*.png
 	rm -rf ansible/roles/geerlingguy.nodejs
+	rm -rf node_modules/
+	rm -rf app/node_modules/
 
 build:
 	make ansible
