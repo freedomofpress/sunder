@@ -17,6 +17,7 @@ export default class CopyButton extends Component {
 
   handleClicked() {
     let successful;
+    this.copyEl.select();
     this.copyEl.setSelectionRange(0, this.copyEl.value.length);
 
     try {
