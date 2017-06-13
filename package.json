@@ -26,7 +26,9 @@
     "asar": false,
     "linux": {
       "icon": "build/icons/",
-      "target": ["deb"]
+      "target": [
+        "deb"
+      ]
     }
   },
   "bin": {
@@ -79,6 +81,7 @@
     "sass-loader": "^3.2.0",
     "selenium-webdriver": "^3.3.0",
     "sinon": "^1.17.3",
+    "spectron": "^3.6.4",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
