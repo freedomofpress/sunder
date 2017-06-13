@@ -5,8 +5,6 @@ import electronPath from 'electron';
 
 const appPath = path.join(__dirname, '..');
 
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
-
 describe('main window', function spec() {
   this.timeout(5000);
   let shares; // Store the generated shares for recovery
@@ -46,7 +44,7 @@ describe('main window', function spec() {
   });
 
   it('should find the right number of shares on distribute screen', async () => {
-    await delay(2100); // wait for fake delay
+    await app.client.waitForExist('.share-row');
     const shareEls = await app.client.elements('.share-row');
     expect(shareEls.value).to.have.length(3);
   });
@@ -80,16 +78,16 @@ describe('main window', function spec() {
 
   it('should click the finish recovery button', async () => {
     await app.client.element('#finish-recovery').click();
-    await delay(2100); // wait for fake delay
   });
 
   it('should click view secret button', async () => {
+    await app.client.waitForExist('#view-secret-button');
     await app.client.element('#view-secret-button').click();
   });
 
   it('should have the right secret revealed', async () => {
-    const foundSecret = await app.client.element('.secret-view')
-        .getAttribute('value');
+    await app.client.waitForVisible('.secret-view');
+    const foundSecret = await app.client.getAttribute('.secret-view', 'value');
     expect(foundSecret).to.be.eql(secret);
   });
 });
