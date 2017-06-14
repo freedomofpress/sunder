@@ -14,17 +14,17 @@ describe('main window', function spec() {
 
   let app;
 
-  before(() => {
+  before(async () => {
     app = new Application({
       path: electronPath,
       env: { SPECTRON: true },
       args: [appPath],
     });
-    return app.start();
+    await app.start();
   });
 
-  after(() => {
-    return app.stop();
+  after(async () => {
+    await app.stop();
   });
 
   it('should open window', async () => {
