@@ -40,6 +40,7 @@ export default class CopyButton extends Component {
 
     return (
       <Button type="default"
+        className="copy"
         icon="clipboard"
         onClick={this.handleClicked.bind(this)}
         {...this.props}>
