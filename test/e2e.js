@@ -93,5 +93,14 @@ describe('main window', function spec() {
     await app.client.waitForVisible('.secret-view');
     const foundSecret = await app.client.getAttribute('.secret-view', 'value');
     expect(foundSecret).to.be.eql(secret);
+    await app.client.element('.btn*=Hide').click();
+  });
+
+  it('should be able to copy the recovered secret', async () => {
+    // Make sure the clipboard is clear before copying
+    await app.electron.clipboard.clear();
+    await app.client.element('.copy').click();
+    const copiedSecret = await app.electron.clipboard.readText();
+    expect(copiedSecret).to.be.eql(secret);
   });
 });
