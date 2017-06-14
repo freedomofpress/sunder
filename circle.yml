@@ -5,3 +5,10 @@ machine:
 dependencies:
   post:
     - npm rebuild
+
+test:
+  pre:
+    - npm run build-app
+  override:
+    - npm run test
+    - npm run test-e2e
