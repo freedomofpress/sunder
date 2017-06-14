@@ -1,5 +1,7 @@
 # Sunder
 
+[![CircleCI](https://circleci.com/gh/freedomofpress/sunder.svg?style=svg&circle-token=b2396d4ad46cc09a0b6f515855e56032fe6ce4bf)](https://circleci.com/gh/freedomofpress/sunder)
+
 ## Development
 
 You need a recent version of Node.js and NPM installed. Tested with:
