@@ -16,3 +16,6 @@ build/icons/*.png
 ansible/roles/geerlingguy.nodejs
 
 secret-shard*
+
+# Ignore static assets for local docs editing
+docs/_build/
