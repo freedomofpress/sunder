@@ -59,3 +59,27 @@ Packages will be stored in `dist/<platform>`.
 #### Code Signing
 
 Code signing is handled automatically by the `electron-builder` package. All you should need to do is add the signing identity through xcode, and electron-builder will discover it automatically. See [Apple documentation](https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html) and [electron-builder documentation](https://github.com/electron-userland/electron-builder/wiki/Code-Signing) for more info.
+
+## Documentation
+
+### Editing the docs
+
+Install the requirements (use of virtualenv is highly recommended), then
+pull up a live reload interface for editing:
+
+```
+pip install -r requirements.txt
+make docs
+```
+
+### Linting the docs
+
+You can check for common syntax and formatting errors in the documentation
+without pushing to CI:
+
+```
+make docs-lint
+```
+
+The linting process will rebuild all local assets from scratch, so it cannot
+be used at the same time as `make docs`.

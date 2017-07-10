@@ -1,5 +1,5 @@
 # Declare subcommands as "phony" targets, since they're not directories.
-.PHONY: ansible clean build clean-build help
+.PHONY: ansible clean build clean-build help docs docs-lint
 
 ansible:
 	ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
@@ -20,6 +20,24 @@ clean-build:
 	make clean
 	make build
 
+.PHONY: docs-clean
+docs-clean:
+# Create required static dirs
+	mkdir -p docs/_static docs/_build
+# Remove any previously build static files
+	make -C docs/ clean
+
+.PHONY: docs-lint
+docs-lint: docs-clean
+# The `-W` option converts warnings to errors.
+# The `-n` option enables "nit-picky" mode.
+	sphinx-build -Wn docs/ docs/_build/html
+
+.PHONY: docs
+docs: docs-clean
+# Spins up livereload environment for editing; blocks.
+	sphinx-autobuild docs/ docs/_build/html
+
 help:
 	@echo Makefile for building sunder packages.
 	@echo Subcommands:
@@ -27,3 +45,5 @@ help:
 	@echo "\t clean: Remove previously built binaries from dist/ directory."
 	@echo "\t build: Creates a Vagrant VM and builds Linux packages."
 	@echo "\t clean-build: Cleans project, then builds Linux packages."
+	@echo "\t docs: Build project documentation in live reload for editing."
+	@echo "\t docs-lint: Check documentation for common syntax errors."
