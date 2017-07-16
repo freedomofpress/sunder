@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import electronPath from 'electron';
 
 const appPath = path.join(__dirname, '..');
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('main window', function spec() {
   this.timeout(5000);
@@ -86,6 +87,8 @@ describe('main window', function spec() {
 
   it('should click view secret button', async () => {
     await app.client.waitForExist('#view-secret-button');
+    // Wait for flex layout to settle in case Veracrypt button is added.
+    await delay(200);
     await app.client.element('#view-secret-button').click();
   });
 
