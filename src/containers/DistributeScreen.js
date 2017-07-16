@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Distribute from '../components/Distribute';
 import HomeButton from '../components/HomeButton';
 import Layout from '../components/Layout';
+import { saveLastDirectory } from '../ducks/files';
 
 export class DistributeScreen extends Component {
   static propTypes = {
@@ -15,6 +16,10 @@ export class DistributeScreen extends Component {
     router: PropTypes.object
   }
 
+  saveLastDirectory(directory) {
+    this.props.dispatch(saveLastDirectory(directory));
+  }
+
   render() {
     if (!this.props.shares) {
       this.context.router.push('/');
@@ -24,7 +29,11 @@ export class DistributeScreen extends Component {
 
     return (
       <Layout header={headerContent} title="Distribute Secret Shards">
-        <Distribute shares={this.props.shares} quorum={this.props.quorum} />
+        <Distribute
+          shares={this.props.shares}
+          quorum={this.props.quorum}
+          lastDirectory={this.props.lastDirectory}
+          saveLastDirectory={this.saveLastDirectory.bind(this)} />
       </Layout>
     );
   }
@@ -33,7 +42,8 @@ export class DistributeScreen extends Component {
 function mapStateToProps(state) {
   return {
     shares: state.split.shares,
-    quorum: state.split.quorum
+    quorum: state.split.quorum,
+    lastDirectory: state.files.lastDirectory
   };
 }
 
