@@ -15,17 +15,17 @@ export default class FileOrTextInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { entryMode: props.defaultMode || 'text', revealed: false };
+    this.state = { entryMode: props.defaultMode || 'text', revealed: true };
   }
 
   onModeChange(event) {
     // Set revealed to false on any mode change so secret file contents aren't
     // unexpectedly revealed.
-    this.setState({ entryMode: event.target.value, revealed: false });
+    this.setState({ entryMode: event.target.value });
   }
 
   onRevealChange(event) {
-    this.setState({ revealed: event.target.checked });
+    this.setState({ revealed: !event.target.checked });
   }
 
   clearData() {
@@ -60,7 +60,7 @@ export default class FileOrTextInput extends Component {
       <label className={`reveal-options ${tooLargeToDisplay ? 'hidden' : ''}`}>
         <input type="checkbox"
           onChange={this.onRevealChange.bind(this)}
-          checked={this.state.revealed} /> Reveal?
+          checked={!this.state.revealed} /> Hide secret?
       </label>
     );
 
