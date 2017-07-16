@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const {clipboard} = require('electron');
+const { clipboard } = require('electron');
 import PropTypes from 'prop-types';
 import Button from './Button';
 

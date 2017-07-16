@@ -8,7 +8,7 @@ const appPath = path.join(__dirname, '..');
 describe('main window', function spec() {
   this.timeout(5000);
 
-  let shares = []; // Store the generated shares for recovery
+  const shares = []; // Store the generated shares for recovery
   const quorum = 2;
   const numShares = 3;
   const secret = 'test secret';
@@ -52,7 +52,7 @@ describe('main window', function spec() {
 
   it('should copy the share values to the clipboard and store them', async () => {
     for (let i = 0; i < quorum; i++) {
-      await app.client.element(`#share-${i+1} .copy`).click();
+      await app.client.element(`#share-${i + 1} .copy`).click();
       const share = await app.electron.clipboard.readText();
       shares.push(share);
     }
@@ -67,13 +67,15 @@ describe('main window', function spec() {
   });
 
   it('should select text input', async () => {
-    await app.client.selectByValue('div.file-or-text-mode-select-container select', 'text')
+    await app.client.selectByValue('div.file-or-text-mode-select-container select', 'text');
   });
 
   it('should input the shares', async () => {
     for (let i = 0; i < quorum; i++) {
       await app.client.execute(
-        "var el = document.querySelector(arguments[0]); el.value = arguments[1]; el.dispatchEvent(new Event('blur'));",
+        'var el = document.querySelector(arguments[0]);' +
+          'el.value = arguments[1];' +
+          'el.dispatchEvent(new Event("blur"));',
         '[name=share]',
         shares[i]);
       await app.client.element('#submit-share-button').click();
