@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { clipboard } from 'electron';
 
 import Button from './Button.js';
+import './PasteButton.scss';
 
 
 export default class PasteButton extends Component {
