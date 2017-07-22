@@ -2,7 +2,9 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import { ShareInput } from 'src/components/ShareInput';
+import ShareInput from 'src/components/ShareInput';
+import FileInput from 'src/components/FileInput';
+import PasteButton from 'src/components/PasteButton';
 
 const props = {
   fields: {
@@ -14,15 +16,9 @@ const props = {
 };
 
 describe('<ShareInput />', () => {
-  it('should call handleSubmit when button is pressed', () => {
+  it('should render without error', () => {
     const shareInput = mount(<ShareInput {...props} />);
-    const input = shareInput.find('textarea');
-    const button = shareInput.find('#submit-share-button');
-    const testShare = 'test string';
-    input.get(0).value = testShare;
-    input.simulate('change');
-    button.simulate('click');
-    expect(props.handleSubmit.calledOnce).to.be.true();
-    expect(props.resetForm.calledOnce).to.be.true();
+    expect(shareInput.find(FileInput)).to.have.length(1);
+    expect(shareInput.find(PasteButton)).to.have.length(1);
   });
 });

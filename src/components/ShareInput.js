@@ -1,56 +1,62 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
-import { createValidator, required } from 'src/lib/validations';
-import FileOrTextInput from 'src/components/FileOrTextInput';
+import { clipboard } from 'electron';
+import { validateShare } from 'src/lib/utilities';
+import FileInput from 'src/components/FileInput';
+import PasteButton from 'src/components/PasteButton';
 import Panel from './Panel';
-import Button from './Button';
 import './ShareInput.scss';
 
 
-export class ShareInput extends Component {
+export default class ShareInput extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     numEnteredShares: PropTypes.number,
-    handleSubmit: PropTypes.func,
-    // These are injected by the reduxForm decorator
-    fields: PropTypes.shape({
-      share: PropTypes.object
-    }),
-    submitting: PropTypes.bool,
-    invalid: PropTypes.bool,
-    resetForm: PropTypes.func
+    shares: PropTypes.array,
+    onSubmit: PropTypes.func
   }
 
-  handleSubmit() {
-    this.props.handleSubmit();
-    this.props.resetForm();
+  constructor(props) {
+    super(props);
+    this.state = { shareInClipboard: false };
+    this.handleFocus = this.handleFocus.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('focus', this.handleFocus);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shares !== this.props.shares) {
+      this.checkClipboardForShare(nextProps.shares);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('focus', this.handleFocus);
+  }
+
+  handleFocus() {
+    this.checkClipboardForShare();
+  }
+
+  checkClipboardForShare(currentShares) {
+    const clipboardText = clipboard.readText();
+    const result = validateShare(clipboardText, currentShares || this.props.shares);
+    this.setState({ shareInClipboard: !result.error });
   }
 
   render() {
-    const { numEnteredShares, invalid, fields: { share } } = this.props;
+    const { numEnteredShares, onSubmit } = this.props;
     const whichShare = numEnteredShares === 0 ? 'first' : 'next';
 
     return (
       <Panel className="share-input"
         title={`Enter the ${whichShare} secret share`}>
-        <FileOrTextInput field={share} defaultMode="file" />
-        <Button type="default"
-          icon="puzzle-piece"
-          id="submit-share-button"
-          disabled={invalid}
-          onClick={this.handleSubmit.bind(this)}>
-          Continue
-        </Button>
+        <FileInput onChange={onSubmit} noStatus />
+        <PasteButton disabled={!this.state.shareInClipboard}
+          onClick={onSubmit} />
       </Panel>
     );
   }
 }
-
-export default reduxForm({
-  form: 'recover-share',
-  fields: ['share'],
-  validate: createValidator({
-    share: [required]
-  })
-})(ShareInput);

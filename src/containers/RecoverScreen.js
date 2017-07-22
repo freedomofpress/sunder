@@ -57,7 +57,7 @@ export class RecoverScreen extends Component {
   }
 
   handleShareAdded(data) {
-    const share = Buffer.isBuffer(data.share) ? data.share.toString('utf8') : data.share;
+    const share = Buffer.isBuffer(data) ? data.toString('utf8') : data;
     this.props.dispatch(addShare(share));
   }
 
