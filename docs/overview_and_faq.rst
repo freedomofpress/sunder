@@ -25,10 +25,10 @@ small number of them does not result in the loss or theft of the secret.
 How is this useful to journalists?
 ----------------------------------
 
-News organizations increasingly have access to sensitive leaked datasets
-- like the Snowden files or the Panama Papers - and are forced to take
-care of and secure those files indefinitely. They inevitably run into a
-variety of problems:
+News organizations increasingly have access to sensitive leaked datasets,
+like the Snowden files or the Panama Papers, and are forced to take care
+of and secure those files indefinitely. They inevitably run into a variety
+of problems:
 
 -  There will be staff churn - some of the journalists with access to
    the sensitive material will leave the organization and new ones will
@@ -160,12 +160,12 @@ splitting can be useful in other areas beyond journalism. For example:
    still had two of three (USB, hard drive, or computer).
 
 -  **Bitcoin** - The keys to the cold-storage vaults of `at least one
-   major bitcoin company are
-   secured <https://medium.com/the-coinbase-blog/how-coinbase-builds-secure-infrastructure-to-store-bitcoin-in-the-cloud-30a6504e40ba#.5qukxh1q5>`__
-   using this scheme. The shares of the secret are distributed to
-   trusted executives and board members. So if the funds need to be
-   accessed, that can only be done by consensus. This is an example of
-   an extremely sensitive secret (perhaps a $100 million secret), that
-   also must not be lost (because the money would be lost with it). This
-   is also a nice example of distribution of trust, where no single
-   person should be unilaterally trusted with the secret.
+   major bitcoin company are secured`_ using this scheme. The shares of
+   the secret are distributed to trusted executives and board members.
+   So if the funds need to be accessed, that can only be done by consensus.
+   This is an example of an extremely sensitive secret (perhaps a $100
+   million secret), that also must not be lost (because the money would be
+   lost with it). This is also a nice example of distribution of trust,
+   where no single person should be unilaterally trusted with the secret.
+
+   .. _at least one major bitcoin company are secured: https://medium.com/the-coinbase-blog/how-coinbase-builds-secure-infrastructure-to-store-bitcoin-in-the-cloud-30a6504e40ba#.5qukxh1q5

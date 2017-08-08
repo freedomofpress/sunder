@@ -74,8 +74,7 @@ generate is never exposed to a network.
 
 We recommend VeraCrypt, but this same basic process will work for any
 file encryption system. VeraCrypt has a good `tutorial for
-beginners <https://veracrypt.codeplex.com/wikipage?title=Beginner%27s%20Tutorial>`__,
-which we recommend you follow with a few specific modifications.
+beginners`_, which we recommend you follow with a few specific modifications.
 
 -  The password should be generated randomly. You can do this in Tails
    by going to ‘Applications > KeePassX’ and then within KeePassX
@@ -89,6 +88,7 @@ which we recommend you follow with a few specific modifications.
    since this will happen only rarely the added security assurance is
    worth the trade-off.
 
+.. _tutorial for beginners: https://veracrypt.codeplex.com/wikipage?title=Beginner%27s%20Tutorial
 
 Install Sunder
 ~~~~~~~~~~~~~~
@@ -281,16 +281,19 @@ compatibility with future devices.
 Install Tails
 ^^^^^^^^^^^^^
 
-The `Tails website <https://tails.boum.org/>`__ has detailed and
+The `Tails website`_ has detailed and
 up-to-date instructions on how to download and verify Tails, and how to
 create a bootable Tails USB drive. Follow the instructions at these
 links and then return to this page:
 
--  `Download and verify the Tails
-   .iso <https://tails.boum.org/download/index.en.html>`__
+-  `Download and verify the Tails .iso`_
 
--  `Install onto a USB
-   drive <https://tails.boum.org/doc/first_steps/installation/index.en.html>`__
+-  `Install onto a USB drive`_
+
+.. _Tails website: https://tails.boum.org/
+.. _Download and verify the Tails .iso: https://tails.boum.org/download/index.en.html
+.. _Install onto a USB drive: https://tails.boum.org/doc/first_steps/installation/index.en.html
+
 
 Install Sunder on Tails
 -----------------------
