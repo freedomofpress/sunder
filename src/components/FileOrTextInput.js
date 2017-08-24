@@ -19,8 +19,6 @@ export default class FileOrTextInput extends Component {
   }
 
   onModeChange(event) {
-    // Set revealed to false on any mode change so secret file contents aren't
-    // unexpectedly revealed.
     this.setState({ entryMode: event.target.value });
   }
 
