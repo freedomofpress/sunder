@@ -7,14 +7,9 @@ Welcome to Sunder's documentation!
 ==================================
 
 .. toctree::
+   :caption: Using Sunder
+   :name: userguidetoc
    :maxdepth: 2
-   :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   overview_and_faq
+   user_manual
