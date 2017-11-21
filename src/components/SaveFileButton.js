@@ -9,7 +9,7 @@ export default class SaveFileButton extends Component {
   static propTypes = {
     contents: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     dialogTitle: PropTypes.string,
-    defaultPath: PropTypes.string,
+    suggestedFileName: PropTypes.string,
     buttonText: PropTypes.string,
     onSaved: PropTypes.func
   }

@@ -9,7 +9,8 @@ export class DistributeScreen extends Component {
   static propTypes = {
     shares: PropTypes.array,
     dispatch: PropTypes.func,
-    quorum: PropTypes.number
+    quorum: PropTypes.number,
+    lastDirectory: PropTypes.string
   }
   static contextTypes = {
     router: PropTypes.object
