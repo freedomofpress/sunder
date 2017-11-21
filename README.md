@@ -18,6 +18,8 @@ You need a recent version of Node.js and NPM installed. Tested with:
 
 For development use `npm run dev`. This does two things: it starts an electron instance with development features enabled, and it starts a webpack dev server. The dev server is to enable 'hot module reloading', which means that changes to the source on your file system will be reflected in the running application code in real time.
 
+If you get an error from `node-gyp` during `npm install`, note that it expects `python` to resolve to Python 2.x.
+
 ### Testing
 
 - To run the unit tests: `npm run test`
