@@ -2,8 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import ShareRow from 'src/components/ShareRow';
-import Button from 'src/components/Button';
-import Modal from 'src/components/Modal';
 import CopyButton from 'src/components/CopyButton';
 import SaveFileButton from 'src/components/SaveFileButton';
 
@@ -16,14 +14,6 @@ describe('<ShareRow />', () => {
   it('should render without error', () => {
     const row = shallow(<ShareRow {...props} />);
     expect(row).to.have.length(1);
-  });
-
-  it('should show a modal when view clicked', () => {
-    const row = shallow(<ShareRow {...props} />);
-    const viewButton = row.find(Button);
-    expect(row.find(Modal)).to.have.length(0);
-    viewButton.simulate('click');
-    expect(row.find(Modal)).to.have.length(1);
   });
 
   it('should indicate saved when save clicked', () => {
