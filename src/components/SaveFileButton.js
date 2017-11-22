@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { remote } from 'electron';
 import fs from 'fs';
+import path from 'path';
 import Button from './Button';
 
 
@@ -11,7 +12,9 @@ export default class SaveFileButton extends Component {
     dialogTitle: PropTypes.string,
     suggestedFileName: PropTypes.string,
     buttonText: PropTypes.string,
-    onSaved: PropTypes.func
+    onSaved: PropTypes.func,
+    lastDirectory: PropTypes.string,
+    saveLastDirectory: PropTypes.func
   }
 
   constructor(props) {
@@ -20,9 +23,13 @@ export default class SaveFileButton extends Component {
   }
 
   handleClick() {
+    const defaultPath = path.join(
+      this.props.lastDirectory || '',
+      this.props.suggestedFileName);
+
     remote.dialog.showSaveDialog({
       title: this.props.dialogTitle || 'Save File',
-      defaultPath: this.props.defaultPath,
+      defaultPath,
     }, this.filePickerCallback.bind(this));
   }
 
@@ -33,6 +40,8 @@ export default class SaveFileButton extends Component {
     }
 
     this.setState({ save: 'saving', to: filename });
+
+    this.props.saveLastDirectory(path.dirname(filename));
 
     fs.writeFile(
       filename,
@@ -72,5 +81,4 @@ export default class SaveFileButton extends Component {
       </Button>
     );
   }
-
 }

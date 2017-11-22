@@ -8,13 +8,20 @@ import './Distribute.scss';
 export default class Distribute extends Component {
   static propTypes = {
     shares: PropTypes.array,
-    quorum: PropTypes.number
+    quorum: PropTypes.number,
+    lastDirectory: PropTypes.string,
+    saveLastDirectory: PropTypes.func
   }
 
   render() {
     const { quorum, shares } = this.props;
     const shareRows = this.props.shares.map((share, index) => (
-      <ShareRow key={share} index={index + 1} share={share} />
+      <ShareRow
+        key={share}
+        index={index + 1}
+        lastDirectory={this.props.lastDirectory}
+        saveLastDirectory={this.props.saveLastDirectory}
+        share={share} />
     ));
 
     return (

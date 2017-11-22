@@ -7,7 +7,9 @@ import './ShareRow.scss';
 export default class ShareRow extends Component {
   static propTypes = {
     share: PropTypes.string,
-    index: PropTypes.number
+    index: PropTypes.number,
+    lastDirectory: PropTypes.string,
+    saveLastDirectory: PropTypes.func
   }
 
   constructor(props) {
@@ -53,7 +55,9 @@ export default class ShareRow extends Component {
           <SaveFileButton contents={share}
             type="small"
             onSaved={this.handleSaved.bind(this)}
-            defaultPath={`secret-shard-${index}.txt`} />
+            lastDirectory={this.props.lastDirectory}
+            saveLastDirectory={this.props.saveLastDirectory}
+            suggestedFileName={`secret-shard-${index}.txt`} />
         </div>
       </div>
     );
