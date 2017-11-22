@@ -44,17 +44,9 @@ describe('<FileOrTextInput />', () => {
 
   it('should handle the reveal checkbox properly', () => {
     const fileOrText = shallow(<FileOrTextInput {...props} />);
-    expect(fileOrText.find('textarea').is('.revealed')).to.be.false();
+    expect(fileOrText.find('textarea').is('.revealed')).to.be.true();
     fileOrText.find('.reveal-options').find('input')
       .simulate('change', { target: { checked: true } });
-    expect(fileOrText.find('textarea').is('.revealed')).to.be.true();
-  });
-
-  it('should handle the reveal checkbox properly', () => {
-    const fileOrText = shallow(<FileOrTextInput {...props} />);
     expect(fileOrText.find('textarea').is('.revealed')).to.be.false();
-    fileOrText.find('.reveal-options').find('input')
-      .simulate('change', { target: { checked: true } });
-    expect(fileOrText.find('textarea').is('.revealed')).to.be.true();
   });
 });

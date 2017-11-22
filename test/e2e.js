@@ -4,11 +4,12 @@ import { expect } from 'chai';
 import electronPath from 'electron';
 
 const appPath = path.join(__dirname, '..');
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('main window', function spec() {
   this.timeout(5000);
 
-  let shares = []; // Store the generated shares for recovery
+  const shares = []; // Store the generated shares for recovery
   const quorum = 2;
   const numShares = 3;
   const secret = 'test secret';
@@ -52,7 +53,7 @@ describe('main window', function spec() {
 
   it('should copy the share values to the clipboard and store them', async () => {
     for (let i = 0; i < quorum; i++) {
-      await app.client.element(`#share-${i+1} .copy`).click();
+      await app.client.element(`#share-${i + 1} .copy`).click();
       const share = await app.electron.clipboard.readText();
       shares.push(share);
     }
@@ -80,6 +81,8 @@ describe('main window', function spec() {
 
   it('should click view secret button', async () => {
     await app.client.waitForExist('#view-secret-button');
+    // Wait for flex layout to settle in case Veracrypt button is added.
+    await delay(200);
     await app.client.element('#view-secret-button').click();
   });
 

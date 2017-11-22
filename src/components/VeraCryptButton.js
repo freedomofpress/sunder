@@ -47,8 +47,7 @@ export default class VeraCryptButton extends Component {
           onClick={this.handleVeracrypt.bind(this)}>
           <h4>Open Veracrypt Volume</h4>
           <span className="button-subtitle">
-            This will prompt you to choose a Veracrypt volume, then open
-            {' '}the volume using the recovered secret as the passphrase.
+            This will open a Veracrypt volume with the secret as the passphrase.
           </span>
         </Button>
         <Info>
