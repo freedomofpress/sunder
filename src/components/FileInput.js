@@ -9,7 +9,9 @@ const MAX_FILE_SIZE_BYTES = 1000000;
 export default class FileInput extends Component {
   static propTypes = {
     field: PropTypes.object,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onChange: PropTypes.func,
+    noStatus: PropTypes.bool
   }
 
   constructor(props) {
@@ -24,7 +26,7 @@ export default class FileInput extends Component {
     // If the user clears or modifies the file contents in the text input we
     // don't want to show that file as still being chosen. This works because
     // the filename is set AFTER the value of the field in `onFileChange`.
-    if (nextProps.field.value !== this.props.field.value) {
+    if (nextProps.field && nextProps.field.value !== this.props.field.value) {
       this.setState({ filename: undefined, error: undefined });
     }
   }
@@ -62,8 +64,15 @@ export default class FileInput extends Component {
         // TODO Look up the mime type here, pipe through reducer
 
         // The order of these statements is important because of `componentWillReceiveProps`
-        this.props.field.onChange(contents);
-        this.setState({ filename: file.name });
+        if (this.props.field) {
+          this.props.field.onChange(contents);
+        }
+        if (this.props.onChange) {
+          this.props.onChange(contents);
+        }
+        if (!this.props.noStatus) {
+          this.setState({ filename: file.name });
+        }
       });
     });
   }

@@ -67,7 +67,9 @@ export default class Recover extends Component {
     } else {
       action = (
         <div className="recover-action">
-          <ShareInput numEnteredShares={numGoodShares}
+          <ShareInput
+            numEnteredShares={numGoodShares}
+            shares={shares}
             onSubmit={onShareAdded} />
           {instructionalContent &&
             <p className="recover-explanation">{instructionalContent}</p>}

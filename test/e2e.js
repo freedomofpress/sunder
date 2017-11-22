@@ -67,19 +67,11 @@ describe('main window', function spec() {
     await app.client.element('#recover-button').click();
   });
 
-  it('should select text input', async () => {
-    await app.client.selectByValue('div.file-or-text-mode-select-container select', 'text');
-  });
-
   it('should input the shares', async () => {
     for (let i = 0; i < quorum; i++) {
-      await app.client.execute(
-        'var el = document.querySelector(arguments[0]);' +
-          'el.value = arguments[1];' +
-          'el.dispatchEvent(new Event("blur"));',
-        '[name=share]',
-        shares[i]);
-      await app.client.element('#submit-share-button').click();
+      const copiedSecret = await app.electron.clipboard.writeText(shares[i]);
+      await app.client.execute("window.dispatchEvent(new Event('focus'))");
+      await app.client.element('.paste').click();
     }
   });
 

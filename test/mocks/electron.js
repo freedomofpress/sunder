@@ -10,6 +10,10 @@ export default {
     dialog: {
       showOpenDialog: spy(),
       showSaveDialog: spy()
-    }
+    },
+  },
+  clipboard: {
+    writeText: spy(),
+    readText: spy()
   }
 };

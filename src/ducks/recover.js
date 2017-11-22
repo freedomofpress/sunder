@@ -2,7 +2,8 @@
  * Actions and reducer for recovering a secret.
  */
 
-import { parseShare, recoverFFI } from 'src/lib/crypto';
+import { recoverFFI } from 'src/lib/crypto';
+import { validateShare } from 'src/lib/utilities';
 import { RESET } from 'src/ducks/global';
 
 export const RECOVER = 'RECOVER';
@@ -119,28 +120,25 @@ function errorReducer(state, action) {
 
 export function addShare(share) {
   return (dispatch, getState) => {
-    const parsedShare = parseShare(share);
     const state = getState();
-    const existingShareProperties = state.recover.shareProperties;
+    const result = validateShare(share, state.recover.shares);
 
-    if (existingShareProperties.id
-      && existingShareProperties.id !== parsedShare.id) {
-      return dispatch(badShare(share, 'Mismatched secret id'));
-    }
-
-    const parsedShares = state.recover.shares.map((s) => parseShare(s.data));
-    if (parsedShares.some((s) => s.shareNum === parsedShare.shareNum)) {
+    if (result.error === 'DUPLICATE') {
       return dispatch(badShare(share, 'Duplicate share'));
     }
 
-    if (!Number.isInteger(parsedShare.quorum) || !Number.isInteger(parsedShare.shareNum)) {
+    if (result.error === 'MALFORMED') {
       return dispatch(badShare(share, 'Malformed share'));
+    }
+
+    if (result.error) {
+      return dispatch(badShare(share, 'Unknown error'));
     }
 
     dispatch({
       type: ADD_SHARE,
       share,
-      shareProperties: { quorum: parsedShare.quorum }
+      shareProperties: { quorum: result.parsedShare.quorum }
     });
   };
 }

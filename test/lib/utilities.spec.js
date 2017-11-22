@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import {
   countGoodShares,
-  sharesMismatched
-
+  sharesMismatched,
+  validateShare
 } from 'src/lib/utilities';
 
 describe('utilities', () => {
@@ -75,6 +75,30 @@ describe('utilities', () => {
         { data: 'c' },
       ];
       expect(countGoodShares(shares)).to.be.equal(2);
+    });
+  });
+
+  describe('validateShare', () => {
+    const validShare = '2-1-secretdata';
+
+    it('should return no errors for a valid share', () => {
+      expect(validateShare(validShare, []).error).to.be.false();
+    });
+
+    it('should return malformed for a bad share', () => {
+      expect(validateShare('cecin\'estpauneshare', []).error).to.be.eq('MALFORMED');
+    });
+
+    it('should return duplicate for a duplicate share', () => {
+      expect(validateShare(validShare, [{ data: validShare }]).error).to.be.eq('DUPLICATE');
+    });
+
+    it('should extract the right quorum', () => {
+      expect(validateShare(validShare, []).parsedShare.quorum).to.be.eq(2);
+    });
+
+    it('should extract the right share index', () => {
+      expect(validateShare(validShare, []).parsedShare.shareNum).to.be.eq(1);
     });
   });
 });
