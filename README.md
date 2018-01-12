@@ -4,11 +4,15 @@
 
 ## Development
 
-You need a recent version of Node.js and NPM installed. Tested with:
+You need a recent version of Node.js installed. Tested with:
 
 * v4.1.0
 * v5.7.0
 * v7.5.0
+
+You also need a recent version of NPM installed. Tested with:
+
+* 4.1.2
 
 ### Quickstart
 
