@@ -19,3 +19,6 @@ secret-shard*
 
 # Ignore static assets for local docs editing
 docs/_build/
+
+# Ignore Visual Studio Code configuration
+.vscode/
