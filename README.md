@@ -8,6 +8,7 @@ You need a recent version of Node.js and NPM installed. Tested with:
 
 * v4.1.0
 * v5.7.0
+* v6.12.3
 * v7.5.0
 
 ### Quickstart
@@ -27,6 +28,8 @@ If you get an error from `node-gyp` during `npm install`, note that it expects `
 - The end-to-end integration suite can be run with `npm run test-e2e`. Note that this runs agains built code, so an `npm run build-app` is prudent and/or necessary.
 
 ## Building
+
+Building Sunder requires Node.js v6.0 or higher.
 
 ### Linux
 
