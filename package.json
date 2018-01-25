@@ -56,7 +56,7 @@
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
-    "electron": "^1.4.16",
+    "electron": "^1.7.11",
     "electron-builder": "^17.0.1",
     "electron-rebuild": "^1.5.7",
     "enzyme": "^2.2.0",
