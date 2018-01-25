@@ -12,25 +12,3 @@ fs.lstat(symlink, (e, stats) => {
     console.log(`WARNING: ${symlink} exists but is not a symlink.`);
   }
 });
-
-// Rebuild native app modules to match electron version
-const electron = require('electron');
-const electronPackage = require('electron/package.json');
-const rebuild = require('electron-rebuild');
-
-const pathToElectronNativeModules = path.join(__dirname, '../app/node_modules');
-
-rebuild.shouldRebuildNativeModules(electron)
-  .then((shouldBuild) => {
-    if (!shouldBuild) {
-      return console.log('Node versions match, skipping rebuild.');
-    }
-
-    console.log('Rebuilding native modules for Electron...');
-
-    return rebuild.installNodeHeaders(electronPackage.version)
-      .then(() => rebuild.rebuildNativeModules(
-        electronPackage.version, pathToElectronNativeModules))
-      .then(() => console.log('Rebuilding complete.'));
-  })
-  .catch((err) => console.error('Rebuilding error!', err));
