@@ -4,11 +4,7 @@
 
 ## Development
 
-You need a recent version of Node.js and NPM installed. Tested with:
-
-* v4.1.0
-* v5.7.0
-* v7.5.0
+You will need Node and NPM. We use Node LTS for Sunder development, most recently Node v8.9.4 and NPM v5.6.0. Prior versions of Node and NPM may also work, but we are not trying to maintain compatability with them at this time.
 
 ### Quickstart
 
