@@ -19,7 +19,7 @@ app.on('window-all-closed', () => {
 
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({ width: 1024, height: 728 });
+  mainWindow = new BrowserWindow({ width: 600, height: 760 });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
@@ -28,6 +28,6 @@ app.on('ready', () => {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
+    mainWindow.webContents.openDevTools({mode: 'detach'})
   }
 });
