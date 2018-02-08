@@ -29,7 +29,16 @@
       "target": [
         "deb"
       ]
-    }
+    },
+    "files": [
+      "dist/bundle.js",
+      "dist/style.css",
+      "dist/*.eot",
+      "dist/*.svg",
+      "dist/*.woff2",
+      "main.js",
+      "app.html"
+    ]
   },
   "bin": {
     "electron": "./node_modules/.bin/electron",
