@@ -1,6 +1,9 @@
 # Declare subcommands as "phony" targets, since they're not directories.
 .PHONY: ansible clean build clean-build help docs docs-lint
 
+# For mounting local code into build container
+PWD := $(shell pwd)
+
 ansible:
 	ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
 
@@ -14,9 +17,10 @@ clean:
 docker-build: ## Builds Docker image for creating Sunder Linux deb packages.
 	docker build . -t sunder-build
 
-build:
-	make ansible
-	vagrant up --provision
+build: docker-build ## Builds Sunder Debian packages for Linux.
+	docker run -v "$(PWD):/sunder" \
+		sunder-build \
+		/sunder/tools/build-sunder-debian-packages.sh
 
 clean-build:
 	vagrant destroy --force
