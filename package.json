@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
-  "main": "app/main.js",
+  "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
@@ -99,7 +99,8 @@
     "redux": "^3.6.0",
     "redux-form": "^5.3.6",
     "redux-promise": "^0.5.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "rusty-secrets": "0.0.13"
   },
   "nyc": {
     "include": [
