@@ -11,6 +11,9 @@ clean:
 	rm -rf node_modules/
 	rm -rf app/node_modules/
 
+docker-build: ## Builds Docker image for creating Sunder Linux deb packages.
+	docker build . -t sunder-build
+
 build:
 	make ansible
 	vagrant up --provision
