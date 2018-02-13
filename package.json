@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
-  "main": "app/main.js",
+  "main": "main.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test electron-mocha --require babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
     "test-watch": "npm test -- --watch",
     "test-e2e": "cross-env NODE_ENV=production mocha --compilers js:babel-core/register --require ./test/setup.js --require co-mocha ./test/e2e.js",
     "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
@@ -17,7 +17,7 @@
     "clean-build": "npm prune && npm run clean && npm run build-app",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron ./",
-    "postinstall": "install-app-deps && node tasks/postinstall.js && electron-rebuild",
+    "postinstall": "electron-builder install-app-deps && node tasks/postinstall.js",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "dist": "npm run build-app && build"
   },
@@ -29,11 +29,19 @@
       "target": [
         "deb"
       ]
-    }
+    },
+    "files": [
+      "dist/bundle.js",
+      "dist/style.css",
+      "dist/*.eot",
+      "dist/*.svg",
+      "dist/*.woff2",
+      "main.js",
+      "app.html"
+    ]
   },
   "bin": {
-    "electron": "./node_modules/.bin/electron",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild"
+    "electron": "./node_modules/.bin/electron"
   },
   "license": "MIT",
   "devDependencies": {
@@ -57,8 +65,8 @@
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
     "electron": "^1.7.11",
-    "electron-builder": "^17.0.1",
-    "electron-rebuild": "^1.5.7",
+    "electron-builder": "^19.30.4",
+    "electron-mocha": "^5.0.0",
     "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^7.0.0",
@@ -76,7 +84,6 @@
     "nyc": "^10.3.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
-    "rusty-secrets": "0.0.13",
     "sass-loader": "^3.2.0",
     "sinon": "^1.17.3",
     "spectron": "^3.6.4",
@@ -99,7 +106,8 @@
     "redux": "^3.6.0",
     "redux-form": "^5.3.6",
     "redux-promise": "^0.5.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "rusty-secrets": "0.0.13"
   },
   "nyc": {
     "include": [
