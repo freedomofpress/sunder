@@ -85,7 +85,6 @@
     "nyc": "^10.3.0",
     "react-addons-test-utils": "^15.0.0",
     "redux-logger": "^2.6.1",
-    "rusty-secrets": "0.0.13",
     "sass-loader": "^3.2.0",
     "sinon": "^1.17.3",
     "spectron": "^3.6.4",
