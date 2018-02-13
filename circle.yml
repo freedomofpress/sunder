@@ -2,10 +2,6 @@ machine:
   node:
     version: 8.2.0
 
-dependencies:
-  post:
-    - npm rebuild
-
 test:
   pre:
     - npm run build-app
