@@ -7,25 +7,29 @@ FROM node:$NODE_VERSION
 ARG USER_NAME
 ENV USER_NAME ${USER_NAME:-node}
 
-RUN apt-get update && apt-get upgrade -y # 2018-02-08
+RUN apt-get update && apt-get upgrade -y # 2018-02-08 && \
+    rm -rf /var/cache/apt/archives/*
 
-RUN apt-get install -y \
-    build-essential \
-    libgconf2-dev \
-    libgtk2.0-dev \
-    libnss3-dev \
+RUN apt-get install -y --no-install-recommends  \
+    graphicsmagick \
     # Required for electron-builder:
     # https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build#linux
     icnsutils \
-    graphicsmagick \
-    xz-utils
+    libgconf2-dev \
+    libgtk2.0-dev \
+    libnss3-dev \
+    xz-utils && \
+    rm -rf /var/cache/apt/archives/*
 
 # For compatibility with grsecurity-patched kernels
-RUN apt-get install -y paxctl
-RUN paxctl -Cm /usr/local/bin/node
+RUN apt-get install -y paxctl && \
+    paxctl -Cm /usr/local/bin/node
 
-RUN mkdir /sunder
-RUN mkdir -p /sunder/build/icons
-RUN chown -R "$USER_NAME" /sunder
+COPY . /sunder
+
+RUN mkdir -p /sunder/build/icons && \
+    chown -R "$USER_NAME" /sunder
+
 WORKDIR /sunder
+RUN npm install
 USER $USER_NAME

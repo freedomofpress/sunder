@@ -11,6 +11,4 @@ if [[ ! -d "${SUNDER_CODE}" ]]; then
 fi
 
 icns2png --extract --output "${SUNDER_CODE}/build/icons/" "${SUNDER_CODE}/build/icon.icns"
-npm install
-npm rebuild
 npm run dist

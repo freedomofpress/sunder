@@ -4,6 +4,9 @@
 # For mounting local code into build container
 PWD := $(shell pwd)
 
+# Use piece of package.json hash for docker tag and building
+DEP_HASH := $(shell md5sum package.json | cut -c1-15)
+
 ansible:
 	ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
 
@@ -15,10 +18,10 @@ clean:
 	rm -rf app/node_modules/
 
 docker-build: ## Builds Docker image for creating Sunder Linux deb packages.
-	docker build . -t sunder-build
+	docker build . -t sunder-build:$(DEP_HASH)
 
 build: docker-build ## Builds Sunder Debian packages for Linux.
-	docker run -v "$(PWD):/sunder" \
+	docker run \
 		sunder-build \
 		/sunder/tools/build-sunder-debian-packages.sh
 
