@@ -6,7 +6,7 @@ PWD := $(shell pwd)
 
 UID := $(shell id -u)
 
-clean:
+clean: docker-clean
 	rm -rf dist/
 	rm -rf build/icons/*.png
 	rm -rf node_modules/
@@ -24,7 +24,7 @@ build: docker-build ## Builds Sunder Debian packages for Linux.
 
 .PHONY: docker-clean
 docker-clean: ## Purges docker sunder images
-	docker rmi -f $(shell docker images --filter "label=image_name=sunder" --filter "label=org=Freedom of the Press" -q) 2> /dev/null || echo "No images to clean"
+	tools/docker-clean
 
 clean-build:
 	vagrant destroy --force
