@@ -1,5 +1,8 @@
 ARG NODE_VERSION=8.9.4
 FROM node:$NODE_VERSION
+# Using these to provide advanced pruning later
+LABEL org="Freedom of the Press"
+LABEL image_name="sunder"
 
 # Supports building as normal user. Assumes UID of 1000,
 # will need to handle USER_ID otherwise. The "node" user

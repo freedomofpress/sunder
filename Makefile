@@ -22,6 +22,10 @@ build: docker-build ## Builds Sunder Debian packages for Linux.
 		-v fpf-sunder-node:/sunder/node_modules \
 		sunder-build:latest
 
+.PHONY: docker-clean
+docker-clean: ## Purges docker sunder images
+	docker rmi -f $(shell docker images --filter "label=image_name=sunder" --filter "label=org=Freedom of the Press" -q) 2> /dev/null || echo "No images to clean"
+
 clean-build:
 	vagrant destroy --force
 	make clean
@@ -49,6 +53,7 @@ help:
 	@echo Makefile for building sunder packages.
 	@echo Subcommands:
 	@echo "\t clean: Remove previously built binaries from dist/ directory."
+	@echo "\t docker-clean: Purge sunder related docker images."
 	@echo "\t build: Creates a docker image and builds Linux packages."
 	@echo "\t clean-build: Cleans project, then builds Linux packages."
 	@echo "\t docs: Build project documentation in live reload for editing."
