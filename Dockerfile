@@ -4,8 +4,8 @@ FROM node:$NODE_VERSION
 # Supports building as normal user. Assumes UID of 1000,
 # will need to handle USER_ID otherwise. The "node" user
 # has uid 1000 by default.
-ARG USER_NAME
-ENV USER_NAME ${USER_NAME:-node}
+ARG UID
+ENV UID ${UID:-1000}
 
 RUN apt-get update && apt-get upgrade -y # 2018-02-08
 
@@ -20,12 +20,14 @@ RUN apt-get install -y \
     graphicsmagick \
     xz-utils
 
-# For compatibility with grsecurity-patched kernels
-RUN apt-get install -y paxctl
-RUN paxctl -Cm /usr/local/bin/node
+RUN if test $UID != 1000 ; then usermod -u $UID node; fi && echo "node ALL=(ALL) NOPASSWD:/bin/sunder-perm-fix" >> /etc/sudoers
 
-RUN mkdir /sunder
-RUN mkdir -p /sunder/build/icons
-RUN chown -R "$USER_NAME" /sunder
+COPY tools/sunder-perm-fix.sh /bin/sunder-perm-fix
+
+COPY tools/sunder-perm-fix.sh /bin/sunder-perm-fix
+
+RUN chmod +x /bin/sunder-perm-fix
+
 WORKDIR /sunder
-USER $USER_NAME
+USER node
+CMD /sunder/tools/build-sunder-debian-packages.sh
