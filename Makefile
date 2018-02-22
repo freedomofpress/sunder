@@ -1,5 +1,5 @@
 # Declare subcommands as "phony" targets, since they're not directories.
-.PHONY: ansible clean build clean-build help docs docs-lint
+.PHONY: clean build clean-build help docs docs-lint
 
 # For mounting local code into build container
 PWD := $(shell pwd)
@@ -26,11 +26,6 @@ build: docker-build ## Builds Sunder Debian packages for Linux.
 docker-clean: ## Purges docker sunder images
 	tools/docker-clean
 
-clean-build:
-	vagrant destroy --force
-	make clean
-	make build
-
 .PHONY: docs-clean
 docs-clean:
 # Create required static dirs
@@ -55,6 +50,5 @@ help:
 	@echo "\t clean: Remove previously built binaries from dist/ directory."
 	@echo "\t docker-clean: Purge sunder related docker images."
 	@echo "\t build: Creates a docker image and builds Linux packages."
-	@echo "\t clean-build: Cleans project, then builds Linux packages."
 	@echo "\t docs: Build project documentation in live reload for editing."
 	@echo "\t docs-lint: Check documentation for common syntax errors."
