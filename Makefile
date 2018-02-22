@@ -4,6 +4,8 @@
 # For mounting local code into build container
 PWD := $(shell pwd)
 
+UID := $(shell id -u)
+
 ansible:
 	ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
 
@@ -15,12 +17,14 @@ clean:
 	rm -rf app/node_modules/
 
 docker-build: ## Builds Docker image for creating Sunder Linux deb packages.
-	docker build . -t sunder-build
+	docker build . --build-arg=UID=$(UID) -t sunder-build
 
 build: docker-build ## Builds Sunder Debian packages for Linux.
-	docker run -v "$(PWD):/sunder" \
-		sunder-build \
-		/sunder/tools/build-sunder-debian-packages.sh
+	docker volume create fpf-sunder-node && \
+	docker run \
+		-v $(PWD):/sunder \
+		-v fpf-sunder-node:/sunder/node_modules \
+		sunder-build:latest
 
 clean-build:
 	vagrant destroy --force

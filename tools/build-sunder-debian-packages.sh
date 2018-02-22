@@ -10,7 +10,31 @@ if [[ ! -d "${SUNDER_CODE}" ]]; then
     exit 1
 fi
 
-icns2png --extract --output "${SUNDER_CODE}/build/icons/" "${SUNDER_CODE}/build/icon.icns"
-npm install
-npm rebuild
-npm run dist
+function img_extract() {
+    icns2png --extract --output "${SUNDER_CODE}/build/icons/" "${SUNDER_CODE}/build/icon.icns"
+}
+
+function perm_fix() {
+    # Fix permissions on named volume and npm install
+    sudo /bin/sunder-perm-fix
+}
+
+function npm_install() {
+    npm install
+}
+
+function build() {
+    if [ -d /proc/sys/kernel/grsecurity/ ]; then
+        # build and hacky re-run for grsec users
+        npm run dist || find /home/node/.cache/ -type f -name ruby -exec paxctl -cm '{}' \;
+        npm run dist
+    else
+        npm run dist
+    fi
+}
+
+
+img_extract
+perm_fix
+npm_install
+build
