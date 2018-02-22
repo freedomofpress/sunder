@@ -26,13 +26,11 @@ If you get an error from `node-gyp` during `npm install`, note that it expects `
 
 ### Linux
 
-Linux packages are built in a Vagrant-based virtual environment, so they can be
+Linux packages are built in a docker container, so they can be
 built on either Linux or Mac OS X. You will need to install the following
 prerequisites for the build environment:
 
-1. [Vagrant](https://www.vagrantup.com/)
-2. [Ansible](https://docs.ansible.com/ansible/intro_installation.html). We
-   recommend using an Ansible version >= 2.2.1.
+1. [Docker](https://docs.docker.com/install/)
 
 Once you have the prerequisites installed, you should be able to
 
@@ -40,7 +38,7 @@ Once you have the prerequisites installed, you should be able to
 make build
 ```
 
-to create a VM and run a full build of the Linux packages.
+Packages will be found in `dist/`.
 
 ### OS X
 

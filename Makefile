@@ -6,13 +6,9 @@ PWD := $(shell pwd)
 
 UID := $(shell id -u)
 
-ansible:
-	ansible-galaxy install -r ansible/requirements.yml -p ansible/roles
-
 clean:
 	rm -rf dist/
 	rm -rf build/icons/*.png
-	rm -rf ansible/roles/geerlingguy.nodejs
 	rm -rf node_modules/
 	rm -rf app/node_modules/
 
@@ -52,9 +48,8 @@ docs: docs-clean
 help:
 	@echo Makefile for building sunder packages.
 	@echo Subcommands:
-	@echo "\t ansible: Fetch dependency Ansible roles for NodeJS config."
 	@echo "\t clean: Remove previously built binaries from dist/ directory."
-	@echo "\t build: Creates a Vagrant VM and builds Linux packages."
+	@echo "\t build: Creates a docker image and builds Linux packages."
 	@echo "\t clean-build: Cleans project, then builds Linux packages."
 	@echo "\t docs: Build project documentation in live reload for editing."
 	@echo "\t docs-lint: Check documentation for common syntax errors."
