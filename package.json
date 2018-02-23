@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "repository": "https://github.com/freedomofpress/secretshare.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
+  "author": {
+    "name": "Freedom of the Press Foundation",
+    "email": "sunder@freedom.press"
+  },
   "main": "main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test electron-mocha --require babel-core/register --recursive --require ./test/setup.js test/**/*.spec.js",
