@@ -79,3 +79,8 @@ make docs-lint
 
 The linting process will rebuild all local assets from scratch, so it cannot
 be used at the same time as `make docs`.
+
+## License
+
+[BSD 3-Clause License](/LICENSE)
+
