@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if type docker; then \
+    docker rmi -f "$(docker images --filter "label=image_name=sunder" --filter "label=org=Freedom of the Press" -q)" 2> /dev/null || echo "No images to clean"
+    docker container prune --filter "label=image_name=sunder" --filter "label=org=Freedom of the Press" -f
+    docker volume rm -f fpf-sunder-nodel
+fi
