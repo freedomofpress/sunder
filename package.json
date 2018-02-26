@@ -2,7 +2,7 @@
   "name": "sunder",
   "productName": "Sunder",
   "version": "0.1.0",
-  "repository": "https://github.com/freedomofpress/secretshare.git",
+  "repository": "https://github.com/freedomofpress/sunder.git",
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "author": {
     "name": "Freedom of the Press Foundation",
