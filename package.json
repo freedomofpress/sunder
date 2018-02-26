@@ -6,7 +6,7 @@
   "description": "Desktop application providing a simple UI for the Shamir secret sharing scheme.",
   "author": {
     "name": "Freedom of the Press Foundation",
-    "email": "sunder@freedom.press"
+    "email": "sysadmin@freedom.press"
   },
   "main": "main.js",
   "scripts": {
