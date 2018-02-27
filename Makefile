@@ -1,3 +1,5 @@
+DEFAULT_GOAL: help
+
 # For mounting local code into build container
 PWD := $(shell pwd)
 UID := $(shell id -u)
