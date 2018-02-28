@@ -26,7 +26,8 @@ function npm_install() {
 function build() {
     if [ -d /proc/sys/kernel/grsecurity/ ]; then
         # build and hacky re-run for grsec users
-        npm run dist || find /home/node/.cache/ -type f -name ruby -exec paxctl -cm '{}' \;
+        npm run dist || true
+        find /home/node/.cache/ -type f -name ruby -exec paxctl -cm '{}' \;
         npm run dist
     else
         npm run dist
