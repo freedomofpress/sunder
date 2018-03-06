@@ -84,6 +84,7 @@
     "minimist": "^1.2.0",
     "mocha": "^3.3.0",
     "mockery": "^1.6.2",
+    "moment": "^2.19.3",
     "node-sass": "^3.4.2",
     "nyc": "^10.3.0",
     "react-addons-test-utils": "^15.0.0",
