@@ -35,7 +35,7 @@ prerequisites for the build environment:
 Once you have the prerequisites installed, you should be able to
 
 ```
-make build
+make build-deb
 ```
 
 Packages will be found in `dist/`.
@@ -45,7 +45,7 @@ Packages will be found in `dist/`.
 To package up the app for your current platform (e.g. OS X):
 
 ```
-npm run dist
+make build-dmg
 ```
 
 Note that this will run `build-app` so there's no need to run that beforehand.

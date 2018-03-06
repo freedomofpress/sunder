@@ -15,13 +15,17 @@ clean: docker-clean ## Removes all build-related artifacts
 docker-build: ## Builds Docker image for creating Sunder Linux deb packages
 	docker build . --build-arg=UID=$(UID) -t sunder-build
 
-.PHONY: build
-build: docker-build ## Builds Sunder Debian packages for Linux
+.PHONY: build-deb
+build-deb: docker-build ## Builds Sunder Debian packages for Linux
 	docker volume create fpf-sunder-node && \
 	docker run \
 		-v $(PWD):/sunder \
 		-v fpf-sunder-node:/sunder/node_modules \
 		sunder-build:latest
+
+.PHONY: build-dmg
+build-dmg: ## Builds Sunder DMG and app bundle for macOS (requires macOS)
+	npm run dist
 
 .PHONY: docker-clean
 docker-clean: ## Purges Docker images related to building Sunder deb packages
