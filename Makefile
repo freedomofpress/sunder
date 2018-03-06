@@ -23,8 +23,14 @@ build-deb: docker-build ## Builds Sunder Debian packages for Linux
 		-v fpf-sunder-node:/sunder/node_modules \
 		sunder-build:latest
 
+.PHONY: npm-install-init
+npm-install-init: ## Installs npm modules locally only if node_modules/ absent
+	if [ ! -d node_modules ] ; then \
+		npm install ; \
+	fi
+
 .PHONY: build-dmg
-build-dmg: ## Builds Sunder DMG and app bundle for macOS (requires macOS)
+build-dmg: npm-install-init ## Builds Sunder DMG and app bundle for macOS (requires macOS)
 	npm run dist
 
 .PHONY: docker-clean
@@ -50,15 +56,15 @@ docs: docs-clean ## Runs livereload environment for local documentation editing
 	sphinx-autobuild docs/ docs/_build/html
 
 .PHONY: build-app
-build-app: ## Packages Electron app locally via webpack for development and testing
+build-app: npm-install-init ## Packages Electron app locally via webpack for development and testing
 	npm run build-app
 
 .PHONY: test-unit
-test-unit: ## Runs unit tests in local dev env
+test-unit: npm-install-init ## Runs unit tests in local dev env
 	npm run test
 
 .PHONY: test-e2e
-test-e2e: build-app ## Runs end-to-end integration tests local dev env
+test-e2e: npm-install-init build-app ## Runs end-to-end integration tests local dev env
 	npm run test-e2e
 
 .PHONY: test
