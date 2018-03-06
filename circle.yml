@@ -3,8 +3,5 @@ machine:
     version: 8.2.0
 
 test:
-  pre:
-    - npm run build-app
   override:
-    - npm run test
-    - npm run test-e2e
+    - make test

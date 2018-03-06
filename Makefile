@@ -49,6 +49,21 @@ docs: docs-clean ## Runs livereload environment for local documentation editing
 # Spins up livereload environment for editing; blocks.
 	sphinx-autobuild docs/ docs/_build/html
 
+.PHONY: build-app
+build-app: ## Packages Electron app locally via webpack for development and testing
+	npm run build-app
+
+.PHONY: test-unit
+test-unit: ## Runs unit tests in local dev env
+	npm run test
+
+.PHONY: test-e2e
+test-e2e: build-app ## Runs end-to-end integration tests local dev env
+	npm run test-e2e
+
+.PHONY: test
+test: test-unit test-e2e ## Runs all unit and integration tests
+
 # Explanation of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
 # 2. Check for second field matching, skip otherwise.

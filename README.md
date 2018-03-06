@@ -18,9 +18,11 @@ If you get an error from `node-gyp` during `npm install`, note that it expects `
 
 ### Testing
 
-- To run the unit tests: `npm run test`
+- To run the unit tests: `make test-unit`
 - For development you might enjoy the continuously updating tests: `npm run test-watch`
-- The end-to-end integration suite can be run with `npm run test-e2e`. Note that this runs agains built code, so an `npm run build-app` is prudent and/or necessary.
+- The end-to-end integration suite can be run with `make test-e2e`.
+  Note that this runs agains built code, so `npm run build-app` will run beforehand.
+- To run all tests, use `make test`. Again, `npm run build-app` will run before the integration tests.
 
 ## Building
 
