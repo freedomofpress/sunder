@@ -15,13 +15,23 @@ clean: docker-clean ## Removes all build-related artifacts
 docker-build: ## Builds Docker image for creating Sunder Linux deb packages
 	docker build . --build-arg=UID=$(UID) -t sunder-build
 
-.PHONY: build
-build: docker-build ## Builds Sunder Debian packages for Linux
+.PHONY: build-deb
+build-deb: docker-build ## Builds Sunder Debian packages for Linux
 	docker volume create fpf-sunder-node && \
 	docker run \
 		-v $(PWD):/sunder \
 		-v fpf-sunder-node:/sunder/node_modules \
 		sunder-build:latest
+
+.PHONY: npm-install-init
+npm-install-init: ## Installs npm modules locally only if node_modules/ absent
+	if [ ! -d node_modules ] ; then \
+		npm install ; \
+	fi
+
+.PHONY: build-dmg
+build-dmg: npm-install-init ## Builds Sunder DMG and app bundle for macOS (requires macOS)
+	npm run dist
 
 .PHONY: docker-clean
 docker-clean: ## Purges Docker images related to building Sunder deb packages
@@ -44,6 +54,21 @@ docs-lint: docs-clean ## Checks for formatting errors in local documentation
 docs: docs-clean ## Runs livereload environment for local documentation editing
 # Spins up livereload environment for editing; blocks.
 	sphinx-autobuild docs/ docs/_build/html
+
+.PHONY: build-app
+build-app: npm-install-init ## Packages Electron app locally via webpack for development and testing
+	npm run build-app
+
+.PHONY: test-unit
+test-unit: npm-install-init ## Runs unit tests in local dev env
+	npm run test
+
+.PHONY: test-e2e
+test-e2e: npm-install-init build-app ## Runs end-to-end integration tests local dev env
+	npm run test-e2e
+
+.PHONY: test
+test: test-unit test-e2e ## Runs all unit and integration tests
 
 # Explanation of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
