@@ -2,6 +2,8 @@
 set -e
 set -u
 
+# Set up Rust PATH
+source /home/node/.cargo/env
 
 SUNDER_CODE=/sunder
 

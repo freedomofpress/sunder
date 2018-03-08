@@ -38,4 +38,8 @@ RUN chmod +x /bin/sunder-perm-fix
 
 WORKDIR /sunder
 USER node
+
+# Install Rust under `node` user home directory
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+
 CMD /sunder/tools/build-sunder-debian-packages.sh
