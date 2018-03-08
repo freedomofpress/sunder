@@ -30,4 +30,7 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools({mode: 'detach'})
   }
+  mainWindow.webContents.on('will-navigate', function(e) {
+    e.preventDefault();
+  });
 });
