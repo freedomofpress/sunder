@@ -6,6 +6,15 @@
 
 You will need Node and NPM. We use Node LTS for Sunder development, most recently Node v8.9.4 and NPM v5.6.0. Prior versions of Node and NPM may also work, but we are not trying to maintain compatability with them at this time.
 
+To perform secret splitting and recovery, Sunder depends on [`rusty-secrets`](http://github.com/SpinResearch/rustysecrets-node), a native module written in [Rust](http://rust-lang.org).
+This package requires a stable version of the Rust toolchain, which can be installed on any platform with
+
+```bash
+$ curl https://sh.rustup.rs -sSf | sh
+```
+
+Please see the [Rust documentation](https://www.rust-lang.org/en-US/install.html) for more information.
+
 ### Quickstart
 
 1. Clone the git repository
