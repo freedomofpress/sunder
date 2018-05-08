@@ -2,6 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/freedomofpress/sunder.svg?style=svg&circle-token=b2396d4ad46cc09a0b6f515855e56032fe6ce4bf)](https://circleci.com/gh/freedomofpress/sunder)
 
+![Sunder user interface](https://sunder.readthedocs.io/en/latest/_images/create_secret_shards_filled.png)
+
+Sunder is an implementation of [Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) based on the [RustySecrets](https://github.com/SpinResearch/RustySecrets) library. It is alpha-quality software and has not been audited. Please see [the documentation](https://sunder.readthedocs.io/en/latest/) for details.
+
 ## Development
 
 You will need Node and NPM. We use Node LTS for Sunder development, most recently Node v8.9.4 and NPM v5.6.0. Prior versions of Node and NPM may also work, but we are not trying to maintain compatability with them at this time.
@@ -85,4 +89,3 @@ be used at the same time as `make docs`.
 ## License
 
 [BSD 3-Clause License](/LICENSE)
-
