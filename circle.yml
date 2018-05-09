@@ -8,6 +8,10 @@ dependencies:
 
   override:
     - source ~/.cargo/env
+
+    # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
+    - rm -f ~/.gitconfig
+
     - npm install
     - pip install
 
