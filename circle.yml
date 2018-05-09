@@ -2,6 +2,15 @@ machine:
   node:
     version: 8.2.0
 
+dependencies:
+  pre:
+    - curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+  override:
+    - source ~/.cargo/env
+    - npm install
+    - pip install
+
 test:
   override:
     - make test
