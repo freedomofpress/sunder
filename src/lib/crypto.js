@@ -1,6 +1,10 @@
 import { remote } from 'electron';
 const cryptoFFI = remote.require('rusty-secrets');
 
+// IMPORTANT: Do not change this value, as this would break backward
+//            compatibility with previously emitted shares.
+const SIGN_SHARES = true;
+
 /**
  * Parses a share to recover the parameters that generated it.
  * @param {string} share The share to parse.
@@ -28,13 +32,15 @@ export function parseShare(share) {
 export function splitFFI(secret, options) {
   return new Promise((resolve, reject) => {
     const mime = '';
-    cryptoFFI.generate_shares(
+    cryptoFFI.wrapped.splitSecret(
       options.quorum,
       options.shares,
       // This needs to be a buffer
       secret,
       // TODO Implement mime types
       mime,
+      // Sign shares
+      SIGN_SHARES,
       (err, shares) => {
         if (err) {
           return reject(err);
@@ -52,12 +58,15 @@ export function splitFFI(secret, options) {
  */
 export function recoverFFI(shares) {
   return new Promise((resolve, reject) => {
-    cryptoFFI.recover_secret(shares, (err, secret, mime) => {
+    cryptoFFI.wrapped.recoverSecret(
+      shares,
+      SIGN_SHARES, // Verify signatures if shares have been signed
+      (err, { secret, mimeType }) => {
       if (err) {
         return reject(err);
       }
 
-      resolve(Buffer.from(secret, 'base64'));
+      resolve(secret);
     });
   });
 }
