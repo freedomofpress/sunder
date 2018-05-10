@@ -7,9 +7,16 @@ dependencies:
     - curl https://sh.rustup.rs -sSf | sh -s -- -y
 
   override:
-    - source ~/.cargo/env
+    # Hack to force sourcing of rust env (~/.profile doesn't cut it)
+    - cat ~/.cargo/env >> ~/.bashrc
+
+    # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
+    - rm -f ~/.gitconfig
+
+    # Install docs requirements. Docs build not currently tested in CI.
+    - pip install -r requirements.txt
+
     - npm install
-    - pip install
 
 test:
   override:
