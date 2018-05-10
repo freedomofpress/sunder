@@ -13,8 +13,10 @@ dependencies:
     # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
     - rm -f ~/.gitconfig
 
+    # Install docs requirements. Docs build not currently tested in CI.
+    - pip install -r requirements.txt
+
     - npm install
-    - pip install
 
 test:
   override:
