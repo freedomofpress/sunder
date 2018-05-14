@@ -1,6 +1,6 @@
 # Sunder
 
-[![CircleCI](https://circleci.com/gh/freedomofpress/sunder.svg?style=svg&circle-token=b2396d4ad46cc09a0b6f515855e56032fe6ce4bf)](https://circleci.com/gh/freedomofpress/sunder)
+[![CircleCI](https://circleci.com/gh/freedomofpress/sunder.svg?style=svg&circle-token=b2396d4ad46cc09a0b6f515855e56032fe6ce4bf)](https://circleci.com/gh/freedomofpress/sunder) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/freedomofpress/sunder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ![Sunder user interface](https://sunder.readthedocs.io/en/latest/_images/create_secret_shards_filled.png)
 
@@ -13,6 +13,8 @@ You will need Node and NPM. We use Node LTS for Sunder development, most recentl
 To perform secret splitting and recovery, Sunder depends on [`rusty-secrets`](http://github.com/SpinResearch/rustysecrets-node), a native module written in [Rust](http://rust-lang.org).
 
 This package requires a stable version of the Rust toolchain. Please see the [Rust documentation](https://www.rust-lang.org/en-US/install.html) for installation instructions.
+
+If you have questions or comments, you can [join us in our Gitter chat room](https://gitter.im/freedomofpress/sunder).
 
 ### Quickstart
 
