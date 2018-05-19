@@ -53,7 +53,7 @@ export default class ShareInput extends Component {
     return (
       <Panel className="share-input"
         title={`Enter the ${whichShare} secret share`}>
-        <FileInput onChange={onSubmit} />
+        <FileInput onChange={onSubmit} allowMultiple />
         <PasteButton disabled={!this.state.shareInClipboard}
           onClick={onSubmit} />
       </Panel>

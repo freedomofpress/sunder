@@ -10,7 +10,8 @@ export default class FileInput extends Component {
   static propTypes = {
     className: PropTypes.string,
     onChange: PropTypes.func,
-    label: PropTypes.string
+    label: PropTypes.string,
+    allowMultiple: PropTypes.bool
   }
 
   constructor(props) {
@@ -71,7 +72,8 @@ export default class FileInput extends Component {
         <input name={this.fileInputId}
           id={this.fileInputId}
           type="file"
-          onChange={this.onFileChange.bind(this)} />
+          onChange={this.onFileChange.bind(this)}
+          multiple={this.props.allowMultiple ? 'multiple' : ''} />
         <label htmlFor={this.fileInputId}>
           <Button className="file-button" type="default" icon="hdd-o">
             {this.props.label || 'Select File'}
