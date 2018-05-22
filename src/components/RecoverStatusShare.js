@@ -9,6 +9,7 @@ export class RecoverStatusShare extends Component {
   static propTypes = {
     share: PropTypes.shape({
       data: PropTypes.string.isRequired,
+      filename: PropTypes.string,
       error: PropTypes.string,
     }),
     current: PropTypes.bool,
@@ -33,10 +34,10 @@ export class RecoverStatusShare extends Component {
       statusMessage = 'Share still needed';
     } else if (share.error) {
       className = 'error';
-      statusMessage = `Share #${index + 1}: ${share.error}`;
+      statusMessage = `Share #${index + 1} [${share.filename}]: ${share.error}`;
     } else {
       className = 'success';
-      statusMessage = `Share #${index + 1} succesfully processed`;
+      statusMessage = `Share #${index + 1} [${share.filename}] succesfully processed`;
     }
 
     return (

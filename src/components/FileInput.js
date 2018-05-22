@@ -65,10 +65,10 @@ export default class FileInput extends Component {
 
         // The order of these statements is important because of `componentWillReceiveProps`
         if (this.props.field) {
-          this.props.field.onChange(contents);
+          this.props.field.onChange(contents, file.name);
         }
         if (this.props.onChange) {
-          this.props.onChange(contents);
+          this.props.onChange(contents, file.name);
         }
         if (!this.props.noStatus) {
           this.setState({ filename: file.name });
