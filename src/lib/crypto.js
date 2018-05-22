@@ -61,12 +61,12 @@ export function recoverFFI(shares) {
     cryptoFFI.wrapped.recoverSecret(
       shares,
       SIGN_SHARES, // Verify signatures if shares have been signed
-      (err, { secret, mimeType }) => {
+      (err, result) => {
       if (err) {
         return reject(err);
       }
 
-      resolve(secret);
+      resolve(result.secret);
     });
   });
 }
