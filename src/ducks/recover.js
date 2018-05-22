@@ -38,16 +38,13 @@ export default function reducer(state = initialState, action) {
       const shareProperties =
         Object.assign({}, action.shareProperties, state.shareProperties);
       return Object.assign({}, state, {
-        shares: [...state.shares, { data: action.share, filename: action.filename }],
+        shares: [...state.shares, { ...action.share }],
         shareProperties
       });
     }
     case BAD_SHARE:
       return Object.assign({}, state, {
-        shares: [
-          ...state.shares,
-          { data: action.share, filename: action.filename, error: action.error }
-        ]
+        shares: [...state.shares, { ...action.share, error: action.error } ]
       });
     case REMOVE_SHARE:
       // If this is the only share, completely reset.
@@ -121,34 +118,33 @@ function errorReducer(state, action) {
 }
 
 
-export function addShare(share, filename) {
+export function addShare(share) {
   return (dispatch, getState) => {
     const state = getState();
-    const result = validateShare(share, state.recover.shares);
+    const result = validateShare(share.data, state.recover.shares);
 
     if (result.error === 'DUPLICATE') {
-      return dispatch(badShare(share, filename, 'Duplicate share'));
+      return dispatch(badShare(share, 'Duplicate share'));
     }
 
     if (result.error === 'MALFORMED') {
-      return dispatch(badShare(share, filename, 'Malformed share'));
+      return dispatch(badShare(share, 'Malformed share'));
     }
 
     if (result.error) {
-      return dispatch(badShare(share, filename, 'Unknown error'));
+      return dispatch(badShare(share, 'Unknown error'));
     }
 
     dispatch({
       type: ADD_SHARE,
       share,
-      filename,
       shareProperties: { quorum: result.parsedShare.quorum }
     });
   };
 }
 
-export function badShare(share, filename, error) {
-  return { type: BAD_SHARE, share, filename, error };
+export function badShare(share, error) {
+  return { type: BAD_SHARE, share, error };
 }
 
 
