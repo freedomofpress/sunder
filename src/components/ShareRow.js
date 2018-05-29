@@ -1,59 +1,55 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CopyButton from './CopyButton';
-import SaveFileButton from './SaveFileButton';
+import Button from './Button';
 import './ShareRow.scss';
 
 export default class ShareRow extends Component {
   static propTypes = {
-    share: PropTypes.string,
-    index: PropTypes.number
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  handleCopied() {
-    this.setState({ copied: true });
-  }
-
-  handleSaved(filename) {
-    this.setState({ saved: filename });
+    shareNumber: PropTypes.number.isRequired,
+    isCopied: PropTypes.bool,
+    saveStatus: PropTypes.shape({
+      text: PropTypes.string,
+      toolTip: PropTypes.string,
+      isError: PropTypes.bool,
+    }),
+    onClickCopy: PropTypes.func.isRequired,
+    onClickSave: PropTypes.func.isRequired,
   }
 
   render() {
-    const { share, index } = this.props;
-    let savedIndicator = '';
+    const { shareNumber, saveStatus } = this.props;
+    let statusText = '';
 
-    if (this.state.saved) {
-      savedIndicator = (
-        <span className="tooltipped bottom-tooltip right-tooltip"
-          data-tooltip={this.state.saved}>
-          saved
+    if (saveStatus) {
+      statusText = (
+        <span className={`share-status ${(saveStatus.isError ? 'error' : '')}`}>
+          <span className="tooltipped bottom-tooltip right-tooltip"
+            data-tooltip={saveStatus.toolTip}>
+            {saveStatus.text}
+          </span>
         </span>
       );
     }
 
     return (
-      <div className="share-row" key={share} id={`share-${index}`}>
+      <div className="share-row" id={`share-${shareNumber}`}>
         <div className="share-cell share-value">
-          {`Share #${index}`}
-          <span className="share-status">
-            {this.state.copied ? 'copied' : ''}
-            {this.state.copied && this.state.saved ? ', ' : ''}
-            {savedIndicator}
-          </span>
+          {`Share #${shareNumber}`}
+          {statusText}
         </div>
         <div className="share-cell share-actions">
-          <CopyButton type="small"
-            targetText={share}
-            onCopied={this.handleCopied.bind(this)} />
-          <SaveFileButton contents={share}
+          <Button className="copy"
             type="small"
-            onSaved={this.handleSaved.bind(this)}
-            defaultPath={`secret-shard-${index}.txt`} />
+            icon="clipboard"
+            onClick={this.props.onClickCopy}>
+            {this.props.isCopied ? 'Copied' : 'Copy'}
+          </Button>
+          <Button className="save"
+            type="small"
+            icon="hdd-o"
+            onClick={this.props.onClickSave}>
+            {saveStatus && !saveStatus.isError ? 'Saved' : 'Save'}
+          </Button>
         </div>
       </div>
     );
