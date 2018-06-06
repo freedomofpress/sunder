@@ -33,7 +33,7 @@ export default class RecoverStatus extends Component {
     if (quorum && numGoodShares >= quorum) {
       let messageText = '';
       if(numBadShares) {
-        messageText = <span><strong>{numGoodShares} </strong>shares entered! Remove malformed shares to continue</span>
+        messageText = <span><strong>{numGoodShares} </strong>shares entered! Remove malformed shares to continue.</span>
       } else {
         messageText =  <span><strong>{numGoodShares} </strong>shares entered! Click the giant button.</span>
       }
