@@ -4,7 +4,7 @@ import Button from './Button';
 import ShareInput from './ShareInput';
 import RecoverStatus from './RecoverStatus';
 import Icon from './Icon';
-import { countGoodShares, sharesMismatched } from 'src/lib/utilities';
+import { countGoodShares, sharesMismatched, countBadShares } from 'src/lib/utilities';
 import './Recover.scss';
 
 export default class Recover extends Component {
@@ -22,6 +22,7 @@ export default class Recover extends Component {
   render() {
     const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable } = this.props;
     const numGoodShares = countGoodShares(shares);
+    const numBadShares = countBadShares(shares);
     let instructionalContent;
 
     if (shares.length > 0) {
@@ -35,7 +36,7 @@ export default class Recover extends Component {
     const hasShares = shares.length > 0;
     const mismatchExists = sharesMismatched(shares);
     const shouldDisplayStatus = !unrecoverable && hasShares &&
-      (!quorum || numGoodShares < quorum || mismatchExists);
+      (!quorum || numGoodShares < quorum || mismatchExists || numBadShares);
 
     let action;
     if (error && unrecoverable) {
@@ -51,7 +52,7 @@ export default class Recover extends Component {
           </Button>
         </div>
       );
-    } else if (!mismatchExists && numGoodShares >= quorum) {
+    } else if (!mismatchExists && numGoodShares >= quorum && !numBadShares) {
       action = (
         <div className="recover-action align-center">
           <h1>All shares entered!</h1>
@@ -76,11 +77,11 @@ export default class Recover extends Component {
         </div>
       );
     }
-
+    
     return (
       <div className="container flex-column recover">
         {action}
-        {shouldDisplayStatus && <RecoverStatus quorum={quorum} shares={shares} />}
+        {shouldDisplayStatus ? <RecoverStatus quorum={quorum} shares={shares} /> : null}
       </div>
     );
   }

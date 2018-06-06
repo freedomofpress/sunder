@@ -5,6 +5,10 @@ export function countGoodShares(shares) {
   return shares.filter((s) => !s.error).length;
 }
 
+export function countBadShares(shares) {
+  return shares.filter((s) => s.error).length;
+}
+
 export function sharesMismatched(shares) {
   if (!shares || shares.length === 0) {
     return false;

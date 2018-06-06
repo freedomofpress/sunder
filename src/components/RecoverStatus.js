@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RecoverStatusShare from './RecoverStatusShare';
-import { countGoodShares } from 'src/lib/utilities';
+import { countGoodShares, countBadShares } from 'src/lib/utilities';
 import './RecoverStatus.scss';
 
 
@@ -16,7 +16,7 @@ export default class RecoverStatus extends Component {
     const { shares } = this.props;
     let quorum = this.props.quorum;
     quorum = quorum || 0;
-    const numBadShares = shares.filter((d) => d.error).length;
+    const numBadShares = countBadShares(shares);
     const numGoodShares = countGoodShares(shares);
     const numToDisplay = Math.max(0, quorum + numBadShares, shares.length);
 
@@ -31,9 +31,16 @@ export default class RecoverStatus extends Component {
 
     let statusMessage = '';
     if (quorum && numGoodShares >= quorum) {
+      let messageText = '';
+      if(numBadShares) {
+        messageText = <span><strong>{numGoodShares} </strong>shares entered! Remove malformed shares to continue</span>
+      } else {
+        messageText =  <span><strong>{numGoodShares} </strong>shares entered! Click the giant button.</span>
+      }
+
       statusMessage = (
         <h3 className="recover-status-message">
-          <strong>{numGoodShares} </strong>shares entered! Click the giant button.
+          {messageText}
         </h3>
       );
     } else if (quorum) {
