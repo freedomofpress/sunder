@@ -68,7 +68,7 @@ test-e2e: npm-install-init build-app ## Runs end-to-end integration tests local 
 	npm run test-e2e
 
 .PHONY: test
-test: test-unit test-e2e ## Runs all unit and integration tests
+test: test-unit test-e2e docs-lint ## Runs all unit and integration tests
 
 # Explanation of the below shell command should it ever break.
 # 1. Set the field separator to ": ##" to parse lines for make targets.
