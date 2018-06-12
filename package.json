@@ -84,7 +84,7 @@
     "jsdom": "^8.4.0",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
-    "mocha": "^3.3.0",
+    "mocha": "^5.2.0",
     "mockery": "^1.6.2",
     "moment": "^2.19.3",
     "neon-cli": "^0.1.22",
