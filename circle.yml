@@ -21,3 +21,4 @@ dependencies:
 test:
   override:
     - make test
+    - make docs-lint
