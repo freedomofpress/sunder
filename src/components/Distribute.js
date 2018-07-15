@@ -43,12 +43,12 @@ export default class Distribute extends Component {
     return (
       <div className="container distribute-container flex-column">
         <Panel title="Secret Shares">
-          <SaveAllButton type="small"
-            contents={shares}
-            onSavedAll={this.onSavedAll.bind(this)} />
           <div className="shares-table">
             {shareRows}
           </div>
+          <SaveAllButton
+            contents={shares}
+            onSavedAll={this.onSavedAll.bind(this)} />
         </Panel>
         <Info>
           {`Remember: you need ${quorum} out of ${shares.length} shares to recover the secret.`}
