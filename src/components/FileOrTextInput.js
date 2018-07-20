@@ -31,7 +31,13 @@ export default class FileOrTextInput extends Component {
     this.setState({ filename: undefined, error: undefined });
   }
 
-  onFileChange(file) {
+  onFileChange(files) {
+    const file = files[0];
+
+    if (file.error) {
+      return this.onError(file);
+    }
+
     this.setState({ filename: file.filename, error: undefined });
     if (this.props.field) {
       this.props.field.onChange(file.data, file.filename);
@@ -91,7 +97,6 @@ export default class FileOrTextInput extends Component {
             <FileInput
               label={this.state.filename ? 'Change file' : null}
               onChange={this.onFileChange.bind(this)}
-              onError={this.onFileError.bind(this)}
             />
             {this.state.filename && <div className="filename">{this.state.filename}</div>}
             {this.state.error && <div className="file-error">{this.state.error}</div>}

@@ -19,46 +19,49 @@ export default class FileInput extends Component {
     this.fileInputId = `file-input-${fileCounter++}`;
   }
 
-  onError(event) {
-    if (this.props.onError) {
-      this.props.onError(event);
-    }
+  onFileChange(event) {
+    const fileList = Array.from(event.target.files);
+    Promise.all(fileList.map(this.processFile)).then((files) => {
+      if (this.props.onChange) {
+        this.props.onChange(files);
+      }
+    });
   }
 
-  onFileChange(event) {
-    const file = event.target.files[0];
-    if (!file) {
-      return;
-    }
+  processFile(file) {
+    // returns a promise that _always_ resolves to
+    // { filename, data, error }
+    const filename = file.name;
+    return new Promise((resolve) => {
+      fs.stat(file.path, (err, stats) => {
+        if (stats.isDirectory()) {
+          return resolve({
+            error: 'Please choose a file. If you want to encrypt a directory, gzip it first.'
+          });
+        }
 
-    fs.stat(file.path, (err, stats) => {
-      if (stats.isDirectory()) {
-        return this.onError({
-          error: 'Please choose a file. If you want to encrypt a directory, gzip it first.'
+        if (err) {
+          return resolve({ error: 'Something went wrong.' });
+        }
+
+        if (stats.size > MAX_FILE_SIZE_BYTES) {
+          return resolve({
+            error: `File too large. Files up to ${MAX_FILE_SIZE_BYTES / 1000000}mb accepted.`
+          });
+        }
+
+        fs.readFile(file.path, (error, contents) => {
+          if (error) {
+            return resolve({ error: 'Something went wrong.' });
+          }
+
+          // TODO Look up the mime type here, pipe through reducer
+
+          resolve({data: contents});
         });
-      }
-
-      if (err) {
-        return this.onError({ error: 'Something went wrong. ' });
-      }
-
-      if (stats.size > MAX_FILE_SIZE_BYTES) {
-        return this.onError({
-          error: `File too large. Files up to ${MAX_FILE_SIZE_BYTES / 1000000}mb accepted.`
-        }):
-      }
-
-      fs.readFile(file.path, (error, contents) => {
-        if (error) {
-          return this.onError({ error: 'Something went wrong.' });
-        }
-
-        // TODO Look up the mime type here, pipe through reducer
-        if (this.props.onChange) {
-          this.onChange({ data: contents, filename: file.name });
-        }
-
       });
+    }).then(function(result) {
+      return { filename, data: '', error: null, ...result };
     });
   }
 
