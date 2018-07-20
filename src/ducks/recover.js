@@ -10,6 +10,7 @@ export const RECOVER = 'RECOVER';
 export const RECOVER_SUCCESS = 'RECOVER_SUCCESS';
 export const RECOVER_ERROR = 'RECOVER_ERROR';
 export const ADD_SHARE = 'ADD_SHARE';
+export const ADD_SHARES = 'ADD_SHARES';
 export const BAD_SHARE = 'BAD_SHARE';
 export const REMOVE_SHARE = 'REMOVE_SHARE';
 export const RESET_RECOVERY = 'RESET_RECOVERY';
@@ -39,6 +40,15 @@ export default function reducer(state = initialState, action) {
         Object.assign({}, action.shareProperties, state.shareProperties);
       return Object.assign({}, state, {
         shares: [...state.shares, { ...action.share }],
+        shareProperties
+      });
+    }
+    case ADD_SHARES: {
+      // If share properties differ, prefer the ones entered first.
+      const shareProperties =
+        Object.assign({}, action.shareProperties, state.shareProperties);
+      return Object.assign({}, state, {
+        shares: [...state.shares, ...action.shares ],
         shareProperties
       });
     }
@@ -118,35 +128,35 @@ function errorReducer(state, action) {
 }
 
 
-export function addShare(share) {
+export function addShares(fileList) {
   return (dispatch, getState) => {
     const state = getState();
-    const result = validateShare(share.data, state.recover.shares);
+    let newShares = [];
+    let quorum = undefined;
+    fileList.forEach(function(share) {
+      const result = validateShare(share.data, [...state.recover.shares, ...newShares]);
+      if (result.error === 'DUPLICATE') {
+        newShares.push({...share, error: 'Duplicate share'});
+      } else if (result.error === 'MALFORMED') {
+        newShares.push({...share, error: 'Malformed share'});
+      } else if (result.error) {
+        newShares.push({...share, error: 'Unknown error' + result.error});
+      } else {
+        newShares.push(share);
+      }
 
-    if (result.error === 'DUPLICATE') {
-      return dispatch(badShare(share, 'Duplicate share'));
-    }
-
-    if (result.error === 'MALFORMED') {
-      return dispatch(badShare(share, 'Malformed share'));
-    }
-
-    if (result.error) {
-      return dispatch(badShare(share, 'Unknown error'));
-    }
+      if (!quorum && result.parsedShare && result.parsedShare.quorum > 0) {
+        quorum = result.parsedShare.quorum;
+      }
+    });
 
     dispatch({
-      type: ADD_SHARE,
-      share,
-      shareProperties: { quorum: result.parsedShare.quorum }
+      type: ADD_SHARES,
+      shares: newShares,
+      shareProperties: { quorum }
     });
   };
 }
-
-export function badShare(share, error) {
-  return { type: BAD_SHARE, share, error };
-}
-
 
 export function removeShare(index) {
   return { type: REMOVE_SHARE, index };

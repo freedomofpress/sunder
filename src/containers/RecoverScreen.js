@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { recover, reset, addShare } from '../ducks/recover';
+import { recover, reset, addShares } from '../ducks/recover';
 import Recover from '../components/Recover';
 import BackButton from '../components/BackButton';
 import WorkingIndicator from 'src/components/WorkingIndicator';
@@ -56,14 +56,15 @@ export class RecoverScreen extends Component {
     return Promise.all([this.props.dispatch(recover()), delayPromise]);
   }
 
-  handleShareAdded(results) {
-    const result = results[0];
-    if (result.error) {
-      return;
-    }
-    const { data, filename } = result;
-    const share = Buffer.isBuffer(data) ? data.toString('utf8') : data;
-    this.props.dispatch(addShare({ data: share, filename}));
+  handleSharesAdded(shares) {
+    shares = shares.map((share) => {
+      const data = share.data;
+      return {
+        ...share,
+        data: Buffer.isBuffer(data) ? data.toString('utf8') : data
+      };
+    });
+    this.props.dispatch(addShares(shares));
   }
 
   handleReset() {
@@ -82,7 +83,7 @@ export class RecoverScreen extends Component {
             inProgress={inProgress}
             error={error}
             unrecoverable={unrecoverable}
-            onShareAdded={this.handleShareAdded.bind(this)}
+            onSharesAdded={this.handleSharesAdded.bind(this)}
             onReset={this.handleReset.bind(this)}
             onSubmit={this.handleRecover.bind(this)} />
           {inProgress || this.state.fakeDelay && <WorkingIndicator />}
