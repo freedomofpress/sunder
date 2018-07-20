@@ -56,7 +56,8 @@ export class RecoverScreen extends Component {
     return Promise.all([this.props.dispatch(recover()), delayPromise]);
   }
 
-  handleShareAdded(data, filename) {
+  handleShareAdded(result) {
+    const { data, filename } = result;
     const share = Buffer.isBuffer(data) ? data.toString('utf8') : data;
     this.props.dispatch(addShare({ data: share, filename}));
   }

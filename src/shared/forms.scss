@@ -25,7 +25,8 @@ input[type=file] {
 
 .file-input-container {
   display: inline-block;
-
+}
+.file-or-text-input-container {
   .filename {
     color: lighten($accentColor, 10%);
     margin-bottom: 10px;
