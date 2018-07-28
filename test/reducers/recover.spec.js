@@ -94,12 +94,12 @@ describe('recover reducer', () => {
       quorum: 3,
       version: 'v0.1'
     };
-    const share = 'xyz';
-    const action = { type: ADD_SHARE, share: 'xyz', shareProperties };
+    const share = {data: 'xyz'};
+    const action = { type: ADD_SHARE, share: share, shareProperties };
     const state = initialState;
 
     it('should add the share', () => {
-      expect(reducer(state, action).shares).to.be.eql([{ data: share }]);
+      expect(reducer(state, action).shares).to.be.eql([ share ]);
     });
 
     it('should store the shareProperties', () => {
@@ -108,7 +108,7 @@ describe('recover reducer', () => {
 
     it('should use earlier shareProperties when conflicting', () => {
       const secondState = Object.assign({}, initialState, { shareProperties });
-      const secondShare = 'abc';
+      const secondShare = {data: 'abc'};
       const secondAction = {
         type: ADD_SHARE,
         share: secondShare,
@@ -122,10 +122,10 @@ describe('recover reducer', () => {
 
   describe('handling of BAD_SHARE', () => {
     it('should store the share with an error', () => {
-      const share = 'xyz';
+      const share = {data: 'xyz'};
       const error = 'Something about this seems fishy.';
       const action = { type: BAD_SHARE, share, error };
-      expect(reducer(undefined, action).shares).to.be.eql([{ data: share, error }]);
+      expect(reducer(undefined, action).shares).to.be.eql([{ data: share.data, error }]);
     });
   });
 
