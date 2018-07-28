@@ -46,6 +46,12 @@ export default class ShareInput extends Component {
     this.setState({ shareInClipboard: !result.error });
   }
 
+  onPasteButtonClick(data) {
+    if (this.props.onSubmit) {
+      this.props.onSubmit([{data: data, filename: 'Copied from clipboard'}]);
+    }
+  }
+
   render() {
     const { numEnteredShares, onSubmit } = this.props;
     const whichShare = numEnteredShares === 0 ? 'first' : 'next';
@@ -55,7 +61,7 @@ export default class ShareInput extends Component {
         title={`Enter the ${whichShare} secret share`}>
         <FileInput onChange={onSubmit} allowMultiple />
         <PasteButton disabled={!this.state.shareInClipboard}
-          onClick={onSubmit} />
+          onClick={this.onPasteButtonClick.bind(this)} />
       </Panel>
     );
   }
