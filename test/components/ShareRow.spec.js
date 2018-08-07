@@ -7,7 +7,7 @@ import SaveFileButton from 'src/components/SaveFileButton';
 
 const props = {
   share: 'xyz',
-  index: 2
+  shareNr: 2
 };
 
 describe('<ShareRow />', () => {
@@ -20,7 +20,12 @@ describe('<ShareRow />', () => {
     const row = mount(<ShareRow {...props} />);
     // This is a hack to avoid mocking out the whole remote dialog/filesystem
     // interaction.
-    row.find(SaveFileButton).prop('onSaved')('testfilename.txt');
+    row.setProps({
+      saved: {
+        success: true,
+        message: 'testfilename.txt'
+      }
+    });
     expect(row.find('.share-status').text()).to.contain('saved');
   });
 
