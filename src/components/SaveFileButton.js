@@ -26,7 +26,7 @@ export default class SaveFileButton extends Component {
         onClick={this.handleClick.bind(this)}
         icon="hdd-o"
         {...this.props}>
-        {this.props.isSaved ? "Saved" : "Save"}
+        {this.props.isSaved ? "Saved" : (this.props.buttonText || "Save") }
       </Button>
     );
   }
