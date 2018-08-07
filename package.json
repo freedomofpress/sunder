@@ -68,7 +68,7 @@
     "css-loader": "^0.23.1",
     "del": "^2.0.1",
     "dirty-chai": "^1.2.2",
-    "electron": "^1.8.1",
+    "electron": "^2.0.6",
     "electron-build-env": "^0.2.0",
     "electron-builder": "^19.30.4",
     "electron-mocha": "^5.0.0",
