@@ -18,7 +18,7 @@ describe('<FileOrTextInput />', () => {
   it('should render a textarea by default', () => {
     const fileOrText = shallow(<FileOrTextInput {...props} />);
     expect(fileOrText.find('textarea').not('.hidden')).to.have.length(1);
-    expect(fileOrText.find(FileInput).is('.hidden')).to.be.true();
+    expect(fileOrText.find(FileInput).parent().is('.hidden')).to.be.true();
   });
 
   it('should render a file input when file mode selected', () => {
