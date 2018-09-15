@@ -11,7 +11,8 @@ export default class FileInput extends Component {
     field: PropTypes.object,
     className: PropTypes.string,
     onChange: PropTypes.func,
-    noStatus: PropTypes.bool
+    noStatus: PropTypes.bool,
+    allowMultiple: PropTypes.bool
   }
 
   constructor(props) {
@@ -33,11 +34,13 @@ export default class FileInput extends Component {
 
   onFileChange(event) {
     this.setState({ error: false });
-    const file = event.target.files[0];
-    if (!file) {
-      return;
+    const fileList = event.target.files;
+    for (var i = 0; i < fileList.length; i++) {
+      this.processFile(fileList[i]);
     }
+  }
 
+  processFile(file) {
     fs.stat(file.path, (err, stats) => {
       if (stats.isDirectory()) {
         return this.setState({
@@ -83,7 +86,8 @@ export default class FileInput extends Component {
         <input name={this.fileInputId}
           id={this.fileInputId}
           type="file"
-          onChange={this.onFileChange.bind(this)} />
+          onChange={this.onFileChange.bind(this)}
+          multiple={this.props.allowMultiple ? 'multiple' : ''} />
         <label htmlFor={this.fileInputId}>
           <Button className="file-button" type="default" icon="hdd-o">
             {this.state.filename ? 'Change File' : 'Select File'}
