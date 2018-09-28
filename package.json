@@ -16,7 +16,7 @@
     "coverage": "NODE_ENV=test node_modules/.bin/nyc --require babel-core/register node_modules/.bin/_mocha --recursive --require ./test/setup.js test/**/*.spec.js",
     "lint": "eslint src test *.js",
     "hot-server": "node server.js",
-    "clean": "rm app/dist/*",
+    "clean": "rm -rf ./dist/*",
     "build-app": "cross-env NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
     "clean-build": "npm prune && npm run clean && npm run build-app",
     "start": "cross-env NODE_ENV=production electron ./",
