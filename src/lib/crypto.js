@@ -31,14 +31,13 @@ export function parseShare(share) {
  */
 export function splitFFI(secret, options) {
   return new Promise((resolve, reject) => {
-    const mime = '';
+    const mimeType = options['mimeType'] || '';
     cryptoFFI.wrapped.splitSecret(
       options.quorum,
       options.shares,
       // This needs to be a buffer
       secret,
-      // TODO Implement mime types
-      mime,
+      mimeType,
       // Sign shares
       SIGN_SHARES,
       (err, shares) => {
@@ -66,7 +65,7 @@ export function recoverFFI(shares) {
         return reject(err);
       }
 
-      resolve(result.secret);
+      resolve(result);
     });
   });
 }

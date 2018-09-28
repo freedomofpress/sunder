@@ -30,6 +30,7 @@ export default function reducer(state = initialState, action) {
     case RECOVER_SUCCESS:
       return Object.assign({}, state, {
         secret: action.secret,
+        mimeType: action.mimeType,
         inProgress: false
       });
     case RECOVER_ERROR:
@@ -176,8 +177,8 @@ export function recover() {
 
     dispatch({ type: RECOVER });
 
-    recoverFFI(shares).then((secret) => {
-      dispatch({ type: RECOVER_SUCCESS, secret });
+    recoverFFI(shares).then((result) => {
+      dispatch({ type: RECOVER_SUCCESS, secret: result.secret, mimeType: result.mimeType });
     }).catch((error) => {
       dispatch({ type: RECOVER_ERROR, error });
     });

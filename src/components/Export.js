@@ -8,10 +8,14 @@ import SaveFileButton from './SaveFileButton';
 import Modal from './Modal';
 import VeraCryptButton from './VeraCryptButton';
 import { detectVeraCrypt } from '../lib/veracrypt';
+import MimeToFileExtension from '../lib/fileextensions';
 
 
 export default class Export extends Component {
-  static propTypes = { secret: PropTypes.object }
+  static propTypes = {
+    mimeType: PropTypes.string,
+    secret: PropTypes.object
+  }
 
   constructor(props) {
     super(props);
@@ -30,6 +34,12 @@ export default class Export extends Component {
   }
 
   render() {
+    let filename = 'secret';
+    const extension = MimeToFileExtension[this.props.mimeType];
+    if (extension) {
+      filename += '.' + extension;
+    }
+
     const modal = (
       <Modal onClose={this.handleHide.bind(this)} title="Secret">
         <textarea className="secret-view" value={this.props.secret.toString('utf8')} readOnly>
@@ -65,7 +75,9 @@ export default class Export extends Component {
               View Secret
             </Button>
             <CopyButton buttonText="Copy Secret" targetText={this.props.secret.toString('utf-8')} />
-            <SaveFileButton buttonText="Save Secret" contents={this.props.secret} />
+            <SaveFileButton buttonText="Save Secret"
+              contents={this.props.secret}
+              saveOptions={ {defaultPath: filename} } />
           </div>
           {this.state.veracryptDetected &&
             <div className="dash-separator" />}

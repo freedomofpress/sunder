@@ -36,9 +36,10 @@ export class SplitScreen extends Component {
       }, 2000);
     });
 
-    const splitPromise = this.props.dispatch(split(values.secret, {
+    const splitPromise = this.props.dispatch(split(values.secret.data, {
       quorum: parseInt(values.quorum, 10),
-      shares: parseInt(values.shares, 10)
+      shares: parseInt(values.shares, 10),
+      mimeType: values.secret.mimeType
     }));
 
     return Promise.all([splitPromise, fakeDelay]);

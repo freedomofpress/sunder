@@ -16,6 +16,7 @@ export class Split extends Component {
     fields: PropTypes.shape({
       shares: PropTypes.object,
       quorum: PropTypes.object,
+      mimeType: PropTypes.object,
       secret: PropTypes.object
     }),
     submitting: PropTypes.bool,
@@ -25,7 +26,7 @@ export class Split extends Component {
 
   render() {
     const {
-      fields: { shares, quorum, secret },
+      fields: { shares, quorum, secret, mimeType },
       submitting,
       handleSubmit,
       invalid
@@ -57,6 +58,6 @@ export class Split extends Component {
 
 export default reduxForm({
   form: 'split',
-  fields: ['secret', 'shares', 'quorum'],
+  fields: ['secret', 'shares', 'quorum', 'mimeType'],
   validate: splitValidator
 })(Split);

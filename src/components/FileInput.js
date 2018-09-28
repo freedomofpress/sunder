@@ -33,6 +33,7 @@ export default class FileInput extends Component {
     // returns a promise that _always_ resolves to
     // { filename, data, error }
     const filename = file.name;
+    const mimeType = file.type;
     return new Promise((resolve) => {
       fs.stat(file.path, (err, stats) => {
         if (stats.isDirectory()) {
@@ -56,13 +57,11 @@ export default class FileInput extends Component {
             return resolve({ error: 'Something went wrong.' });
           }
 
-          // TODO Look up the mime type here, pipe through reducer
-
           resolve({data: contents});
         });
       });
     }).then(function(result) {
-      return { filename, data: '', error: null, ...result };
+      return { filename, mimeType, data: '', error: null, ...result };
     });
   }
 

@@ -17,7 +17,7 @@ export class ExportScreen extends Component {
 
     return (
       <Layout header={headerContent} title="Export Recovered Secret">
-        <Export secret={this.props.secret} />
+        <Export secret={this.props.secret} mimeType={this.props.mimeType} />
       </Layout>
     );
   }
@@ -25,7 +25,8 @@ export class ExportScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    secret: state.recover.secret
+    secret: state.recover.secret,
+    mimeType: state.recover.mimeType
   };
 }
 

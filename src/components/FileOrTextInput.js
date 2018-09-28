@@ -31,6 +31,13 @@ export default class FileOrTextInput extends Component {
     this.setState({ filename: undefined, error: undefined });
   }
 
+  onTextChange(text) {
+    if (this.props.field) {
+      this.props.field.onChange({
+        data: text, mimeType: 'text/plain'
+      });
+    }
+  }
   onFileChange(files) {
     const file = files[0];
 
@@ -40,7 +47,9 @@ export default class FileOrTextInput extends Component {
 
     this.setState({ filename: file.filename, error: undefined });
     if (this.props.field) {
-      this.props.field.onChange(file.data, file.filename);
+      this.props.field.onChange({
+        data: file.data, filename: file.filename, mimeType: file.mimeType
+      });
     }
   }
 
@@ -67,7 +76,7 @@ export default class FileOrTextInput extends Component {
       textField = (
         <textarea className={`file-or-text-input ${this.state.revealed ? 'revealed' : ''}`
             + ` ${entryMode === 'text' ? '' : 'hidden'}`}
-          {...field}>
+          onChange={this.onTextChange.bind(this)}>
         </textarea>
       );
     }
