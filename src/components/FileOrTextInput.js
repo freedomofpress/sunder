@@ -28,6 +28,24 @@ export default class FileOrTextInput extends Component {
 
   clearData() {
     this.props.field.onChange('');
+    this.setState({ filename: undefined, error: undefined });
+  }
+
+  onFileChange(files) {
+    const file = files[0];
+
+    if (file.error) {
+      return this.onError(file);
+    }
+
+    this.setState({ filename: file.filename, error: undefined });
+    if (this.props.field) {
+      this.props.field.onChange(file.data, file.filename);
+    }
+  }
+
+  onError(event) {
+    this.setState({error: event.error});
   }
 
   render() {
@@ -75,7 +93,14 @@ export default class FileOrTextInput extends Component {
         <div className={`field-container file-or-text-input-container
             flex-column ${hasError ? 'has-error' : ''}`}>
           {textField}
-          <FileInput className={entryMode === 'file' ? '' : 'hidden'} field={field} />
+          <div className={entryMode === 'file' ? '' : 'hidden'}>
+            <FileInput
+              label={this.state.filename ? 'Change file' : null}
+              onChange={this.onFileChange.bind(this)}
+            />
+            {this.state.filename && <div className="filename">{this.state.filename}</div>}
+            {this.state.error && <div className="file-error">{this.state.error}</div>}
+          </div>
           {hasError && <label className="error-label">{field.error}</label>}
         </div>
       </div>

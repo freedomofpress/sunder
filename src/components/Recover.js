@@ -16,11 +16,11 @@ export default class Recover extends Component {
     error: PropTypes.string,
     unrecoverable: PropTypes.bool,
     onReset: PropTypes.func,
-    onShareAdded: PropTypes.func
+    onSharesAdded: PropTypes.func
   }
 
   render() {
-    const { quorum, shares, onSubmit, error, onReset, onShareAdded, unrecoverable } = this.props;
+    const { quorum, shares, onSubmit, error, onReset, onSharesAdded, unrecoverable } = this.props;
     const numGoodShares = countGoodShares(shares);
     const numBadShares = countBadShares(shares);
     let instructionalContent;
@@ -71,7 +71,7 @@ export default class Recover extends Component {
           <ShareInput
             numEnteredShares={numGoodShares}
             shares={shares}
-            onSubmit={onShareAdded} />
+            onSubmit={onSharesAdded} />
           {instructionalContent &&
             <p className="recover-explanation">{instructionalContent}</p>}
         </div>
