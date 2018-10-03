@@ -94,7 +94,7 @@
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
     "sinon": "^1.17.3",
-    "spectron": "^3.6.4",
+    "spectron": "^3.8.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
