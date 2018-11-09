@@ -71,6 +71,7 @@ export default class FileInput extends Component {
       <div className={`file-input-container ${this.props.className}`}>
         <input name={this.fileInputId}
           id={this.fileInputId}
+          value=""
           type="file"
           onChange={this.onFileChange.bind(this)}
           multiple={this.props.allowMultiple ? 'multiple' : ''} />
