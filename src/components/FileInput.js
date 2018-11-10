@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'src/components/Button';
 import fs from 'fs';
+import path from 'path';
+const { dialog } = require('electron').remote
 
 let fileCounter = 0;
 const MAX_FILE_SIZE_BYTES = 1000000;
@@ -20,8 +22,12 @@ export default class FileInput extends Component {
     this.fileInputId = `file-input-${fileCounter++}`;
   }
 
-  onFileChange(event) {
-    const fileList = Array.from(event.target.files);
+  onFileSelection() {
+    let options = {properties: ['openfile']}
+    if (this.props.allowMultiple) options.properties.push('multiSelections');
+    const fileList = dialog.showOpenDialog(options);
+    if (fileList === undefined) return;
+
     Promise.all(fileList.map(this.processFile)).then((files) => {
       if (this.props.onChange) {
         this.props.onChange(files);
@@ -29,12 +35,12 @@ export default class FileInput extends Component {
     });
   }
 
-  processFile(file) {
+  processFile(filePath) {
     // returns a promise that _always_ resolves to
     // { filename, data, error }
-    const filename = file.name;
+    const filename = path.basename(filePath);
     return new Promise((resolve) => {
-      fs.stat(file.path, (err, stats) => {
+      fs.stat(filePath, (err, stats) => {
         if (stats.isDirectory()) {
           return resolve({
             error: 'Please choose a file. If you want to encrypt a directory, gzip it first.'
@@ -51,7 +57,7 @@ export default class FileInput extends Component {
           });
         }
 
-        fs.readFile(file.path, (error, contents) => {
+        fs.readFile(filePath, (error, contents) => {
           if (error) {
             return resolve({ error: 'Something went wrong.' });
           }
@@ -69,17 +75,9 @@ export default class FileInput extends Component {
   render() {
     return (
       <div className={`file-input-container ${this.props.className}`}>
-        <input name={this.fileInputId}
-          id={this.fileInputId}
-          value=""
-          type="file"
-          onChange={this.onFileChange.bind(this)}
-          multiple={this.props.allowMultiple ? 'multiple' : ''} />
-        <label htmlFor={this.fileInputId}>
-          <Button className="file-button" type="default" icon="hdd-o">
-            {this.props.label || 'Select File'}
-          </Button>
-        </label>
+        <Button className="file-button" type="default" icon="hdd-o" onClick={this.onFileSelection.bind(this)}>
+          {this.props.label || 'Select File'}
+        </Button>
       </div>
     );
   }
