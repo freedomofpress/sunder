@@ -8,7 +8,8 @@ import './Field.scss';
 export default class NumberField extends Component {
   static propTypes = {
     field: PropTypes.object,
-    label: PropTypes.string
+    label: PropTypes.string,
+    submittedOnce: PropTypes.bool
   };
 
   onChange(event) {
@@ -16,8 +17,8 @@ export default class NumberField extends Component {
   }
 
   render() {
-    const { field, label } = this.props;
-    const hasError = field.touched && field.invalid;
+    const { field, label, submittedOnce } = this.props;
+    const hasError = submittedOnce && field.invalid;
 
     return (
       <div className={`field-container ${hasError ? 'has-error' : ''}`}>

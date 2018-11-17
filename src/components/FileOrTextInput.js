@@ -10,7 +10,8 @@ export default class FileOrTextInput extends Component {
   static propTypes = {
     // redux-form field
     field: PropTypes.object,
-    defaultMode: PropTypes.string
+    defaultMode: PropTypes.string,
+    submittedOnce: PropTypes.bool
   }
 
   constructor(props) {
@@ -49,8 +50,8 @@ export default class FileOrTextInput extends Component {
   }
 
   render() {
-    const { field } = this.props;
-    const hasError = field.touched && field.invalid;
+    const { submittedOnce, field } = this.props;
+    const hasError = submittedOnce && field.invalid;
     const { entryMode } = this.state;
 
     const tooLargeToDisplay = field.value && field.value.length * 2 > MAX_DISPLAY_SIZE_BYTES;

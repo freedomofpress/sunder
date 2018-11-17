@@ -35,9 +35,12 @@ describe('<Split />', () => {
     expect(split.find(WorkingIndicator)).to.have.length(1);
   });
 
-  it('should disable the button when invalid', () => {
+  it('should disable the button after an invalid submission', () => {
     props.invalid = true;
     const split = shallow(<Split {...props} />);
+    split.setState({
+      submittedOnce: true
+    });
     expect(split.find(Button).prop('disabled')).to.be.true();
   });
 });

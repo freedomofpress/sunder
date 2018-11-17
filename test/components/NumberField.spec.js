@@ -11,7 +11,8 @@ describe('NumberField', () => {
         error: 'error',
         touched: true,
         invalid: true
-      }
+      },
+      submittedOnce: true
     };
     expect(shallow(<NumberField {...props} />).find('.error-label')).to.have.length(1);
   });

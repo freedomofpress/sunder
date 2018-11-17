@@ -9,11 +9,12 @@ export default class SplitOptions extends Component {
     dispatch: PropTypes.func,
     // reduxForm fields
     quorumField: PropTypes.object,
-    sharesField: PropTypes.object
+    sharesField: PropTypes.object,
+    submittedOnce: PropTypes.bool
   }
 
   render() {
-    const { sharesField, quorumField } = this.props;
+    const { sharesField, quorumField, submittedOnce } = this.props;
     let statusMessage;
     const statusEnding = ' shares needed to recover secret.';
 
@@ -35,9 +36,10 @@ export default class SplitOptions extends Component {
     return (
       <div>
         <div className="split-options">
-          <NumberField field={quorumField}
+          <NumberField field={quorumField} submittedOnce={submittedOnce}
             label="Shares needed to recover the secret" />
-          <NumberField field={sharesField} label="Total number of shares" />
+          <NumberField field={sharesField} submittedOnce={submittedOnce}
+            label="Total number of shares" />
         </div>
         <div className="split-status-message">{statusMessage}</div>
       </div>
