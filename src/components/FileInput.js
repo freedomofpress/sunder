@@ -23,7 +23,7 @@ export default class FileInput extends Component {
   }
 
   onFileSelection() {
-    let options = {properties: ['openfile']}
+    let options = {properties: ['openFile']}
     if (this.props.allowMultiple) options.properties.push('multiSelections');
     const fileList = dialog.showOpenDialog(options);
     if (fileList === undefined) return;
