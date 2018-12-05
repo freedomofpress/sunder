@@ -58,5 +58,7 @@ export class Split extends Component {
 export default reduxForm({
   form: 'split',
   fields: ['secret', 'shares', 'quorum'],
-  validate: splitValidator
+  validate: splitValidator,
+  touchOnBlur: false,
+  touchOnChange: true
 })(Split);
