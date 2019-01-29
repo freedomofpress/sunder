@@ -6,6 +6,19 @@ jobs:
    steps:
      - checkout
      - run:
+         name: Configure node version
+         command: |
+           export NVM_DIR="/opt/circleci/.nvm"
+           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+           nvm install 8.11.3
+           nvm alias default 8.11.3
+     - run:
+         name: Install yarn
+         command: |
+           curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+           echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+           sudo apt-get update && sudo apt-get install yarn
+     - run:
          name: Install rust
          command: |
            curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -19,10 +32,15 @@ jobs:
          command: |
            # Hack to force sourcing of rust env
            source ~/.cargo/env
+           export NVM_DIR="/opt/circleci/.nvm"
+           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
            yarn install
      - run:
          name: Run unit tests and e2e tests
-         command: make test
+         command: |
+           export NVM_DIR="/opt/circleci/.nvm"
+           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+           make test
      - run:
          name: Build docs
          command: make docs-lint
