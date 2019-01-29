@@ -22,7 +22,7 @@ function perm_fix() {
 }
 
 function npm_install() {
-    npm install
+    yarn install
 }
 
 function build() {

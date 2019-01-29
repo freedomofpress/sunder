@@ -19,12 +19,12 @@ If you have questions or comments, you can [join us in our Gitter chat room](htt
 ### Quickstart
 
 1. Clone the git repository
-2. `npm install`
-3. `npm run dev`
+2. `yarn install`
+3. `yarn run dev`
 
 For development use `npm run dev`. This does two things: it starts an electron instance with development features enabled, and it starts a webpack dev server. The dev server is to enable 'hot module reloading', which means that changes to the source on your file system will be reflected in the running application code in real time.
 
-If you get an error from `node-gyp` during `npm install`, note that it expects `python` to resolve to Python 2.x.
+If you get an error from `node-gyp` during `yarn install`, note that it expects `python` to resolve to Python 2.x.
 
 ### Testing
 

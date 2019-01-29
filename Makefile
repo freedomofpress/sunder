@@ -26,7 +26,7 @@ build-deb: docker-build ## Builds Sunder Debian packages for Linux
 .PHONY: npm-install-init
 npm-install-init: ## Installs npm modules locally only if node_modules/ absent
 	if [ ! -d node_modules ] ; then \
-		npm install ; \
+		yarn install ; \
 	fi
 
 .PHONY: build-dmg
