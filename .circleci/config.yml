@@ -1,28 +1,21 @@
 version: 2.0
 jobs:
  build:
-   machine:
-     image: circleci/classic:latest
+   docker:
+     - image: liliakai/sunder-build:latest
    steps:
      - checkout
      - run:
-         name: Install rust
-         command: |
-           curl https://sh.rustup.rs -sSf | sh -s -- -y
-           # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
-           rm -f ~/.gitconfig
-     - run:
-         name: Install python requirements for docs.
-         command: pip install -r requirements.txt
-     - run:
          name: npm install and build RustySecrets
          command: |
+           # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
+           rm -f ~/.gitconfig
            # Hack to force sourcing of rust env
            source ~/.cargo/env
            npm install
      - run:
          name: Run unit tests and e2e tests
-         command: make test
+         command: xvfb-run --server-args=$XVFB_ARGS make test
      - run:
          name: Build docs
          command: make docs-lint
