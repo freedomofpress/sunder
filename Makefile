@@ -23,6 +23,14 @@ build-deb: docker-build ## Builds Sunder Debian packages for Linux
 		-v fpf-sunder-node:/sunder/node_modules \
 		sunder-build:latest
 
+.PHONY: docker-test
+docker-test: docker-build ## Runs tests in the Docker image
+	docker volume create fpf-sunder-node && \
+	docker run \
+		-v $(PWD):/sunder \
+		-v fpf-sunder-node:/sunder/node_modules \
+		sunder-build:latest tools/docker-test.sh
+
 .PHONY: npm-install-init
 npm-install-init: ## Installs npm modules locally only if node_modules/ absent
 	if [ ! -d node_modules ] ; then \
