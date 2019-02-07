@@ -1,21 +1,46 @@
 version: 2.0
 jobs:
  build:
+   working_directory: /sunder
    docker:
-     - image: liliakai/sunder-build:latest
+     - image: docker:18.03.1-ce-git
    steps:
      - checkout
+     - setup_remote_docker
+     - restore_cache:
+         keys:
+           - v1-{{ .Branch }}
+         paths:
+           - /caches/sunder.tar
      - run:
-         name: npm install and build RustySecrets
+         name: Load Docker image layer cache
          command: |
-           # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
-           rm -f ~/.gitconfig
-           # Hack to force sourcing of rust env
-           source ~/.cargo/env
-           npm install
+           set +o pipefail
+           docker load -i /caches/sunder.tar | true
      - run:
-         name: Run unit tests and e2e tests
-         command: xvfb-run --server-args=$XVFB_ARGS make test
+         name: Build Docker image
+         command: |
+           docker build --cache-from=sunder-build -t sunder-build .
      - run:
-         name: Build docs
-         command: make docs-lint
+         name: Save Docker image layer cache
+         command: |
+           mkdir -p /caches
+           docker save -o /caches/sunder.tar sunder-build
+     - save_cache:
+         key: v1-{{ .Branch }}-{{ epoch }}
+         paths:
+           - /caches/sunder.tar
+     - run:
+         name: Create a volume to hold a copy of the repo and build output
+         command: |
+           # create a dummy container which will hold a volume with the repo
+           docker create -v /sunder --name sunder-repo alpine:3.4 /bin/true
+           # ensure this volume belongs to the 'node' user id in sunder-build
+           chown -R 1000 /sunder
+           # copy the repo into this volume
+           docker cp /sunder sunder-repo:/
+     - run:
+         name: Run the tests in the docker container
+         command: |
+           # start an application container using this volume
+           docker run --volumes-from sunder-repo sunder-build:latest tools/docker-test.sh
