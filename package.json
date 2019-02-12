@@ -27,7 +27,6 @@
   },
   "build": {
     "productName": "Sunder",
-    "asar": false,
     "linux": {
       "icon": "build/icons/",
       "target": [
