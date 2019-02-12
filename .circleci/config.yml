@@ -12,6 +12,7 @@ jobs:
            - v1-{{ .Branch }}
          paths:
            - /caches/sunder.tar
+           - /sunder/node_modules
      - run:
          name: Load Docker image layer cache
          command: |
@@ -26,10 +27,6 @@ jobs:
          command: |
            mkdir -p /caches
            docker save -o /caches/sunder.tar sunder-build
-     - save_cache:
-         key: v1-{{ .Branch }}-{{ epoch }}
-         paths:
-           - /caches/sunder.tar
      - run:
          name: Create a volume with a copy of the repository
          command: |
@@ -52,3 +49,12 @@ jobs:
          name: Lint docs
          command: |
            docker run --volumes-from sunder-repo sunder-build:latest make docs-lint
+     - run:
+         name: Cache node modules
+         command: |
+           docker cp sunder-repo:/sunder/node_modules /sunder/
+     - save_cache:
+         key: v1-{{ .Branch }}-{{ epoch }}
+         paths:
+           - /caches/sunder.tar
+           - /sunder/node_modules
