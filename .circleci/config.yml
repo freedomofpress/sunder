@@ -31,7 +31,7 @@ jobs:
          paths:
            - /caches/sunder.tar
      - run:
-         name: Create a volume to hold a copy of the repo and build output
+         name: Create a volume with a copy of the repository
          command: |
            # create a dummy container which will hold a volume with the repo
            docker create -v /sunder --name sunder-repo alpine:3.4 /bin/true
@@ -40,7 +40,15 @@ jobs:
            # copy the repo into this volume
            docker cp /sunder sunder-repo:/
      - run:
-         name: Run the tests in the docker container
+         name: Build and package
+         command: |
+           docker run --volumes-from sunder-repo sunder-build:latest tools/build-sunder-debian-packages.sh
+     - run:
+         name: Test
          command: |
            # start an application container using this volume
            docker run --volumes-from sunder-repo sunder-build:latest tools/docker-test.sh
+     - run:
+         name: Lint docs
+         command: |
+           docker run --volumes-from sunder-repo sunder-build:latest make docs-lint
