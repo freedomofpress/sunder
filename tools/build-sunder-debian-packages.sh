@@ -36,8 +36,18 @@ function build() {
     fi
 }
 
+function verify() {
+    count=`ls -1 dist/sunder*.deb 2>/dev/null | wc -l`
+    if [ $count == 0 ]
+    then
+        printf "BUILD FAILED! .deb not found.\\n"
+        exit 1
+    fi
+}
+
 
 img_extract
 perm_fix
 npm_install
 build
+verify

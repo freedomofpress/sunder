@@ -1,4 +1,4 @@
-ARG NODE_VERSION=8.9.4
+ARG NODE_VERSION=8.15.1
 FROM node:$NODE_VERSION
 # Using these to provide advanced pruning later
 LABEL org="Freedom of the Press"
@@ -24,6 +24,27 @@ RUN apt-get install -y --no-install-recommends  \
     sudo \
     xz-utils && \
     rm -rf /var/cache/apt/archives/*
+
+# Required for starting electron
+RUN apt-get install -y --no-install-recommends  \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libxtst6 \
+    libxss1 \
+    libasound2 \
+    xvfb xauth \
+    && rm -rf /var/cache/apt/archives/*
+
+# Install python for building docs with sphinx
+RUN apt-get update && \
+    apt-get install -y python python-dev python-pip python-virtualenv && \
+    rm -rf /var/cache/apt/archives/*
+
+# Install sphinx and related python requirements
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
+
 
 RUN if test $UID != 1000 ; then usermod -u $UID node; fi && echo "node ALL=(ALL) NOPASSWD:/bin/sunder-perm-fix" >> /etc/sudoers
 

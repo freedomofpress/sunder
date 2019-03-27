@@ -1,28 +1,60 @@
 version: 2.0
 jobs:
  build:
-   machine:
-     image: circleci/classic:latest
+   working_directory: /sunder
+   docker:
+     - image: docker:18.03.1-ce-git
    steps:
      - checkout
+     - setup_remote_docker
+     - restore_cache:
+         keys:
+           - v1-{{ .Branch }}
+         paths:
+           - /caches/sunder.tar
+           - /sunder/node_modules
      - run:
-         name: Install rust
+         name: Load Docker image layer cache
          command: |
-           curl https://sh.rustup.rs -sSf | sh -s -- -y
-           # Hack to unbreak cargo fetching (we need HTTPS, not SSH URLs).
-           rm -f ~/.gitconfig
+           set +o pipefail
+           docker load -i /caches/sunder.tar | true
      - run:
-         name: Install python requirements for docs.
-         command: pip install -r requirements.txt
-     - run:
-         name: npm install and build RustySecrets
+         name: Build Docker image
          command: |
-           # Hack to force sourcing of rust env
-           source ~/.cargo/env
-           npm install
+           docker build --cache-from=sunder-build -t sunder-build .
      - run:
-         name: Run unit tests and e2e tests
-         command: make test
+         name: Save Docker image layer cache
+         command: |
+           mkdir -p /caches
+           docker save -o /caches/sunder.tar sunder-build
      - run:
-         name: Build docs
-         command: make docs-lint
+         name: Create a volume with a copy of the repository
+         command: |
+           # create a dummy container which will hold a volume with the repo
+           docker create -v /sunder --name sunder-repo alpine:3.4 /bin/true
+           # ensure this volume belongs to the 'node' user id in sunder-build
+           chown -R 1000 /sunder
+           # copy the repo into this volume
+           docker cp /sunder sunder-repo:/
+     - run:
+         name: Build and package
+         command: |
+           docker run --volumes-from sunder-repo sunder-build:latest tools/build-sunder-debian-packages.sh
+     - run:
+         name: Test
+         command: |
+           # start an application container using this volume
+           docker run --volumes-from sunder-repo sunder-build:latest tools/docker-test.sh
+     - run:
+         name: Lint docs
+         command: |
+           docker run --volumes-from sunder-repo sunder-build:latest make docs-lint
+     - run:
+         name: Cache node modules
+         command: |
+           docker cp sunder-repo:/sunder/node_modules /sunder/
+     - save_cache:
+         key: v1-{{ .Branch }}-{{ epoch }}
+         paths:
+           - /caches/sunder.tar
+           - /sunder/node_modules
