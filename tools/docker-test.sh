@@ -5,4 +5,7 @@
 # Set up Rust PATH
 source /home/node/.cargo/env
 
+sudo /bin/sunder-perm-fix
+npm install
+
 xvfb-run --server-args=$XVFB_ARGS make test
