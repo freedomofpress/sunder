@@ -1,4 +1,4 @@
-ARG NODE_VERSION=8.9.4
+ARG NODE_VERSION=8.15.1
 FROM node:$NODE_VERSION
 # Using these to provide advanced pruning later
 LABEL org="Freedom of the Press"
