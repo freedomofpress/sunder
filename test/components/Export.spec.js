@@ -14,7 +14,7 @@ describe('<Export />', () => {
   it('should show the view model when view clicked', () => {
     const wrapper = mount(<Export {...props} />);
     expect(wrapper.find(Modal)).to.have.length(0);
-    wrapper.find('#view-secret-button').simulate('click');
+    wrapper.find('#view-secret-button').at(1).simulate('click');
     expect(wrapper.find(Modal)).to.have.length(1);
   });
 });
