@@ -29,7 +29,7 @@ RUN apt-get install -y --no-install-recommends  \
 RUN apt-get install -y --no-install-recommends  \
     libgtk-3-0 \
     libx11-xcb1 \
-    libXtst6 \
+    libxtst6 \
     libxss1 \
     libasound2 \
     xvfb xauth \
