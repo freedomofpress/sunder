@@ -59,7 +59,7 @@ using frontend technologies from the web platform.
 Sunder uses `Shamir's Secret Sharing`_,
 which is implemented in Rust in the `rusty-secrets`_ library.
 The JS frontend communicates with the Rust library
-via the `rusty-secrets-ffi`_ FFI bindings.
+via ffi bindings in the `rustysecrets-node`_ module.
 
 One shortcoming of Shamir's Secret Sharing scheme is that it lacks *integrity*.
 If a generated secret share is corrupted,
@@ -91,6 +91,6 @@ and is available at `merkle-sigs.rs`_.
 .. _Electron: https://electronjs.org
 .. _`Shamir's secret sharing`: https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing
 .. _rusty-secrets: https://github.com/SpinResearch/RustySecrets
-.. _rusty-secrets-ffi: https://www.npmjs.com/package/rusty-secrets-ffi
+.. _rustysecrets-node: https://github.com/SpinResearch/rustysecrets-node
 .. _`Merkle signature scheme`: https://en.wikipedia.org/wiki/Merkle_signature_scheme
 .. _`merkle-sigs.rs`: https://github.com/SpinResearch/merkle_sigs.rs
