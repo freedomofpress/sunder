@@ -13,10 +13,10 @@ ENV UID ${UID:-1000}
 RUN apt-get update && apt-get upgrade -y # 2018-02-08 && \
     rm -rf /var/cache/apt/archives/*
 
+# Required for electron-builder:
+# https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build#linux
 RUN apt-get install -y --no-install-recommends  \
     graphicsmagick \
-    # Required for electron-builder:
-    # https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build#linux
     icnsutils \
     libgconf2-dev \
     libgtk2.0-dev \
