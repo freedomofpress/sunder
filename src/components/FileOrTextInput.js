@@ -27,7 +27,7 @@ export default class FileOrTextInput extends Component {
   }
 
   clearData() {
-    this.props.field.onChange('');
+    this.props.input.onChange('');
     this.setState({ filename: undefined, error: undefined });
   }
 
@@ -39,8 +39,8 @@ export default class FileOrTextInput extends Component {
     }
 
     this.setState({ filename: file.filename, error: undefined });
-    if (this.props.field) {
-      this.props.field.onChange(file.data, file.filename);
+    if (this.props.input) {
+      this.props.input.onChange(file.data, file.filename);
     }
   }
 
@@ -49,11 +49,11 @@ export default class FileOrTextInput extends Component {
   }
 
   render() {
-    const { field } = this.props;
-    const hasError = field.touched && field.invalid;
+    const { input } = this.props;
+    const hasError = input.touched && input.invalid;
     const { entryMode } = this.state;
 
-    const tooLargeToDisplay = field.value && field.value.length * 2 > MAX_DISPLAY_SIZE_BYTES;
+    const tooLargeToDisplay = input.value && input.value.length * 2 > MAX_DISPLAY_SIZE_BYTES;
     let textField;
     if (tooLargeToDisplay) {
       textField = (
@@ -67,7 +67,7 @@ export default class FileOrTextInput extends Component {
       textField = (
         <textarea className={`file-or-text-input ${this.state.revealed ? 'revealed' : ''}`
             + ` ${entryMode === 'text' ? '' : 'hidden'}`}
-          {...field}>
+          {...input}>
         </textarea>
       );
     }
