@@ -9,8 +9,8 @@ let props;
 describe('<SplitOptions />', () => {
   beforeEach(() => {
     props = {
-      quorumField: { value: 3 },
-      sharesField: { value: 10 },
+      quorum: { input: { value: 3 } },
+      shares: { input: { value: 10 } },
       dispatch: spy()
     };
   });
@@ -21,7 +21,7 @@ describe('<SplitOptions />', () => {
 
   it('should display the quorum and share values somewhere', () => {
     const splitOptions = shallow(<SplitOptions {...props} />);
-    expect(splitOptions.text()).to.contain(props.quorumField.value);
-    expect(splitOptions.text()).to.contain(props.sharesField.value);
+    expect(splitOptions.text()).to.contain(props.quorum.input.value);
+    expect(splitOptions.text()).to.contain(props.shares.input.value);
   });
 });
