@@ -6,7 +6,7 @@ import FileOrTextInput, { MAX_DISPLAY_SIZE_BYTES } from 'src/components/FileOrTe
 import FileInput from 'src/components/FileInput';
 
 const props = {
-  field: {
+  input: {
     touched: false,
     invalid: false,
     value: 'secret',
@@ -34,12 +34,14 @@ describe('<FileOrTextInput />', () => {
       testSecret.push('a');
     }
     testSecret = testSecret.join('');
-    const testProps = { field: Object.assign({}, props.field, { value: testSecret }) };
+    const testProps = {
+      input: Object.assign({}, props.input, { value: testSecret })
+    };
     const fileOrText = shallow(<FileOrTextInput {...testProps} />);
     const noDisplay = fileOrText.find('.no-display-message');
     expect(noDisplay).to.have.length(1);
     noDisplay.find('a').simulate('click');
-    expect(props.field.onChange.calledWith('')).to.be.true();
+    expect(props.input.onChange.calledWith('')).to.be.true();
   });
 
   it('should handle the reveal checkbox properly', () => {

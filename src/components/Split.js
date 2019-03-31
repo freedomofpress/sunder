@@ -7,25 +7,18 @@ import Panel from './Panel';
 import WorkingIndicator from './WorkingIndicator';
 import splitValidator from '../lib/splitvalidator';
 import Icon from './Icon';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field, Fields } from 'redux-form';
 import './Split.scss';
 
 export class Split extends Component {
   // These are all injected by the reduxForm decorator
   static propTypes = {
-    fields: PropTypes.shape({
-      shares: PropTypes.object,
-      quorum: PropTypes.object,
-      secret: PropTypes.object
-    }),
     submitting: PropTypes.bool,
     handleSubmit: PropTypes.func,
     invalid: PropTypes.bool,
-  }
-
+  };
   render() {
     const {
-      fields: { shares, quorum, secret },
       submitting,
       handleSubmit,
       invalid
@@ -34,11 +27,16 @@ export class Split extends Component {
     return (
       <div className="container flex-column split-container">
         <Panel title="Enter Your Secret">
-          <FileOrTextInput disabled={submitting} field={secret} />
+          <Field
+            name="secret"
+            disabled={submitting}
+            component={FileOrTextInput} />
         </Panel>
         <Panel title="Share Options" className="split-options-panel">
-          <SplitOptions disabled={submitting}
-            sharesField={shares} quorumField={quorum} />
+          <Fields
+            names={["quorum", "shares"]}
+            disabled={submitting}
+            component={SplitOptions} />
         </Panel>
         <div className="flex-row split-button-container">
           <Button type="primary"
@@ -57,7 +55,6 @@ export class Split extends Component {
 
 export default reduxForm({
   form: 'split',
-  fields: ['secret', 'shares', 'quorum'],
   validate: splitValidator,
   touchOnBlur: false,
   touchOnChange: true

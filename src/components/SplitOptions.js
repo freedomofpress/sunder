@@ -8,25 +8,25 @@ export default class SplitOptions extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     // reduxForm fields
-    quorumField: PropTypes.object,
-    sharesField: PropTypes.object
+    quorum: PropTypes.object,
+    shares: PropTypes.object
   }
 
   render() {
-    const { sharesField, quorumField } = this.props;
+    const { shares, quorum } = this.props;
     let statusMessage;
     const statusEnding = ' shares needed to recover secret.';
 
-    if (quorumField.value && sharesField.value) {
+    if (quorum.input.value && shares.input.value) {
       statusMessage = (
         <span>
-          <strong>{quorumField.value}</strong>{' of '}
-          <strong>{sharesField.value}</strong>{statusEnding}
+          <strong>{quorum.input.value}</strong>{' of '}
+          <strong>{shares.input.value}</strong>{statusEnding}
         </span>
       );
-    } else if (quorumField.value) {
+    } else if (quorum.input.value) {
       statusMessage = (
-        <span><strong>{quorumField.value}</strong>{statusEnding}</span>
+        <span><strong>{quorum.input.value}</strong>{statusEnding}</span>
       );
     } else {
       statusMessage = 'How many shares should be needed to recover the secret?';
@@ -35,9 +35,9 @@ export default class SplitOptions extends Component {
     return (
       <div>
         <div className="split-options">
-          <NumberField field={quorumField}
+          <NumberField field={quorum.input}
             label="Shares needed to recover the secret" />
-          <NumberField field={sharesField} label="Total number of shares" />
+          <NumberField field={shares.input} label="Total number of shares" />
         </div>
         <div className="split-status-message">{statusMessage}</div>
       </div>
