@@ -1,6 +1,10 @@
 # Sunder
 
-[![CircleCI](https://circleci.com/gh/freedomofpress/sunder.svg?style=svg&circle-token=b2396d4ad46cc09a0b6f515855e56032fe6ce4bf)](https://circleci.com/gh/freedomofpress/sunder) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/freedomofpress/sunder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+**Important:** As of June 2019, Freedom of the Press Foundation has discontinued its work on the Sunder project.
+For actively maintained implementations of Shamir's Secret Sharing, consider using [Mozilla SOPS](https://github.com/mozilla/sops/)
+or [Hashicorp Vault](https://github.com/hashicorp/vault).
+
+----------
 
 ![Sunder user interface](https://sunder.readthedocs.io/en/latest/_images/create_secret_shards_filled.png)
 
